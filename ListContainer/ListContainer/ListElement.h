@@ -12,7 +12,7 @@ public:
 	ListElement(Type insertingValue);
 	Type& GetValue(void);
 
-	shared_ptr<ListElement<Type>> NextElement;
+	shared_ptr<ListElement<Type>> NextElementPtr;
 
 private:
 	Type Value;
@@ -21,7 +21,7 @@ private:
 template<class Type>
 ListElement<Type>::ListElement(Type insertingValue)
 {
-	NextElement = nullptr;
+	NextElementPtr = nullptr;
 	Value = insertingValue;
 }
 
