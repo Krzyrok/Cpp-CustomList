@@ -2,7 +2,9 @@
 
 int main()
 {
-	cout << "tests";
+	cout << "tests" << endl;
+
+
 	system("Pause");
 	return 0;
 }

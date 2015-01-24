@@ -79,7 +79,7 @@
     <ClInclude Include="CommonHeaders.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ListContainer.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
