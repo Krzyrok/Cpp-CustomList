@@ -3,20 +3,38 @@
 
 #include "ListElement.h"
 
-template<class Type>
-class ListeElement
+#include <xmemory0>
+
+template<class Type, class Allocator = allocator<Type>>
+class List
 {
 public:
-	ListeElement(void);
+	List(const Allocator& passedAlloc = Allocator());
+
+	void push_front(const Type& value);
 
 private:
-	shared_ptr<ListeElement<Type>> _firstElementPointer;
+	shared_ptr<ListElement<Type>> _firstElementPointer;
+	Allocator _allocator;
+
+	Type* test;
 };
 
-template<class Type>
-List<Type>::List(void)
+template<class Type, class Allocator = allocator<Type>>
+List<Type, Allocator>::List(const Allocator& passedAllocator = Allocator())
 {
 	_firstElementPointer = nullptr;
+	_allocator = passedAllocator;
+}
+
+template<class Type, class Allocator = allocator<Type>>
+void List<Type, Allocator>::push_front(const Type& value)
+{
+	if (_firstElementPointer == nullptr)
+	{
+		_firstElementPointer = shared_ptr <ListElement<Type>>(new ListElement<Type>(value));
+		return;
+	}
 }
 
 #endif 
