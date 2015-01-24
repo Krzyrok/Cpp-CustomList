@@ -10,12 +10,9 @@ class ListElement
 {
 public:
 	ListElement(Type insertingValue);
-	Type& GetValue(void);
 
-	shared_ptr<ListElement<Type>> NextElementPtr;
-
-private:
 	Type Value;
+	shared_ptr<ListElement<Type>> NextElementPtr;
 };
 
 template<class Type>
@@ -23,12 +20,6 @@ ListElement<Type>::ListElement(Type insertingValue)
 {
 	NextElementPtr = nullptr;
 	Value = insertingValue;
-}
-
-template<class Type>
-Type& ListElement<Type>::GetValue(void)
-{
-	return Value;
 }
 
 #endif
