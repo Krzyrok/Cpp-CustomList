@@ -1,7 +1,7 @@
 #ifndef LIST_HEADER
 #define LIST_HEADER
 
-#include "ListElement.h"
+#include "ListIterator.h"
 
 #include <xmemory0>
 
@@ -10,7 +10,7 @@ class List
 {
 public:
 	typedef size_t size_type;
-	typedef ListElement<Type> iterator;
+	typedef ListIterator<Type> iterator;
 
 	// Constructor
 	List(const Allocator& passedAlloc = Allocator())
@@ -21,9 +21,9 @@ public:
 	}
 
 	// methods
-	void begin(void)
+	iterator begin(void)
 	{
-
+		return iterator(_firstElementPointer);
 	}
 
 	void push_back(const Type& value)

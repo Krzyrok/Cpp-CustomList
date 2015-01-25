@@ -15,7 +15,7 @@ private:
 	void TestPushBack(List<int>& testingList);
 	void TestPushFront(List<int>& testingList);
 	void TestSize(List<int>& testingList); 
-	void TestBeginIterator(List<int>& testingList);
+	void TestListIterator(List<int>& testingList);
 };
 
 #endif 
