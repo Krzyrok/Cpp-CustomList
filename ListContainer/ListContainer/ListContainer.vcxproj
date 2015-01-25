@@ -79,6 +79,7 @@
     <ClInclude Include="CommonHeaders.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ListElement.h" />
+    <ClInclude Include="ListIterator.h" />
     <ClInclude Include="Tester.h" />
   </ItemGroup>
   <ItemGroup>
