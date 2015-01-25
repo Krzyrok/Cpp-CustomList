@@ -9,8 +9,10 @@ void Tester::Exeute(void)
 
 	allocator < int > alloc;
 	List<int> myIntList(alloc);
+
 	
 	TestPushBack(myIntList);
+	TestPushFront(myIntList);
 	TestSize(myIntList);
 	TestBeginIterator(myIntList);
 
@@ -24,15 +26,22 @@ void Tester::TestPushBack(List<int>& testingList)
 	testingList.push_back(7);
 }
 
+void Tester::TestPushFront(List<int>& testingList)
+{
+	testingList.push_front(3);
+	testingList.push_front(44);
+	testingList.push_front(1);
+}
+
 void Tester::TestSize(List<int>& testingList)
 {
-	if (testingList.size() == 3)
+	if (testingList.size() == 6)
 	{
 		cout << "size works corretly: " << testingList.size() << endl;
 	}
 	else
 	{
-		cout << "size DOESN'T work!!!!" << endl;
+		cout << "size DOESN'T work!!!! RESULT: " << testingList.size() << endl;
 	}
 
 }

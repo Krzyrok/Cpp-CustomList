@@ -13,6 +13,7 @@ public:
 
 private:
 	void TestPushBack(List<int>& testingList);
+	void TestPushFront(List<int>& testingList);
 	void TestSize(List<int>& testingList); 
 	void TestBeginIterator(List<int>& testingList);
 };
