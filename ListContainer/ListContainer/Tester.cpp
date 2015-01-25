@@ -77,8 +77,15 @@ void Tester::TestListIterator(List<int>& testingList)
 	cout << "checking equality (should be true): " << (testingIterator == testingIterator2) << endl << endl;
 
 	testingIterator = testingList.begin();
+	List<int>::iterator iterator3(testingIterator);
+	cout << "checking difference (should be false): " << (testingIterator != iterator3) << endl;
+	cout << "checking equality (should be true): " << (testingIterator == iterator3) << endl;
+	cout << "1: " << *iterator3 << endl << endl;
+
+	testingIterator = testingList.begin();
 	*testingIterator = 77;
 	cout << "77: " << *testingIterator++ << endl;
+	cout << "77: " << *iterator3 << endl;
 	cout << "2: " << *testingIterator << endl << endl;
 
 

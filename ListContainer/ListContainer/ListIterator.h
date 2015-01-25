@@ -10,8 +10,19 @@ class ListIterator
 	: public iterator<forward_iterator_tag, ListElement<Type>, ptrdiff_t, ListElement<Type>*, ListElement<Type>&>
 {
 public:
+	ListIterator(void)
+		: _pointer(nullptr)
+	{
+	}
+
+
 	ListIterator(shared_ptr<ListElement<Type>> ptr) 
 		: _pointer(ptr) 
+	{
+	}
+
+	ListIterator(const ListIterator &originalIterator)
+		: _pointer(originalIterator._pointer)
 	{
 	}
 
