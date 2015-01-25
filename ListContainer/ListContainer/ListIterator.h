@@ -35,7 +35,7 @@ public:
 
 	Type* operator->()
 	{ 
-		return _pointer; 
+		return &(_pointer->GetValue());
 	}
 
 	bool operator==(const ListIterator& secondIterator)

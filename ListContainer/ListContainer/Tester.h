@@ -2,9 +2,9 @@
 #define TESTER_HEADER
 
 #include "List.h"
+#include "TestObject.h"
 
 #include <list>
-#include <iostream>
 
 class Tester
 {

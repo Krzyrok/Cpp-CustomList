@@ -44,13 +44,12 @@ void Tester::TestSize(List<int>& testingList)
 {
 	if (testingList.size() == 6)
 	{
-		cout << "size works corretly: " << testingList.size() << endl;
+		cout << "size works corretly: " << testingList.size() << endl << endl;
 	}
 	else
 	{
-		cout << "size DOESN'T work!!!! RESULT: " << testingList.size() << endl;
+		cout << "size DOESN'T work!!!! RESULT: " << testingList.size() << endl << endl;
 	}
-
 }
 
 void Tester::TestListIterator(List<int>& testingList)
@@ -58,9 +57,9 @@ void Tester::TestListIterator(List<int>& testingList)
 	List<int>::iterator testingIterator = testingList.begin();
 
 	cout << "1: " << (*testingIterator++) << endl;
-	cout << "2: " << (*++testingIterator) << endl;
 	cout << "3: " << (*++testingIterator) << endl;
-	cout << "4: " << (*++testingIterator) << endl << endl;
+	cout << "4: " << (*++testingIterator) << endl;
+	cout << "5: " << (*++testingIterator) << endl << endl;
 	
 	testingIterator = testingList.begin();
 	List<int>::iterator testingIterator2 = testingList.begin();
@@ -76,4 +75,15 @@ void Tester::TestListIterator(List<int>& testingList)
 	cout << "checking equality (should be false): " << (testingIterator == testingIterator2) << endl;
 	testingIterator = testingIterator2;
 	cout << "checking equality (should be true): " << (testingIterator == testingIterator2) << endl << endl;
+
+	//testingIterator = testingList.begin();
+	//testingIterator = testingIterator + 3;
+	//cout << "4: " << *testingIterator << endl << endl;
+
+
+	List<TestObject> listTestObject;
+	listTestObject.push_front(TestObject());
+	listTestObject.push_front(TestObject());
+	List<TestObject>::iterator iteratorForTestObject = listTestObject.begin();
+	iteratorForTestObject->PrintSomething();
 }
