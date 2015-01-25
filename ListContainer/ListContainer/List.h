@@ -11,6 +11,7 @@ class List
 public:
 	List(const Allocator& passedAlloc = Allocator());
 
+	void begin(void);
 	void push_front(const Type& value);
 
 private:
@@ -26,13 +27,21 @@ List<Type, Allocator>::List(const Allocator& passedAllocator = Allocator())
 }
 
 template<class Type, class Allocator = allocator<Type>>
+void List<Type, Allocator>::begin(void)
+{
+
+}
+
+template<class Type, class Allocator = allocator<Type>>
 void List<Type, Allocator>::push_front(const Type& value)
 {
 	if (_firstElementPointer == nullptr)
 	{
-		_firstElementPointer = shared_ptr <ListElement<Type>>(new ListElement<Type>(value));
+		_firstElementPointer = shared_ptr <ListElement<Type>>(new ListElement<Type>(new Type(value)));
 		return;
 	}
+
+
 }
 
 #endif 

@@ -5,21 +5,28 @@
 
 #include <memory>
 
-template<class Type>
+template<class Type, class Allocator = allocator<Type>>
 class ListElement
 {
 public:
-	ListElement(Type insertingValue);
+	ListElement(Type* insertingValuePointer);
+	
+	Type& GetValue(void);
 
-	Type Value;
+	shared_ptr<Type> ValuePointer;
 	shared_ptr<ListElement<Type>> NextElementPtr;
 };
 
-template<class Type>
-ListElement<Type>::ListElement(Type insertingValue)
+template<class Type, class Allocator = allocator<Type>>
+ListElement<Type, Allocator>::ListElement(Type* insertingValuePointer)
 {
 	NextElementPtr = nullptr;
-	Value = insertingValue;
+	ValuePointer = shared_ptr<Type>(insertingValuePointer);
 }
 
+template<class Type, class Allocator = allocator<Type>>
+Type& ListElement<Type, Allocator>::GetValue(void)
+{
+	return *ValuePointer;
+}
 #endif

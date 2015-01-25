@@ -14,8 +14,9 @@ int main()
 	allocator < int > alloc;
 	shared_ptr<int> ptr(new int(5));
 
-	List<int> myIntList;
+	List<int> myIntList(alloc);
 	myIntList.push_front(5);
+	myIntList.push_front(12);
 
 	system("Pause");
 	return 0;
