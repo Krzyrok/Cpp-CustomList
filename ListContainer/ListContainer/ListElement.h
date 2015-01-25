@@ -9,24 +9,19 @@ template<class Type, class Allocator = allocator<Type>>
 class ListElement
 {
 public:
-	ListElement(Type* insertingValuePointer);
+	ListElement(Type* insertingValuePointer)
+	{
+		NextElementPointer = nullptr;
+		ValuePointer = shared_ptr<Type>(insertingValuePointer);
+	}
 	
-	Type& GetValue(void);
+	Type& GetValue(void)
+	{
+		return *ValuePointer;
+	}
 
 	shared_ptr<Type> ValuePointer;
 	shared_ptr<ListElement<Type>> NextElementPointer;
 };
 
-template<class Type, class Allocator = allocator<Type>>
-ListElement<Type, Allocator>::ListElement(Type* insertingValuePointer)
-{
-	NextElementPointer = nullptr;
-	ValuePointer = shared_ptr<Type>(insertingValuePointer);
-}
-
-template<class Type, class Allocator = allocator<Type>>
-Type& ListElement<Type, Allocator>::GetValue(void)
-{
-	return *ValuePointer;
-}
 #endif

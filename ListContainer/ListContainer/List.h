@@ -9,47 +9,52 @@ template<class Type, class Allocator = allocator<Type>>
 class List
 {
 public:
-	List(const Allocator& passedAlloc = Allocator());
+	typedef size_t size_type;
 
-	void begin(void);
-	void push_back(const Type& value);
+	// Constructor
+	List(const Allocator& passedAlloc = Allocator())
+	{
+		_firstElementPointer = nullptr;
+		_allocator = passedAlloc;
+		_numberOfElements = 0;
+	}
+
+	// methods
+	void begin(void)
+	{
+
+	}
+
+	void push_back(const Type& value)
+	{
+		if (_firstElementPointer == nullptr)
+		{
+			_firstElementPointer = shared_ptr <ListElement<Type>>(new ListElement<Type>(new Type(value)));
+			_numberOfElements++;
+			return;
+		}
+
+		shared_ptr<ListElement<Type>> previousElement = _firstElementPointer;
+		shared_ptr<ListElement<Type>> currentElement = _firstElementPointer->NextElementPointer;
+		while (currentElement != nullptr)
+		{
+			previousElement = currentElement;
+			currentElement = currentElement->NextElementPointer;
+		}
+
+		previousElement->NextElementPointer = shared_ptr <ListElement<Type>>(new ListElement<Type>(new Type(value)));
+		_numberOfElements++;
+	}
+
+	size_type size(void) const
+	{
+		return _numberOfElements;
+	}
 
 private:
 	shared_ptr<ListElement<Type>> _firstElementPointer;
 	Allocator _allocator;
+	size_type _numberOfElements;
 };
-
-template<class Type, class Allocator = allocator<Type>>
-List<Type, Allocator>::List(const Allocator& passedAllocator = Allocator())
-{
-	_firstElementPointer = nullptr;
-	_allocator = passedAllocator;
-}
-
-template<class Type, class Allocator = allocator<Type>>
-void List<Type, Allocator>::begin(void)
-{
-
-}
-
-template<class Type, class Allocator = allocator<Type>>
-void List<Type, Allocator>::push_back(const Type& value)
-{
-	if (_firstElementPointer == nullptr)
-	{
-		_firstElementPointer = shared_ptr <ListElement<Type>>(new ListElement<Type>(new Type(value)));
-		return;
-	}
-
-	shared_ptr<ListElement<Type>> previousElement = _firstElementPointer;
-	shared_ptr<ListElement<Type>> currentElement = _firstElementPointer->NextElementPointer;
-	while (currentElement != nullptr)
-	{
-		previousElement = currentElement;
-		currentElement = currentElement->NextElementPointer;
-	}
-
-	previousElement->NextElementPointer = shared_ptr <ListElement<Type>>(new ListElement<Type>(new Type(value)));
-}
 
 #endif 
