@@ -16,8 +16,6 @@ public:
 private:
 	shared_ptr<ListElement<Type>> _firstElementPointer;
 	Allocator _allocator;
-
-	Type* test;
 };
 
 template<class Type, class Allocator = allocator<Type>>
