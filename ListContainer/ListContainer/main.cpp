@@ -15,8 +15,9 @@ int main()
 	shared_ptr<int> ptr(new int(5));
 
 	List<int> myIntList(alloc);
-	myIntList.push_front(5);
-	myIntList.push_front(12);
+	myIntList.push_back(5);
+	myIntList.push_back(12);
+	myIntList.push_back(7);
 
 	system("Pause");
 	return 0;

@@ -14,13 +14,13 @@ public:
 	Type& GetValue(void);
 
 	shared_ptr<Type> ValuePointer;
-	shared_ptr<ListElement<Type>> NextElementPtr;
+	shared_ptr<ListElement<Type>> NextElementPointer;
 };
 
 template<class Type, class Allocator = allocator<Type>>
 ListElement<Type, Allocator>::ListElement(Type* insertingValuePointer)
 {
-	NextElementPtr = nullptr;
+	NextElementPointer = nullptr;
 	ValuePointer = shared_ptr<Type>(insertingValuePointer);
 }
 

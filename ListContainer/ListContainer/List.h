@@ -12,7 +12,7 @@ public:
 	List(const Allocator& passedAlloc = Allocator());
 
 	void begin(void);
-	void push_front(const Type& value);
+	void push_back(const Type& value);
 
 private:
 	shared_ptr<ListElement<Type>> _firstElementPointer;
@@ -33,7 +33,7 @@ void List<Type, Allocator>::begin(void)
 }
 
 template<class Type, class Allocator = allocator<Type>>
-void List<Type, Allocator>::push_front(const Type& value)
+void List<Type, Allocator>::push_back(const Type& value)
 {
 	if (_firstElementPointer == nullptr)
 	{
@@ -41,7 +41,15 @@ void List<Type, Allocator>::push_front(const Type& value)
 		return;
 	}
 
+	shared_ptr<ListElement<Type>> previousElement = _firstElementPointer;
+	shared_ptr<ListElement<Type>> currentElement = _firstElementPointer->NextElementPointer;
+	while (currentElement != nullptr)
+	{
+		previousElement = currentElement;
+		currentElement = currentElement->NextElementPointer;
+	}
 
+	previousElement->NextElementPointer = shared_ptr <ListElement<Type>>(new ListElement<Type>(new Type(value)));
 }
 
 #endif 
