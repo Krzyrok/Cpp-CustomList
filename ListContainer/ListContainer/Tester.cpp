@@ -23,7 +23,7 @@ void Tester::TestPushBack(List<int>& testingList)
 	testingList.push_back(7);
 }
 
-void TestBeginIterator(List<int>& testingList)
+void Tester::TestBeginIterator(List<int>& testingList)
 {
 	testingList.begin();
 }
