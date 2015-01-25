@@ -11,6 +11,7 @@ void Tester::Exeute(void)
 	List<int> myIntList(alloc);
 	
 	TestPushBack(myIntList);
+	TestBeginIterator(myIntList);
 
 	system("Pause");
 }
@@ -20,4 +21,9 @@ void Tester::TestPushBack(List<int>& testingList)
 	testingList.push_back(5);
 	testingList.push_back(12);
 	testingList.push_back(7);
+}
+
+void TestBeginIterator(List<int>& testingList)
+{
+	testingList.begin();
 }
