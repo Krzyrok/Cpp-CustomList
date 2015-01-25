@@ -7,8 +7,7 @@ void Tester::Exeute(void)
 	c.push_front(3);
 	c.push_front(5);
 	list<int>::iterator itek = c.begin();
-	list<int>::iterator itek2;
-	itek2 = itek;
+	list<int>::iterator itek2 = c.begin();
 	if (itek == itek2)
 		cout << "Rowne\n";
 	else
@@ -61,5 +60,20 @@ void Tester::TestListIterator(List<int>& testingList)
 	cout << "1: " << (*testingIterator++) << endl;
 	cout << "2: " << (*++testingIterator) << endl;
 	cout << "3: " << (*++testingIterator) << endl;
-	cout << "4: " << (*++testingIterator) << endl;
+	cout << "4: " << (*++testingIterator) << endl << endl;
+	
+	testingIterator = testingList.begin();
+	List<int>::iterator testingIterator2 = testingList.begin();
+	cout << "checking difference (should be false): " << (testingIterator != testingIterator2) << endl;
+	cout << "checking equality (should be true): " << (testingIterator == testingIterator2) << endl << endl;
+
+	testingIterator++;
+	cout << "checking equality (should be false): " << (testingIterator == testingIterator2) << endl;
+	testingIterator2++;
+	cout << "checking equality (should be true): " << (testingIterator == testingIterator2) << endl << endl;
+
+	testingIterator2++;
+	cout << "checking equality (should be false): " << (testingIterator == testingIterator2) << endl;
+	testingIterator = testingIterator2;
+	cout << "checking equality (should be true): " << (testingIterator == testingIterator2) << endl << endl;
 }
