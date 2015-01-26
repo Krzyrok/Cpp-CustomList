@@ -41,6 +41,17 @@ public:
 		return const_iterator(_firstElementPointer);
 	}
 
+	iterator end(void)
+	{
+		return iterator(nullptr);
+	}
+
+	const_iterator end(void) const
+	{
+		return const_iterator(nullptr);
+	}
+
+
 	void push_back(const Type& value)
 	{
 		if (tryToPushOnFirstPosition(value))

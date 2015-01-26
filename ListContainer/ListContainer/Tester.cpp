@@ -10,7 +10,8 @@ void Tester::Exeute(void)
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
-	TestListIterator(myIntList);
+	//TestListIterator(myIntList);
+	TestBeginEndIterator(myIntList);
 
 	system("Pause");
 }
@@ -63,6 +64,8 @@ void Tester::TestSize(List<int>& testingList)
 	{
 		cout << "size DOESN'T work!!!! RESULT: " << testingList.size() << endl << endl;
 	}
+
+	cout << "----------------\n\n";
 }
 
 void Tester::TestListIterator(List<int>& testingList)
@@ -132,6 +135,11 @@ void Tester::TestListIterator(List<int>& testingList)
 	List<int>::const_iterator constTestingIterator3(pointer);
 	cout << "777: " << (*constTestingIterator3) << endl << endl;
 
+
+	cout << "----------------\n\n";
+
+
+
 	// code below should not compile
 
 //	testingIterator = constTestingIterator; // should be error
@@ -142,5 +150,12 @@ void Tester::TestListIterator(List<int>& testingList)
 
 void Tester::TestBeginEndIterator(List<int>& testingList)
 {
+	int i = 1;
+	for (List<int>::iterator it = testingList.begin(); it != testingList.end(); it++, i++)
+	{
+		cout << i << ": " << *it << endl;
+	}
+	cout << endl;
 
+	cout << "----------------\n\n";
 }
