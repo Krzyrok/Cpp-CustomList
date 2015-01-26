@@ -134,8 +134,8 @@ void Tester::TestListIterator(List<int>& testingList)
 
 	// code below should not compile
 
-	//testingIterator = constTestingIterator; // should be error
-	//constTestingIterator = testingList.begin();
-	//*constTestingIterator = 124;  // should be error
-	//cout << "should not compile for const_interator -> 124: " << (*constTestingIterator) << endl;
+//	testingIterator = constTestingIterator; // should be error
+//	constTestingIterator = testingList.begin();
+//	*constTestingIterator = 124;  // should be error
+//	cout << "should not compile for const_interator -> 124: " << (*constTestingIterator) << endl;
 }
