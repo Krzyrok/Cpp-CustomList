@@ -32,7 +32,7 @@ void Tester::TestClassicList(void)
 	itConst = c.end();
 	itConst = itek;
 
-	
+
 	// code below should not compile
 
 	//itek = itConst;
