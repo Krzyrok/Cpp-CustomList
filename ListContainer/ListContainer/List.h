@@ -10,7 +10,8 @@ class List
 {
 public:
 	typedef size_t size_type;
-	typedef ListIterator<Type> iterator;
+	typedef typename ListIterator<Type, false> Iterator;
+	typedef typename ListIterator<Type, true> Const_Iterator;
 
 	// Constructor
 	List(const Allocator& passedAlloc = Allocator())
@@ -21,9 +22,14 @@ public:
 	}
 
 	// methods
-	iterator begin(void)
+	Iterator begin(void)
 	{
-		return iterator(_firstElementPointer);
+		return Iterator(_firstElementPointer);
+	}
+
+	Const_Iterator begin(void) const
+	{
+		return Const_Iterator(_firstElementPointer);
 	}
 
 	void push_back(const Type& value)

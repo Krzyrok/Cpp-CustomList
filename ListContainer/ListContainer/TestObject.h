@@ -8,9 +8,11 @@
 class TestObject
 {
 public:
+	int TestValue = 44;
+
 	void PrintSomething(void)
 	{
-		cout << "Test message from TesObject\n\n";
+		cout << "Test message from TesTObject\n\n";
 	}
 };
 
