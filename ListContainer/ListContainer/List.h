@@ -52,6 +52,12 @@ public:
 	}
 
 
+	size_type size(void) const
+	{
+		return _numberOfElements;
+	}
+
+
 	void push_back(const Type& value)
 	{
 		if (tryToPushOnFirstPosition(value))
@@ -84,9 +90,11 @@ public:
 		_numberOfElements++;
 	}
 
-	size_type size(void) const
+	
+	void clear(void)
 	{
-		return _numberOfElements;
+		_firstElementPointer.reset();
+		_numberOfElements = 0;
 	}
 
 private:

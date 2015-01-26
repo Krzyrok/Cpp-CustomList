@@ -14,11 +14,17 @@ public:
 		NextElementPointer = nullptr;
 		ValuePointer = shared_ptr<Type>(insertingValuePointer);
 	}
-	
+
 	Type& GetValue(void)
 	{
 		return *ValuePointer;
 	}
+
+	~ListElement(void)
+	{
+		cout << "Deleted " << endl;
+	}
+
 
 	shared_ptr<Type> ValuePointer;
 	shared_ptr<ListElement<Type>> NextElementPointer;

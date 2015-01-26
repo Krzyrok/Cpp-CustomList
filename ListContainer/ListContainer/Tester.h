@@ -19,6 +19,7 @@ private:
 	void TestSize(List<int>& testingList); 
 	void TestListIterator(List<int>& testingList);
 	void TestBeginEndIterator(List<int>& testingList);
+	void TestClear(List<int>& testingList);
 };
 
 #endif 

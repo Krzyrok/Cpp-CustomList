@@ -12,6 +12,7 @@ void Tester::Exeute(void)
 	TestSize(myIntList);
 	//TestListIterator(myIntList);
 	TestBeginEndIterator(myIntList);
+	TestClear(myIntList);
 
 	system("Pause");
 }
@@ -155,7 +156,12 @@ void Tester::TestBeginEndIterator(List<int>& testingList)
 	{
 		cout << i << ": " << *it << endl;
 	}
-	cout << endl;
+	cout << "\n----------------\n\n";
+}
 
-	cout << "----------------\n\n";
+void Tester::TestClear(List<int>& testingList)
+{
+	testingList.clear();
+	cout << "Size after clear(): " << testingList.size() << endl ;
+	cout << "\n----------------\n\n";
 }
