@@ -12,7 +12,7 @@ public:
 
 	void PrintSomething(void)
 	{
-		cout << "Test message from TesTObject\n\n";
+		cout << "Test message from TestObject\n\n";
 	}
 };
 

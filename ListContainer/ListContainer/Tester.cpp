@@ -2,6 +2,21 @@
 
 void Tester::Exeute(void)
 {
+	//TestClassicList();
+
+	allocator <int> alloc;
+	List<int> myIntList(alloc);
+
+	TestPushBack(myIntList);
+	TestPushFront(myIntList);
+	TestSize(myIntList);
+	TestListIterator(myIntList);
+
+	system("Pause");
+}
+
+void Tester::TestClassicList(void)
+{
 	list<int> c;
 	c.size();
 	c.push_front(3);
@@ -15,22 +30,13 @@ void Tester::Exeute(void)
 
 	list<int>::const_iterator itConst = c.begin();
 	itConst = c.end();
-	itConst = c.begin();
+	itConst = itek;
+
+	
+	// code below should not compile
+
+	//itek = itConst;
 	//*itConst = 77;
-	
-
-
-	allocator < int > alloc;
-	List<int> myIntList(alloc);
-
-
-	
-	TestPushBack(myIntList);
-	TestPushFront(myIntList);
-	TestSize(myIntList);
-	TestListIterator(myIntList);
-
-	system("Pause");
 }
 
 void Tester::TestPushBack(List<int>& testingList)
@@ -61,7 +67,7 @@ void Tester::TestSize(List<int>& testingList)
 
 void Tester::TestListIterator(List<int>& testingList)
 {
-	List<int>::Iterator testingIterator = testingList.begin();
+	List<int>::iterator testingIterator = testingList.begin();
 
 	cout << "1: " << (*testingIterator++) << endl;
 	cout << "3: " << (*++testingIterator) << endl;
@@ -69,7 +75,7 @@ void Tester::TestListIterator(List<int>& testingList)
 	cout << "5: " << (*++testingIterator) << endl << endl;
 	
 	testingIterator = testingList.begin();
-	List<int>::Iterator testingIterator2 = testingList.begin();
+	List<int>::iterator testingIterator2 = testingList.begin();
 	cout << "checking difference (should be false): " << (testingIterator != testingIterator2) << endl;
 	cout << "checking equality (should be true): " << (testingIterator == testingIterator2) << endl << endl;
 
@@ -84,7 +90,7 @@ void Tester::TestListIterator(List<int>& testingList)
 	cout << "checking equality (should be true): " << (testingIterator == testingIterator2) << endl << endl;
 
 	testingIterator = testingList.begin();
-	List<int>::Iterator iterator3(testingIterator);
+	List<int>::iterator iterator3(testingIterator);
 	cout << "checking difference (should be false): " << (testingIterator != iterator3) << endl;
 	cout << "checking equality (should be true): " << (testingIterator == iterator3) << endl;
 	cout << "1: " << *iterator3 << endl << endl;
@@ -96,29 +102,40 @@ void Tester::TestListIterator(List<int>& testingList)
 	cout << "2: " << *testingIterator << endl << endl;
 
 
-	//shared_ptr<const TestObject> to_ptr = shared_ptr<TestObject>(new TestObject);
-	//cout << to_ptr->TestValue <<endl;
-
-	ListElement<const int> tle = ListElement<const int>(new int(798));
-	//tle.GetValue() = 44;
-	cout << tle.GetValue() << endl;;
-
 	List<TestObject> listTestObject;
 	listTestObject.push_front(TestObject());
 	listTestObject.push_front(TestObject());
-	List<TestObject>::Iterator iteratorForTestObject = listTestObject.begin();
-	//iteratorForTestObject->PrintSomething();
+	List<TestObject>::iterator iteratorForTestObject = listTestObject.begin();
+	iteratorForTestObject->PrintSomething();
 
 
 	// testing const_iterator
-	List<int>::Const_Iterator constTestingIterator = testingList.begin();
-	//testingIterator = testingList.begin();
-	//cout << "77: " << (*constTestingIterator++) << endl;
-	//cout << "3: " << (*++constTestingIterator) << endl;
+	List<int>::const_iterator constTestingIterator = testingList.begin();
+	testingIterator = testingList.begin();
+	cout << "77: " << (*constTestingIterator++) << endl;
+	cout << "3: " << (*++constTestingIterator) << endl;
+	constTestingIterator = testingList.begin();
+	cout << "checking difference (should be false): " << (constTestingIterator != testingIterator) << endl;
+	cout << "checking equality (should be true): " << (constTestingIterator == testingIterator) << endl << endl;
+	
+	constTestingIterator++;
+	constTestingIterator++;
+	constTestingIterator = testingIterator;
+	cout << "77: " << (*constTestingIterator) << endl << endl;
+	
+
+	List<int>::const_iterator constTestingIterator2 = testingList.begin();
+	cout << "checking difference (should be false): " << (constTestingIterator != constTestingIterator2) << endl;
+	cout << "checking equality (should be true): " << (constTestingIterator == constTestingIterator2) << endl << endl;
+	
+	shared_ptr<ListElement<int>> pointer(new ListElement<int>(new int(777)));
+	List<int>::const_iterator constTestingIterator3(pointer);
+	cout << "777: " << (*constTestingIterator3) << endl << endl;
+
+	// code below should not compile
+
+	//testingIterator = constTestingIterator; // should be error
 	//constTestingIterator = testingList.begin();
-	//cout << "checking difference (should be false): " << (constTestingIterator != testingIterator) << endl;
-	//cout << "checking equality (should be true): " << (constTestingIterator == testingIterator) << endl << endl;
-	//constTestingIterator = testingList.begin();
-	//*constTestingIterator = 124;
-	cout << "should not compile for const_interator -> 124: " << (*constTestingIterator) << endl;
+	//*constTestingIterator = 124;  // should be error
+	//cout << "should not compile for const_interator -> 124: " << (*constTestingIterator) << endl;
 }

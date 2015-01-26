@@ -12,6 +12,8 @@ public:
 	void Exeute(void);
 
 private:
+	void TestClassicList(void);
+
 	void TestPushBack(List<int>& testingList);
 	void TestPushFront(List<int>& testingList);
 	void TestSize(List<int>& testingList); 
