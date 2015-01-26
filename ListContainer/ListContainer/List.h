@@ -9,8 +9,8 @@ template<class Type, class Allocator = allocator<Type>>
 class List
 {
 public:
-	typedef typename ListIterator<Type> iterator;
-	typedef typename ConstListIterator<Type> const_iterator;
+	typedef typename ListIterator<Type, Allocator> iterator;
+	typedef typename ConstListIterator<Type, Allocator> const_iterator;
 
 	typedef Type value_type;
 	typedef Allocator allocator_type;
@@ -65,15 +65,15 @@ public:
 			return;
 		}
 
-		shared_ptr<ListElement<Type>> previousElement = _firstElementPointer;
-		shared_ptr<ListElement<Type>> currentElement = _firstElementPointer->NextElementPointer;
+		shared_ptr<ListElement<Type, Allocator>> previousElement = _firstElementPointer;
+		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer->NextElementPointer;
 		while (currentElement != nullptr)
 		{
 			previousElement = currentElement;
 			currentElement = currentElement->NextElementPointer;
 		}
 
-		previousElement->NextElementPointer = shared_ptr <ListElement<Type>>(new ListElement<Type>(new Type(value)));
+		previousElement->NextElementPointer = shared_ptr <ListElement<Type, Allocator>>(new ListElement<Type, Allocator>(value, _allocator));
 		_numberOfElements++;
 	}
 
@@ -84,7 +84,7 @@ public:
 			return;
 		}
 
-		shared_ptr<ListElement<Type>> newFirstElement = shared_ptr <ListElement<Type>>(new ListElement<Type>(new Type(value)));
+		shared_ptr<ListElement<Type, Allocator>> newFirstElement = shared_ptr <ListElement<Type, Allocator>>(new ListElement<Type, Allocator>(value, _allocator));
 		newFirstElement->NextElementPointer = _firstElementPointer;
 		_firstElementPointer = newFirstElement;
 		_numberOfElements++;
@@ -98,7 +98,7 @@ public:
 	}
 
 private:
-	shared_ptr<ListElement<Type>> _firstElementPointer;
+	shared_ptr<ListElement<Type, Allocator>> _firstElementPointer;
 	Allocator _allocator;
 	size_type _numberOfElements;
 
@@ -107,7 +107,7 @@ private:
 	{
 		if (_firstElementPointer == nullptr)
 		{
-			_firstElementPointer = shared_ptr <ListElement<Type>>(new ListElement<Type>(new Type(value)));
+			_firstElementPointer = shared_ptr <ListElement<Type, Allocator>>(new ListElement<Type, Allocator>(value, _allocator));
 			_numberOfElements++;
 			return true;
 		}

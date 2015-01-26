@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CommonHeaders.h" />
+    <ClInclude Include="Deleter.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ListElement.h" />
     <ClInclude Include="ListIterator.h" />

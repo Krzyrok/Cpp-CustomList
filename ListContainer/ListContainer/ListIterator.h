@@ -5,11 +5,11 @@
 
 #include <iterator>
 
-template <class Type>
+template <class Type, class Allocator>
 class ConstListIterator;
 
 
-template <class Type>
+template <class Type, class Allocator>
 class ListIterator 
 	: public iterator<forward_iterator_tag, Type>
 {
@@ -18,7 +18,7 @@ public:
 		: _pointer(nullptr) {}
 
 
-	ListIterator(shared_ptr<ListElement<Type>> ptr) 
+	ListIterator(shared_ptr<ListElement<Type, Allocator>> ptr)
 		: _pointer(ptr) {}
 
 	ListIterator(const ListIterator &originalIterator)
@@ -58,13 +58,13 @@ public:
 	}
 
 
-	friend class ConstListIterator<Type>;
+	friend class ConstListIterator<Type, Allocator>;
 
 private:
-	shared_ptr<ListElement<Type>> _pointer;
+	shared_ptr<ListElement<Type, Allocator>> _pointer;
 };
 
-template <class Type>
+template <class Type, class Allocator>
 class ConstListIterator
 	: public iterator<forward_iterator_tag, const Type>
 {
@@ -73,13 +73,13 @@ public:
 		: _pointer(nullptr) {}
 
 
-	ConstListIterator(shared_ptr<ListElement<Type>> ptr)
+	ConstListIterator(shared_ptr<ListElement<Type, Allocator>> ptr)
 		: _pointer(ptr) {}
 
 	ConstListIterator(const ConstListIterator &originalIterator)
 		: _pointer(originalIterator._pointer) {}
 
-	ConstListIterator(const ListIterator<Type> &originalIterator)
+	ConstListIterator(const ListIterator<Type, Allocator> &originalIterator)
 		: _pointer(originalIterator._pointer) {}
 
 	ConstListIterator operator++()
@@ -117,7 +117,7 @@ public:
 
 
 private:
-	shared_ptr<ListElement<Type>> _pointer;
+	shared_ptr<ListElement<Type, Allocator>> _pointer;
 };
 
 #endif

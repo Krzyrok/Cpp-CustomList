@@ -1,18 +1,25 @@
 #ifndef LIST_ELEMENT_HEADER
 #define LIST_ELEMENT_HEADER
 
-#include "CommonHeaders.h"
+#include "Deleter.h"
 
 #include <memory>
 
-template<class Type, class Allocator = allocator<Type>>
+template<class Type, class Allocator>
 class ListElement
 {
 public:
-	ListElement(Type* insertingValuePointer)
+	ListElement(const Type& insertingValue, Allocator& passedAllocator)
 	{
 		NextElementPointer = nullptr;
-		ValuePointer = shared_ptr<Type>(insertingValuePointer);
+		
+		//Type* insertingValuePointer = new Type(insertingValue);
+
+		Type* insertingValuePointer = passedAllocator.allocate(1);
+		passedAllocator.construct(insertingValuePointer, insertingValue);
+		
+		Deleter<Type, Allocator> deleter(passedAllocator);
+		ValuePointer = shared_ptr<Type>(insertingValuePointer, deleter);
 	}
 
 	Type& GetValue(void)
@@ -20,14 +27,10 @@ public:
 		return *ValuePointer;
 	}
 
-	~ListElement(void)
-	{
-		cout << "Deleted " << endl;
-	}
-
 
 	shared_ptr<Type> ValuePointer;
-	shared_ptr<ListElement<Type>> NextElementPointer;
+	shared_ptr<ListElement<Type, Allocator>> NextElementPointer;
+
 };
 
 #endif

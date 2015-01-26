@@ -132,7 +132,8 @@ void Tester::TestListIterator(List<int>& testingList)
 	cout << "checking difference (should be false): " << (constTestingIterator != constTestingIterator2) << endl;
 	cout << "checking equality (should be true): " << (constTestingIterator == constTestingIterator2) << endl << endl;
 	
-	shared_ptr<ListElement<int>> pointer(new ListElement<int>(new int(777)));
+	
+	shared_ptr<ListElement<int, allocator<int>>> pointer(new ListElement<int, allocator<int>>(777, allocator<int>()));
 	List<int>::const_iterator constTestingIterator3(pointer);
 	cout << "777: " << (*constTestingIterator3) << endl << endl;
 
@@ -143,10 +144,10 @@ void Tester::TestListIterator(List<int>& testingList)
 
 	// code below should not compile
 
-//	testingIterator = constTestingIterator; // should be error
-//	constTestingIterator = testingList.begin();
-//	*constTestingIterator = 124;  // should be error
-//	cout << "should not compile for const_interator -> 124: " << (*constTestingIterator) << endl;
+	//testingIterator = constTestingIterator; // should be error
+	//constTestingIterator = testingList.begin();
+	//*constTestingIterator = 124;  // should be error
+	//cout << "should not compile for const_interator -> 124: " << (*constTestingIterator) << endl;
 }
 
 void Tester::TestBeginEndIterator(List<int>& testingList)
