@@ -39,25 +39,6 @@ void Tester::PrintList(List<int>& printingList)
 	}
 }
 
-void Tester::TestConstructors(void)
-{
-	List<int> emptyList;
-	cout << "size (0): " << emptyList.size() << endl << endl;
-
-	allocator<int> alloc;
-	List<int, allocator<int>> emptyList2(alloc);
-	cout << "size (0): " << emptyList2.size() << endl << endl;
-
-	List<int> listWithTheSameValues(5, 1410);
-	cout << "size (5, 1410): " << listWithTheSameValues.size() << endl;
-	PrintList(listWithTheSameValues);
-
-	//List<int> list11 = PrepareRandonIntList();
-	//PrintList(list11);
-
-	cout << "\n----------------\n\n";
-}
-
 void Tester::TestClassicList(void)
 {
 	list<int> c;
@@ -80,6 +61,31 @@ void Tester::TestClassicList(void)
 
 	//itek = itConst;
 	//*itConst = 77;
+}
+
+void Tester::TestConstructors(void)
+{
+	List<int> emptyList;
+	cout << "size (0): " << emptyList.size() << endl << endl;
+
+	allocator<int> alloc;
+	List<int, allocator<int>> emptyList2(alloc);
+	cout << "size (0): " << emptyList2.size() << endl << endl;
+
+	List<int> listWithTheSameValues(5, 1410);
+	cout << "size (5, 1410): " << listWithTheSameValues.size() << endl;
+	PrintList(listWithTheSameValues);
+	cout << endl;
+
+	cout << "Random list: \n";
+	List<int> randomList = PrepareRandonIntList();
+	PrintList(randomList);
+	cout << "Copied (by iterators) list: \n";
+	List<int> iteratorCopiedList(randomList.begin(), randomList.end());
+	PrintList(iteratorCopiedList);
+	cout << endl;
+
+	cout << "\n----------------\n\n";
 }
 
 void Tester::TestPushBack(List<int>& testingList)
