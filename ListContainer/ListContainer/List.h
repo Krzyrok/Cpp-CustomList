@@ -45,6 +45,13 @@ public:
 		}
 	}
 
+	template <class IteratorType>
+	List(IteratorType firstIterator, IteratorType lastIterator, const Allocator& passedAlloc = Allocator())
+		: List(passedAlloc)
+	{
+		
+	}
+
 	// Methods
 	iterator begin(void)
 	{
