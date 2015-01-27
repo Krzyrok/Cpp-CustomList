@@ -11,7 +11,7 @@ void Tester::Exeute(void)
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
-	//TestListIterator(myIntList);
+	TestListIterator(myIntList);
 	TestBeginEndIterator(myIntList);
 	TestClear(myIntList);
 
@@ -42,14 +42,18 @@ void Tester::PrintList(List<int>& printingList)
 void Tester::TestConstructors(void)
 {
 	List<int> emptyList;
-	cout << "size (0): " << emptyList.size() << endl;
+	cout << "size (0): " << emptyList.size() << endl << endl;
 
 	allocator<int> alloc;
 	List<int, allocator<int>> emptyList2(alloc);
-	cout << "size (0): " << emptyList2.size() << endl;
+	cout << "size (0): " << emptyList2.size() << endl << endl;
 
-	List<int> list11 = PrepareRandonIntList();
-	PrintList(list11);
+	List<int> listWithTheSameValues(5, 1410);
+	cout << "size (5, 1410): " << listWithTheSameValues.size() << endl;
+	PrintList(listWithTheSameValues);
+
+	//List<int> list11 = PrepareRandonIntList();
+	//PrintList(list11);
 
 	cout << "\n----------------\n\n";
 }
@@ -189,11 +193,10 @@ void Tester::TestListIterator(List<int>& testingList)
 
 void Tester::TestBeginEndIterator(List<int>& testingList)
 {
-	int i = 1;
-	for (List<int>::iterator it = testingList.begin(); it != testingList.end(); it++, i++)
-	{
-		cout << i << ": " << *it << endl;
-	}
+	testingList.clear();
+	TestPushBack(testingList);
+	TestPushFront(testingList);
+	PrintList(testingList);
 	cout << "\n----------------\n\n";
 }
 

@@ -33,7 +33,16 @@ public:
 	explicit List(size_type n, const Type& value = Type(), const Allocator& passedAlloc = Allocator())
 		: List(passedAlloc)
 	{
+		if (n <= 0)
+			return;
 
+		_firstElementPointer = createElementPtrAndChangeSize(value);
+		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
+		for (size_type i = 1; i < n; i++)
+		{
+			currentElement->NextElementPointer = createElementPtrAndChangeSize(value);
+			currentElement = currentElement->NextElementPointer;
+		}
 	}
 
 	// Methods
@@ -79,8 +88,7 @@ public:
 			currentElement = currentElement->NextElementPointer;
 		}
 
-		previousElement->NextElementPointer = shared_ptr <ListElement<Type, Allocator>>(new ListElement<Type, Allocator>(value, _allocator));
-		_numberOfElements++;
+		previousElement->NextElementPointer = createElementPtrAndChangeSize(value);
 	}
 
 	void push_front(const Type& value)
@@ -90,10 +98,9 @@ public:
 			return;
 		}
 
-		shared_ptr<ListElement<Type, Allocator>> newFirstElement = shared_ptr <ListElement<Type, Allocator>>(new ListElement<Type, Allocator>(value, _allocator));
+		shared_ptr<ListElement<Type, Allocator>> newFirstElement = createElementPtrAndChangeSize(value);
 		newFirstElement->NextElementPointer = _firstElementPointer;
 		_firstElementPointer = newFirstElement;
-		_numberOfElements++;
 	}
 
 	
@@ -113,12 +120,19 @@ private:
 	{
 		if (_firstElementPointer == nullptr)
 		{
-			_firstElementPointer = shared_ptr <ListElement<Type, Allocator>>(new ListElement<Type, Allocator>(value, _allocator));
-			_numberOfElements++;
+			_firstElementPointer = createElementPtrAndChangeSize(value);
 			return true;
 		}
 
 		return false;
+	}
+
+	shared_ptr<ListElement<Type, Allocator>> createElementPtrAndChangeSize(const Type& value)
+	{
+		shared_ptr <ListElement<Type, Allocator>> result = shared_ptr <ListElement<Type, Allocator>>(new ListElement<Type, Allocator>(value, _allocator));
+		_numberOfElements++;
+
+		return result;
 	}
 };
 
