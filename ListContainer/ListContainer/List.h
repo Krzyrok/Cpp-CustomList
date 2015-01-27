@@ -22,15 +22,17 @@ public:
 	typedef size_t size_type;
 
 
-	// Constructor
-	List(const Allocator& passedAlloc = Allocator())
+	// Constructors
+	explicit List(const Allocator& passedAlloc = Allocator())
 	{
 		_firstElementPointer = nullptr;
 		_allocator = passedAlloc;
 		_numberOfElements = 0;
 	}
 
-	// methods
+
+
+	// Methods
 	iterator begin(void)
 	{
 		return iterator(_firstElementPointer);

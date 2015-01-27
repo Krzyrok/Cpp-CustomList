@@ -10,11 +10,16 @@ void Tester::Exeute(void)
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
-	//TestListIterator(myIntList);
+	TestListIterator(myIntList);
 	TestBeginEndIterator(myIntList);
 	TestClear(myIntList);
 
 	system("Pause");
+}
+
+void Tester::TestConstructor(void)
+{
+
 }
 
 void Tester::TestClassicList(void)
