@@ -18,6 +18,27 @@ void Tester::Exeute(void)
 	system("Pause");
 }
 
+List<int> Tester::PrepareRandonIntList(int size)
+{
+	List<int> result;
+	for (int i = 0; i < size; i++)
+	{
+		int randomNumber = rand() % 100;
+		result.push_front(randomNumber);
+	}
+
+	return result;
+}
+
+void Tester::PrintList(List<int>& printingList)
+{
+	int i = 1;
+	for (List<int>::iterator it = printingList.begin(); it != printingList.end(); it++, i++)
+	{
+		cout << i << ": " << *it << endl;
+	}
+}
+
 void Tester::TestConstructors(void)
 {
 	List<int> emptyList;
@@ -26,6 +47,11 @@ void Tester::TestConstructors(void)
 	allocator<int> alloc;
 	List<int, allocator<int>> emptyList2(alloc);
 	cout << "size (0): " << emptyList2.size() << endl;
+
+	List<int> list11 = PrepareRandonIntList();
+	PrintList(list11);
+
+	cout << "\n----------------\n\n";
 }
 
 void Tester::TestClassicList(void)

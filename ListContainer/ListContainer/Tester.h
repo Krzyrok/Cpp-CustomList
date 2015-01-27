@@ -14,6 +14,9 @@ public:
 private:
 	void TestClassicList(void);
 
+	List<int> PrepareRandonIntList(int size = 4);
+	void PrintList(List<int>& printingList);
+
 	void TestConstructors(void);
 	void TestPushBack(List<int>& testingList);
 	void TestPushFront(List<int>& testingList);
