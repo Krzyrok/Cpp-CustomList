@@ -30,7 +30,11 @@ public:
 		_numberOfElements = 0;
 	}
 
+	explicit List(size_type n, const Type& value = Type(), const Allocator& passedAlloc = Allocator())
+		: List(passedAlloc)
+	{
 
+	}
 
 	// Methods
 	iterator begin(void)

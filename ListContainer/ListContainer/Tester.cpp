@@ -7,19 +7,25 @@ void Tester::Exeute(void)
 	allocator <int> alloc;
 	List<int> myIntList(alloc);
 
+	TestConstructors();
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
-	TestListIterator(myIntList);
+	//TestListIterator(myIntList);
 	TestBeginEndIterator(myIntList);
 	TestClear(myIntList);
 
 	system("Pause");
 }
 
-void Tester::TestConstructor(void)
+void Tester::TestConstructors(void)
 {
+	List<int> emptyList;
+	cout << "size (0): " << emptyList.size() << endl;
 
+	allocator<int> alloc;
+	List<int, allocator<int>> emptyList2(alloc);
+	cout << "size (0): " << emptyList2.size() << endl;
 }
 
 void Tester::TestClassicList(void)
