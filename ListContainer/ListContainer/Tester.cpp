@@ -2,7 +2,7 @@
 
 void Tester::Exeute(void)
 {
-	//TestClassicList();
+	TestClassicList();
 
 	allocator <int> alloc;
 	List<int> myIntList(alloc);
@@ -61,6 +61,8 @@ void Tester::TestClassicList(void)
 
 	//itek = itConst;
 	//*itConst = 77;
+
+	list<int> test(c.begin(), c.end());
 }
 
 void Tester::TestConstructors(void)
@@ -77,11 +79,11 @@ void Tester::TestConstructors(void)
 	PrintList(listWithTheSameValues);
 	cout << endl;
 
-	cout << "Random list: \n";
 	List<int> randomList = PrepareRandonIntList();
+	cout << "Size: " << randomList.size() << ". Random list: \n";
 	PrintList(randomList);
-	cout << "Copied (by iterators) list: \n";
 	List<int> iteratorCopiedList(randomList.begin(), randomList.end());
+	cout << "Size: " << iteratorCopiedList.size() << ". Copied (by iterators) list: \n";
 	PrintList(iteratorCopiedList);
 	cout << endl;
 

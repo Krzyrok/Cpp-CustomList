@@ -45,11 +45,25 @@ public:
 		}
 	}
 
-	template <class IteratorType>
-	List(IteratorType firstIterator, IteratorType lastIterator, const Allocator& passedAlloc = Allocator())
+	template <class InputIterator, class = typename enable_if<_Is_iterator<InputIterator>::value, void>::type>
+	List(InputIterator firstIterator, InputIterator lastIterator, const Allocator& passedAlloc = Allocator())
 		: List(passedAlloc)
 	{
-		
+		if (firstIterator == lastIterator)
+			return;
+
+		InputIterator currentIterator = firstIterator;
+
+		Type& value = (*currentIterator);
+		_firstElementPointer = createElementPtrAndChangeSize(value);
+		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
+		currentIterator++;
+		for (; currentIterator != lastIterator; currentIterator++)
+		{
+			value = *currentIterator;
+			currentElement->NextElementPointer = createElementPtrAndChangeSize(value);
+			currentElement = currentElement->NextElementPointer;
+		}
 	}
 
 	// Methods
