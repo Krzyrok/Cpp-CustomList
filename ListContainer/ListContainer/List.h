@@ -105,6 +105,12 @@ public:
 	}
 
 
+	// Capacity
+	bool empty() const
+	{
+		return (size() == 0);
+	}
+
 	size_type size(void) const
 	{
 		return _numberOfElements;

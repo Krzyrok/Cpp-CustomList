@@ -24,6 +24,7 @@ private:
 	void TestListIterator(List<int>& testingList);
 	void TestBeginEndIterator(List<int>& testingList);
 	void TestClear(List<int>& testingList);
+	void TestEmpty(List<int>& testingList);
 };
 
 #endif 

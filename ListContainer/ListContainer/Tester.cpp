@@ -14,7 +14,7 @@ void Tester::Exeute(void)
 	//TestListIterator(myIntList);
 	TestClear(myIntList);
 	TestBeginEndIterator(myIntList);
-
+	TestEmpty(myIntList);
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -231,5 +231,21 @@ void Tester::TestClear(List<int>& testingList)
 {
 	testingList.clear();
 	cout << "Size after clear(): " << testingList.size() << endl ;
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestEmpty(List<int>& testingList)
+{
+	cout << "Size before clear: " << testingList.size() << endl;
+	cout << "Is empty (false): " << testingList.empty() << endl;
+	testingList.clear();
+	cout << "Size after clear: " << testingList.size() << endl;
+	cout << "Is empty (true): " << testingList.empty() << endl;
+
+	List<int> newList;
+	cout << "Is empty (true): " << newList.empty() << endl;
+
+	TestPushBack(testingList);
+	TestPushFront(testingList);
 	cout << "\n----------------\n\n";
 }
