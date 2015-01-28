@@ -69,7 +69,11 @@ public:
 	{
 	}
 
+	// -------------------------------------------------------------------
+
 	// Methods
+
+	// Iterators
 	iterator begin(void)
 	{
 		return iterator(_firstElementPointer);
@@ -77,7 +81,7 @@ public:
 
 	const_iterator begin(void) const
 	{
-		return const_iterator(_firstElementPointer);
+		return cbegin();
 	}
 
 	iterator end(void)
@@ -86,6 +90,16 @@ public:
 	}
 
 	const_iterator end(void) const
+	{
+		return cend();
+	}
+
+	const_iterator cbegin(void) const
+	{
+		return const_iterator(_firstElementPointer);
+	}
+
+	const_iterator cend(void) const
 	{
 		return const_iterator(nullptr);
 	}
