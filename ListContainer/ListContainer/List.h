@@ -375,60 +375,8 @@ public:
 		if (firstIteratorInOtherList == lastIteratorInOtherList)
 			return;
 
-		//iterator currentIteratorForOtherList = firstIteratorInOtherList;
-		//int numberOfMovingElements;
-		//for (numberOfMovingElements = 0; currentIteratorForOtherList != lastIteratorInOtherList; currentIteratorForOtherList++)
-		//{
-		//	numberOfMovingElements++;
-		//}
-
-		//bool isFirstIteratorAtListBeginning = false;
-		//if (otherList.begin() == firstIteratorInOtherList)
-		//	isFirstIteratorAtListBeginning = true;
-
-		//bool isLastIteratorAtListEnding = false;
-		//if (otherList.end() == lastIteratorInOtherList)
-		//	isLastIteratorAtListEnding = true;
-
-		//
-		//bool isPositionIteratorAtListBeginning = false;
-		//if (begin() == positionIteratorForNewElements)
-		//	isPositionIteratorAtListBeginning = true;
-
-		//bool isPositionIteratorAtListEnding = false;
-		//if (end() == positionIteratorForNewElements)
-		//	isPositionIteratorAtListEnding = true;
-		//
-		//shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeLastInOtherList;
-		//if (isLastIteratorAtListEnding)
-		//{
-		//	elementPointerBeforeLastInOtherList = otherList._lastElementPointer;
-		//}
-		//else
-		//{
-		//	elementPointerBeforeLastInOtherList = otherList.findElementBefore(lastIteratorInOtherList);
-		//}
-
-
-
-		// magic ...
-		//if ()
 		insert(positionIteratorForNewElements, firstIteratorInOtherList, lastIteratorInOtherList);
 		otherList.erase(firstIteratorInOtherList, lastIteratorInOtherList);
-
-		//shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeFirstInOtherList = otherList.findElementBefore(firstIteratorInOtherList);
-		//shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeInsertingPositionInCurrentList = findElementBefore(positionIteratorForNewElements);
-
-		//shared_ptr <ListElement<Type, Allocator>> tmpElementPointer = elementPointerBeforeInsertingPositionInCurrentList->NextElementPointer;
-		//elementPointerBeforeInsertingPositionInCurrentList->NextElementPointer = elementPointerBeforeFirstInOtherList->NextElementPointer;
-
-		//shared_ptr <ListElement<Type, Allocator>> tmpElementPointer2 = elementPointerBeforeLastInOtherList->NextElementPointer;
-		//elementPointerBeforeLastInOtherList->NextElementPointer = tmpElementPointer;
-
-		//elementPointerBeforeFirstInOtherList->NextElementPointer = tmpElementPointer2;
-
-		//_numberOfElements += numberOfMovingElements;
-		//otherList._numberOfElements -= numberOfMovingElements;
 	}
 
 	void remove(const Type& value)
@@ -471,6 +419,29 @@ public:
 				erase(firstIterator);
 			}
 		}
+	}
+
+	void reverse(void)
+	{
+		if (size() < 2)
+			return;
+
+		shared_ptr<ListElement<Type, Allocator>> previousPointer = _firstElementPointer;
+		shared_ptr<ListElement<Type, Allocator>> currentPointer = _firstElementPointer->NextElementPointer;
+		_firstElementPointer->NextElementPointer = nullptr;
+		
+		shared_ptr<ListElement<Type, Allocator>> tmpPointer;
+		for (size_type i = 1; i < size(); i++)
+		{
+			tmpPointer = currentPointer->NextElementPointer;
+			currentPointer->NextElementPointer = previousPointer;
+			previousPointer = currentPointer;
+			currentPointer = tmpPointer;
+		}
+
+		tmpPointer = _firstElementPointer;
+		_firstElementPointer = _lastElementPointer;
+		_lastElementPointer = tmpPointer;
 	}
 
 

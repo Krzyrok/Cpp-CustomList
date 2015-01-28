@@ -30,6 +30,7 @@ void Tester::Exeute(void)
 	TestSplice(myIntList);
 	TestRemoveAndRemoveIf(myIntList);
 	TestUnique();
+	TestReverse(myIntList);
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -566,6 +567,21 @@ void Tester::TestUnique(void)
 	testingList = List<int>(elementsForList3, elementsForList3 + 5);
 	testingList.unique(SecondIsGreater<int>());
 	cout << "List after unique with predicate, size (2) - 5,1: " << testingList.size() << endl;
+	PrintList(testingList);
+
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestReverse(List<int>& testingList)
+{
+	PrepareStandardList(testingList);
+	testingList.reverse();
+	cout << "After reverse (6) 6-1: " << testingList.size() << endl;
+	PrintList(testingList);
+
+	testingList.pop_back();
+	testingList.reverse();
+	cout << "After reverse (5) 2-6: " << testingList.size() << endl;
 	PrintList(testingList);
 
 	cout << "\n----------------\n\n";

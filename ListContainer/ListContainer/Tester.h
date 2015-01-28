@@ -40,6 +40,7 @@ private:
 	void TestSplice(List<int>& testingList);
 	void TestRemoveAndRemoveIf(List<int>& testingList);
 	void TestUnique(void);
+	void TestReverse(List<int>& testingList);
 
 
 };
