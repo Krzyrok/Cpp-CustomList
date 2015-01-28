@@ -30,6 +30,7 @@ private:
 	void TestFront(List<int>& testingList);
 	void TestBack(List<int>& testingList);
 	void TestAssign(List<int>& testingList);
+	void TestPopFront(List<int>& testingList);
 };
 
 #endif 

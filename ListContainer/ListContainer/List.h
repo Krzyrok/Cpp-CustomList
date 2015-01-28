@@ -163,26 +163,9 @@ public:
 		_lastElementPointer = currentElement;
 	}
 
-	void push_back(const Type& value)
-	{
-		if (tryToPushOnFirstPosition(value))
-		{
-			return;
-		}
-
-		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
-		while (currentElement->NextElementPointer != nullptr)
-		{
-			currentElement = currentElement->NextElementPointer;
-		}
-
-		currentElement->NextElementPointer = createElementPtrAndChangeSize(value);
-		_lastElementPointer = currentElement->NextElementPointer;
-	}
-
 	void push_front(const Type& value)
 	{
-		if (tryToPushOnFirstPosition(value))
+		if (checkIfEmptyAndPushElement(value))
 		{
 			return;
 		}
@@ -191,6 +174,29 @@ public:
 		newFirstElement->NextElementPointer = _firstElementPointer;
 		_firstElementPointer = newFirstElement;
 	}
+
+	void pop_front(void)
+	{
+		if (checkIfEmptyOrOneElementAndDelete())
+		{
+			return;
+		}
+		_firstElementPointer = _firstElementPointer->NextElementPointer;
+		_numberOfElements--;
+	}
+
+	void push_back(const Type& value)
+	{
+		if (checkIfEmptyAndPushElement(value))
+		{
+			return;
+		}
+
+		_lastElementPointer->NextElementPointer = createElementPtrAndChangeSize(value);
+		_lastElementPointer = _lastElementPointer->NextElementPointer;
+	}
+
+	
 
 	
 	void clear(void)
@@ -207,12 +213,27 @@ private:
 	size_type _numberOfElements;
 
 
-	bool tryToPushOnFirstPosition(const Type& value)
+	bool checkIfEmptyAndPushElement(const Type& value)
 	{
 		if (_firstElementPointer == nullptr)
 		{
 			_firstElementPointer = createElementPtrAndChangeSize(value);
 			_lastElementPointer = _firstElementPointer;
+			return true;
+		}
+
+		return false;
+	}
+
+	bool checkIfEmptyOrOneElementAndDelete(void)
+	{
+		if (size() == 0)
+		{
+			return true;
+		}
+		else if (size() == 1)
+		{
+			clear();
 			return true;
 		}
 

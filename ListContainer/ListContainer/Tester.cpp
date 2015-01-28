@@ -9,7 +9,7 @@ void Tester::Exeute(void)
 	allocator <int> alloc;
 	List<int> myIntList(alloc);
 
-	TestConstructors();
+	//TestConstructors();
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
@@ -21,6 +21,7 @@ void Tester::Exeute(void)
 	TestFront(myIntList);
 	TestBack(myIntList);
 	TestAssign(myIntList);
+	TestPopFront(myIntList);
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -313,6 +314,18 @@ void Tester::TestAssign(List<int>& testingList)
 	cout << "Should be 1 - 6:" << endl;
 	PrintList(testingList);
 	cout << endl;
+
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestPopFront(List<int>& testingList)
+{
+	cout << "Size before deleting (6): " << testingList.size() << endl;
+	cout << "First element (1): " << testingList.front() << endl;
+
+	testingList.pop_front();
+	cout << "Size after deleting (5): " << testingList.size() << endl;
+	cout << "First element (2): " << testingList.front() << endl;
 
 	cout << "\n----------------\n\n";
 }
