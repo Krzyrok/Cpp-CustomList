@@ -28,8 +28,8 @@ void Tester::Exeute(void)
 	TestSwap(myIntList);
 	TestResize(myIntList);
 	TestSplice(myIntList);
-	TestRemove(myIntList);
-
+	TestRemoveAndRemoveIf(myIntList);
+	TestUnique();
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -532,7 +532,7 @@ void Tester::TestSplice(List<int>& testingList)
 
 }
 
-void Tester::TestRemove(List<int>& testingList)
+void Tester::TestRemoveAndRemoveIf(List<int>& testingList)
 {
 	PrepareStandardList(testingList);
 	testingList.remove_if(IsEven<int>());
@@ -547,3 +547,27 @@ void Tester::TestRemove(List<int>& testingList)
 
 	cout << "\n----------------\n\n";
 }
+
+void Tester::TestUnique(void)
+{
+	int elementsForList[5] = { 2, 3, 3, 3, 1 };
+	List<int> testingList(elementsForList, elementsForList + 5);
+	testingList.unique();
+	cout << "List after unique, size (3) - 2,3,1: " << testingList.size() << endl;
+	PrintList(testingList);
+
+	int elementsForList2[5] = { 5, 5, 1, 6, 6 };
+	testingList = List<int>(elementsForList2, elementsForList2 + 5);
+	testingList.unique();
+	cout << "List after unique, size (3) - 5,1,6: " << testingList.size() << endl;
+	PrintList(testingList);
+
+	int elementsForList3[5] = { 1, 3, 5, 1, 2 };
+	testingList = List<int>(elementsForList3, elementsForList3 + 5);
+	testingList.unique(SecondIsGreater<int>());
+	cout << "List after unique with predicate, size (2) - 5,1: " << testingList.size() << endl;
+	PrintList(testingList);
+
+	cout << "\n----------------\n\n";
+}
+

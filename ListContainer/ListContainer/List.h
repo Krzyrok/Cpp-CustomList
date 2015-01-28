@@ -3,6 +3,7 @@
 
 #include "ListIterator.h"
 #include "Functor.h"
+#include "BinaryFunctor.h"
 
 #include <xmemory0>
 
@@ -440,6 +441,9 @@ public:
 	template <class Predicate>
 	void remove_if(Predicate predicate)
 	{
+		if (size() < 1)
+			return;
+
 		for (iterator listIterator = begin(); listIterator != end(); listIterator++)
 		{
 			if (predicate(*listIterator))
@@ -448,6 +452,27 @@ public:
 			}
 		}
 	}
+
+	void unique(void)
+	{
+		unique(BinaryIsEqual<Type>());
+	}
+
+	template <class BinaryPredicate>
+	void unique(BinaryPredicate binaryPredicate)
+	{
+		if (size() < 2)
+			return;
+
+		for (iterator firstIterator = begin(), secondIterator = (++begin()); secondIterator != end(); firstIterator++, secondIterator++)
+		{
+			if (binaryPredicate(*secondIterator, *firstIterator))
+			{
+				erase(firstIterator);
+			}
+		}
+	}
+
 
 	// Observers
 	allocator_type get_allocator(void) const

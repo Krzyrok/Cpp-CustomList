@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BinaryFunctor.h" />
     <ClInclude Include="CommonHeaders.h" />
     <ClInclude Include="Deleter.h" />
     <ClInclude Include="Functor.h" />

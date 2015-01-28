@@ -38,7 +38,8 @@ private:
 	void TestSwap(List<int>& testingList);
 	void TestResize(List<int>& testingList);
 	void TestSplice(List<int>& testingList);
-	void TestRemove(List<int>& testingList);
+	void TestRemoveAndRemoveIf(List<int>& testingList);
+	void TestUnique(void);
 
 
 };
