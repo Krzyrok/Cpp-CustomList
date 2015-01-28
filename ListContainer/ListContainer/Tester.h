@@ -37,6 +37,7 @@ private:
 	void TestErase(List<int>& testingList);
 	void TestSwap(List<int>& testingList);
 	void TestResize(List<int>& testingList);
+	void TestSplice(List<int>& testingList);
 
 };
 

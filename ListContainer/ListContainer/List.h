@@ -352,6 +352,72 @@ public:
 	}
 
 
+	// Operations
+	void splice(iterator positionIterator, List& otherList)
+	{
+
+	}
+
+	void splice(iterator positionIteratorForNewElements, List& otherList, iterator positionIteratorInOtherList)
+	{
+
+	}
+
+	void splice(iterator positionIteratorForNewElements, List& otherList, iterator firstIteratorInOtherList, iterator lastIteratorInOtherList)
+	{
+		if (firstIteratorInOtherList == lastIteratorInOtherList)
+			return;
+
+		iterator currentIteratorForOtherList = firstIteratorInOtherList;
+		int numberOfMovingElements;
+		for (numberOfMovingElements = 0; currentIteratorForOtherList != lastIteratorInOtherList; currentIteratorForOtherList++)
+		{
+			numberOfMovingElements++;
+		}
+
+		bool isFirstIteratorAtListBeginning = false;
+		if (otherList.begin() == firstIteratorInOtherList)
+			isFirstIteratorAtListBeginning = true;
+
+		bool isLastIteratorAtListEnding = false;
+		if (otherList.end() == lastIteratorInOtherList)
+			isLastIteratorAtListEnding = true;
+
+		
+		bool isPositionIteratorAtListBeginning = false;
+		if (begin() == positionIteratorForNewElements)
+			isPositionIteratorAtListBeginning = true;
+
+		bool isPositionIteratorAtListEnding = false;
+		if (end() == positionIteratorForNewElements)
+			isPositionIteratorAtListEnding = true;
+		
+		shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeLastInOtherList = otherList.findElementBefore(lastIteratorInOtherList);
+		if (isPositionIteratorAtListBeginning)
+		{
+
+		}
+
+
+
+		// magic ...
+
+		shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeFirstInOtherList = otherList.findElementBefore(firstIteratorInOtherList);
+		shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeInsertingPositionInCurrentList = findElementBefore(positionIteratorForNewElements);
+
+		shared_ptr <ListElement<Type, Allocator>> tmpElementPointer = elementPointerBeforeInsertingPositionInCurrentList->NextElementPointer;
+		elementPointerBeforeInsertingPositionInCurrentList->NextElementPointer = elementPointerBeforeFirstInOtherList->NextElementPointer;
+
+		shared_ptr <ListElement<Type, Allocator>> tmpElementPointer2 = elementPointerBeforeLastInOtherList->NextElementPointer;
+		elementPointerBeforeLastInOtherList->NextElementPointer = tmpElementPointer;
+
+		elementPointerBeforeFirstInOtherList->NextElementPointer = tmpElementPointer2;
+
+		_numberOfElements += numberOfMovingElements;
+		otherList._numberOfElements -= numberOfMovingElements;
+	}
+
+
 	// Observers
 	allocator_type get_allocator(void) const
 	{

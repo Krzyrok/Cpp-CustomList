@@ -27,6 +27,8 @@ void Tester::Exeute(void)
 	TestErase(myIntList);
 	TestSwap(myIntList);
 	TestResize(myIntList);
+	TestSplice(myIntList);
+
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -449,4 +451,36 @@ void Tester::TestResize(List<int>& testingList)
 	PrintList(testingList);
 
 	cout << "\n----------------\n\n";
+}
+
+void Tester::TestSplice(List<int>& testingList)
+{
+	PrepareStandardList(testingList);
+	
+	int elementsForOtherList[5] = {128, 256, 512, 1024, 2048};
+	List<int> otherList(elementsForOtherList, elementsForOtherList + 5);
+	
+	List<int>::iterator firstIterator = otherList.begin();
+	firstIterator++;
+
+	List<int>::iterator lastIterator = otherList.begin();
+	lastIterator++;
+	lastIterator++;
+	lastIterator++;
+
+	List<int>::iterator positionIterator = testingList.begin();
+	positionIterator++;
+
+	testingList.splice(positionIterator, otherList, firstIterator, lastIterator);
+
+	cout << "List 1 after splice, size (8): " << testingList.size() << endl;
+	PrintList(testingList);
+	cout << "List 2 after splice, size (3): " << otherList.size() << endl;
+	PrintList(otherList);
+
+
+
+	
+	cout << "\n----------------\n\n";
+
 }
