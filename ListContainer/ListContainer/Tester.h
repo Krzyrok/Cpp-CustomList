@@ -36,6 +36,7 @@ private:
 	void TestInsert(List<int>& testingList);
 	void TestErase(List<int>& testingList);
 	void TestSwap(List<int>& testingList);
+	void TestResize(List<int>& testingList);
 
 };
 

@@ -311,9 +311,37 @@ public:
 		otherList._numberOfElements = tmpNumberOfElements;
 	}
 
-	void resize(size_type n, value_type val = value_type())
+	void resize(size_type newSize, value_type newValue = value_type())
 	{
+		if (newSize < 0)
+			return;
 
+		if (newSize == 0)
+		{
+			clear();
+		}
+
+		if (newSize > size())
+		{
+			size_type initialSize = size();
+			for (size_type i = 0; i < newSize - initialSize; i++)
+			{
+				push_back(newValue);
+			}
+		}
+		else if (newSize < size())
+		{
+			shared_ptr <ListElement<Type, Allocator>> currentElementPointer = _firstElementPointer;
+			for (size_type i = 1; i < newSize; i++)
+			{
+				currentElementPointer = currentElementPointer->NextElementPointer;
+			}
+
+			currentElementPointer->NextElementPointer.reset();
+			_lastElementPointer = currentElementPointer;
+		}
+
+		_numberOfElements = newSize;
 	}
 	
 	void clear(void)

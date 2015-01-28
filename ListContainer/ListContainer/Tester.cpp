@@ -26,6 +26,7 @@ void Tester::Exeute(void)
 	TestInsert(myIntList);
 	TestErase(myIntList);
 	TestSwap(myIntList);
+	TestResize(myIntList);
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -432,6 +433,20 @@ void Tester::TestSwap(List<int>& testingList)
 	PrintList(testingList);
 	cout << "After swap, list2:" << randomList.size() << endl;
 	PrintList(randomList);
+
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestResize(List<int>& testingList)
+{
+	PrepareStandardList(testingList);
+	testingList.resize(3);
+	cout << "Should be 1-3, size::" << testingList.size() << endl;
+	PrintList(testingList);
+
+	testingList.resize(7, 256);
+	cout << "Should be + 4 x 256, size::" << testingList.size() << endl;
+	PrintList(testingList);
 
 	cout << "\n----------------\n\n";
 }
