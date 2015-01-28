@@ -422,6 +422,17 @@ public:
 		}
 	}
 
+	void merge(List& otherList)
+	{
+		merge(otherList, FirstSmallerThanSecond<Type>());
+	}
+
+	template <class Compare>
+	void merge(List& otherList, Compare compare)
+	{
+
+	}
+
 	void sort(void)
 	{
 		sort(FirstSmallerThanSecond<Type>());

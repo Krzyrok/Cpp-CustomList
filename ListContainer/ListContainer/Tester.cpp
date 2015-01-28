@@ -32,6 +32,7 @@ void Tester::Exeute(void)
 	TestUnique();
 	TestReverse(myIntList);
 	TestSort();
+	TestMerge();
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -606,6 +607,44 @@ void Tester::TestSort(void)
 	cout << "After sorting (5): " << testingList.size() << endl;
 	PrintList(testingList);
 
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestMerge(void)
+{
+	List<int> firstList = PrepareRandonIntList(4);
+	List<int> secondList = PrepareRandonIntList(5);
+	firstList.sort();
+	secondList.sort();
+	
+	cout << "List 1 before merging (4): " << firstList.size() << endl;
+	PrintList(firstList);
+	cout << "List 2 before merging (5): " << secondList.size() << endl;
+	PrintList(secondList);
+
+	firstList.merge(secondList);
+	cout << "List 1 after merging (9): " << firstList.size() << endl;
+	PrintList(firstList);
+	cout << "List 2 after merging (0): " << secondList.size() << endl;
+	PrintList(secondList);
+
+
+
+	firstList = PrepareRandonIntList(10);
+	secondList = PrepareRandonIntList(6);
+	firstList.sort(FirstGraterEqualThanSecond<int>());
+	secondList.sort(FirstGraterEqualThanSecond<int>());
+
+	cout << "List 1 before merging (10): " << firstList.size() << endl;
+	PrintList(firstList);
+	cout << "List 2 before merging (6): " << secondList.size() << endl;
+	PrintList(secondList);
+
+	firstList.merge(secondList, FirstGraterEqualThanSecond<int>());
+	cout << "List 1 after merging (16): " << firstList.size() << endl;
+	PrintList(firstList);
+	cout << "List 2 after merging (0): " << secondList.size() << endl;
+	PrintList(secondList);
 	cout << "\n----------------\n\n";
 }
 
