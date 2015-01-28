@@ -196,8 +196,24 @@ public:
 		_lastElementPointer = _lastElementPointer->NextElementPointer;
 	}
 
-	
+	void pop_back(void)
+	{
+		if (checkIfEmptyOrOneElementAndDelete())
+		{
+			return;
+		}
 
+		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
+		while (currentElement->NextElementPointer != _lastElementPointer)
+		{
+			currentElement = currentElement->NextElementPointer;
+		}
+
+		currentElement->NextElementPointer.reset();
+		_lastElementPointer = currentElement;
+
+		_numberOfElements--;
+	}
 	
 	void clear(void)
 	{

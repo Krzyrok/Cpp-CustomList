@@ -22,6 +22,7 @@ void Tester::Exeute(void)
 	TestBack(myIntList);
 	TestAssign(myIntList);
 	TestPopFront(myIntList);
+	TestPopBack(myIntList);
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -327,5 +328,19 @@ void Tester::TestPopFront(List<int>& testingList)
 	cout << "Size after deleting (5): " << testingList.size() << endl;
 	cout << "First element (2): " << testingList.front() << endl;
 
+	testingList.push_front(1);
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestPopBack(List<int>& testingList)
+{
+	cout << "Size before deleting (6): " << testingList.size() << endl;
+	cout << "Last element (6): " << testingList.back() << endl;
+
+	testingList.pop_back();
+	cout << "Size after deleting (5): " << testingList.size() << endl;
+	cout << "Last element (5): " << testingList.back() << endl;
+
+	testingList.push_back(6);
 	cout << "\n----------------\n\n";
 }

@@ -31,6 +31,7 @@ private:
 	void TestBack(List<int>& testingList);
 	void TestAssign(List<int>& testingList);
 	void TestPopFront(List<int>& testingList);
+	void TestPopBack(List<int>& testingList);
 };
 
 #endif 
