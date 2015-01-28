@@ -2,7 +2,7 @@
 
 void Tester::Exeute(void)
 {
-	TestClassicList();
+	//TestClassicList();
 
 	allocator <int> alloc;
 	List<int> myIntList(alloc);
@@ -11,11 +11,10 @@ void Tester::Exeute(void)
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
-	TestListIterator(myIntList);
-	TestBeginEndIterator(myIntList);
+	//TestListIterator(myIntList);
 	TestClear(myIntList);
+	TestBeginEndIterator(myIntList);
 
-	system("Pause");
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -62,7 +61,6 @@ void Tester::TestClassicList(void)
 	//itek = itConst;
 	//*itConst = 77;
 
-	list<int> test(c.begin(), c.end());
 }
 
 void Tester::TestConstructors(void)
@@ -85,6 +83,14 @@ void Tester::TestConstructors(void)
 	List<int> iteratorCopiedList(randomList.begin(), randomList.end());
 	cout << "Size: " << iteratorCopiedList.size() << ". Copied (by iterators) list: \n";
 	PrintList(iteratorCopiedList);
+	cout << endl;
+
+	list<int> originalList;
+	originalList.push_front(5);
+	originalList.push_front(966);
+	List<int> iteratorCopiedList2(originalList.begin(), originalList.end());
+	cout << "Should be 966 and 5" << endl;
+	PrintList(iteratorCopiedList2);
 	cout << endl;
 
 	cout << "\n----------------\n\n";
@@ -201,7 +207,6 @@ void Tester::TestListIterator(List<int>& testingList)
 
 void Tester::TestBeginEndIterator(List<int>& testingList)
 {
-	testingList.clear();
 	TestPushBack(testingList);
 	TestPushFront(testingList);
 	PrintList(testingList);

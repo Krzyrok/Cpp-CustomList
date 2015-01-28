@@ -45,7 +45,7 @@ public:
 		}
 	}
 
-	template <class InputIterator, class = typename enable_if<_Is_iterator<InputIterator>::value, void>::type>
+	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
 	List(InputIterator firstIterator, InputIterator lastIterator, const Allocator& passedAlloc = Allocator())
 		: List(passedAlloc)
 	{
