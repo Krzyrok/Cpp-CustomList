@@ -116,6 +116,11 @@ public:
 		return _numberOfElements;
 	}
 
+	size_type max_size() const
+	{
+		return _allocator.max_size();
+	}
+
 
 	void push_back(const Type& value)
 	{

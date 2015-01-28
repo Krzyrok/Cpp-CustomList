@@ -15,6 +15,7 @@ void Tester::Exeute(void)
 	TestClear(myIntList);
 	TestBeginEndIterator(myIntList);
 	TestEmpty(myIntList);
+	TestMaxSize(myIntList);
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -55,6 +56,7 @@ void Tester::TestClassicList(void)
 	itConst = c.end();
 	itConst = itek;
 
+	c.max_size();
 
 	// code below should not compile
 
@@ -247,5 +249,12 @@ void Tester::TestEmpty(List<int>& testingList)
 
 	TestPushBack(testingList);
 	TestPushFront(testingList);
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestMaxSize(List<int>& testingList)
+{
+	cout << "Max size for list: " << testingList.max_size() << endl;
+	cout << "Max size for classic list: " << List<int>().max_size() << endl;
 	cout << "\n----------------\n\n";
 }
