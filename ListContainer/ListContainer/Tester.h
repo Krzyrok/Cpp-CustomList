@@ -17,6 +17,7 @@ private:
 
 	List<int> PrepareRandonIntList(int size = 4);
 	void PrintList(List<int>& printingList);
+	void PrepareStandardList(List<int>& printingList);
 
 	void TestConstructors(void);
 	void TestPushBack(List<int>& testingList);
@@ -32,6 +33,7 @@ private:
 	void TestAssign(List<int>& testingList);
 	void TestPopFront(List<int>& testingList);
 	void TestPopBack(List<int>& testingList);
+	void TestInsert(List<int>& testingList);
 };
 
 #endif 

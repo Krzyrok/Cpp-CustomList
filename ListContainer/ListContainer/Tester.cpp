@@ -23,6 +23,8 @@ void Tester::Exeute(void)
 	TestAssign(myIntList);
 	TestPopFront(myIntList);
 	TestPopBack(myIntList);
+	TestInsert(myIntList);
+
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -44,6 +46,13 @@ void Tester::PrintList(List<int>& printingList)
 	{
 		cout << i << ": " << *it << endl;
 	}
+}
+
+void Tester::PrepareStandardList(List<int>& printingList)
+{
+	TestClear(printingList);
+	TestPushBack(printingList);
+	TestPushFront(printingList);
 }
 
 void Tester::TestClassicList(void)
@@ -342,5 +351,22 @@ void Tester::TestPopBack(List<int>& testingList)
 	cout << "Last element (5): " << testingList.back() << endl;
 
 	testingList.push_back(6);
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestInsert(List<int>& testingList)
+{
+	List<int>::iterator listIterator = testingList.begin();
+	listIterator++;
+	listIterator++;
+	List<int>::iterator newIterator = testingList.insert(listIterator, 749);
+	cout << "Added value (749): " << *newIterator << endl;
+	newIterator++;
+	cout << "Next value (3): " << *newIterator << endl;
+	cout << "Size (7): " << testingList.size() << endl;
+	cout << "Complete list: \n";
+	PrintList(testingList);
+	cout << endl;
+
 	cout << "\n----------------\n\n";
 }
