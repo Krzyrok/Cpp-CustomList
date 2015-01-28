@@ -11,7 +11,7 @@ void Tester::Exeute(void)
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
-	TestListIterator(myIntList);
+	//TestListIterator(myIntList);
 	TestClear(myIntList);
 	TestBeginEndIterator(myIntList);
 	TestEmpty(myIntList);
