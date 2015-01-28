@@ -54,16 +54,19 @@ public:
 
 		InputIterator currentIterator = firstIterator;
 
-		Type& value = (*currentIterator);
-		_firstElementPointer = createElementPtrAndChangeSize(value);
+		_firstElementPointer = createElementPtrAndChangeSize(*currentIterator);
 		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
 		currentIterator++;
 		for (; currentIterator != lastIterator; currentIterator++)
 		{
-			value = *currentIterator;
-			currentElement->NextElementPointer = createElementPtrAndChangeSize(value);
+			currentElement->NextElementPointer = createElementPtrAndChangeSize(*currentIterator);
 			currentElement = currentElement->NextElementPointer;
 		}
+	}
+
+	List(const List& listToCopy)
+		: List(listToCopy.begin(), listToCopy.end())
+	{
 	}
 
 	// Methods

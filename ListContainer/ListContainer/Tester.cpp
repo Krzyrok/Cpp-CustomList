@@ -7,7 +7,7 @@ void Tester::Exeute(void)
 	allocator <int> alloc;
 	List<int> myIntList(alloc);
 
-	TestConstructors();
+	//TestConstructors();
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
@@ -89,8 +89,16 @@ void Tester::TestConstructors(void)
 	originalList.push_front(5);
 	originalList.push_front(966);
 	List<int> iteratorCopiedList2(originalList.begin(), originalList.end());
-	cout << "Should be 966 and 5" << endl;
+	cout << "Should be 966 and 5: " << endl;
 	PrintList(iteratorCopiedList2);
+	cout << endl;
+
+	List<int> listToCopy;
+	listToCopy.push_front(1772);
+	listToCopy.push_front(13);
+	List<int> copiedList(listToCopy);
+	cout << "Should be 13 and 1772: " << endl;
+	PrintList(copiedList);
 	cout << endl;
 
 	cout << "\n----------------\n\n";
