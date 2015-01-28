@@ -5,6 +5,7 @@
 #include "TestObject.h"
 
 #include <list>
+#include <ctime>
 
 class Tester
 {
@@ -28,6 +29,7 @@ private:
 	void TestMaxSize(List<int>& testingList);
 	void TestFront(List<int>& testingList);
 	void TestBack(List<int>& testingList);
+	void TestAssign(List<int>& testingList);
 };
 
 #endif 

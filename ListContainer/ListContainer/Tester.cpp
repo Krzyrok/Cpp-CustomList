@@ -4,6 +4,8 @@ void Tester::Exeute(void)
 {
 	//TestClassicList();
 
+	srand((unsigned int)time(NULL));
+
 	allocator <int> alloc;
 	List<int> myIntList(alloc);
 
@@ -18,6 +20,7 @@ void Tester::Exeute(void)
 	TestMaxSize(myIntList);
 	TestFront(myIntList);
 	TestBack(myIntList);
+	TestAssign(myIntList);
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -284,6 +287,32 @@ void Tester::TestBack(List<int>& testingList)
 
 	testingList.push_back(7);
 	cout << "Back (7): " << testingList.back() << endl;
+
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestAssign(List<int>& testingList)
+{
+	list<int> classicList;
+	classicList.push_back(7);
+	classicList.push_back(14);
+	testingList.assign(classicList.begin(), classicList.end());
+	cout << "Should be 7, 14:" << endl;
+	PrintList(testingList);
+	cout << endl;
+
+	testingList.assign(5, 128);
+	cout << "Should be 5 x 128:" << endl;
+	PrintList(testingList);
+	cout << endl;
+
+	List<int> originalList;
+	TestPushBack(originalList);
+	TestPushFront(originalList);
+	testingList.assign(originalList.begin(), originalList.end());
+	cout << "Should be 1 - 6:" << endl;
+	PrintList(testingList);
+	cout << endl;
 
 	cout << "\n----------------\n\n";
 }

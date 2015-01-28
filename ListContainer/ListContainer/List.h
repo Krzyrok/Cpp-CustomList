@@ -30,40 +30,17 @@ public:
 		_numberOfElements = 0;
 	}
 
-	explicit List(size_type n, const Type& value = Type(), const Allocator& passedAlloc = Allocator())
+	explicit List(size_type numberOfElements, const Type& value = Type(), const Allocator& passedAlloc = Allocator())
 		: List(passedAlloc)
 	{
-		if (n <= 0)
-			return;
-
-		_firstElementPointer = createElementPtrAndChangeSize(value);
-		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
-		for (size_type i = 1; i < n; i++)
-		{
-			currentElement->NextElementPointer = createElementPtrAndChangeSize(value);
-			currentElement = currentElement->NextElementPointer;
-		}
+		assign(numberOfElements, value);
 	}
 
 	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
 	List(InputIterator firstIterator, InputIterator lastIterator, const Allocator& passedAlloc = Allocator())
 		: List(passedAlloc)
 	{
-		if (firstIterator == lastIterator)
-			return;
-
-		InputIterator currentIterator = firstIterator;
-
-		_firstElementPointer = createElementPtrAndChangeSize(*currentIterator);
-		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
-		currentIterator++;
-		for (; currentIterator != lastIterator; currentIterator++)
-		{
-			currentElement->NextElementPointer = createElementPtrAndChangeSize(*currentIterator);
-			currentElement = currentElement->NextElementPointer;
-		}
-
-		_lastElementPointer = currentElement;
+		assign(firstIterator, lastIterator);
 	}
 
 	List(const List& listToCopy)
@@ -143,6 +120,47 @@ public:
 	const_reference back(void) const
 	{
 		return _lastElementPointer->GetValue();
+	}
+
+
+	// Modifiers
+	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
+	void assign(InputIterator firstIterator, InputIterator lastIterator)
+	{
+		clear();
+
+		if (firstIterator == lastIterator)
+			return;
+
+		InputIterator currentIterator = firstIterator;
+
+		_firstElementPointer = createElementPtrAndChangeSize(*currentIterator);
+		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
+		currentIterator++;
+		for (; currentIterator != lastIterator; currentIterator++)
+		{
+			currentElement->NextElementPointer = createElementPtrAndChangeSize(*currentIterator);
+			currentElement = currentElement->NextElementPointer;
+		}
+
+		_lastElementPointer = currentElement;
+	}
+
+	void assign(size_type numberOfElements, const Type& value)
+	{
+		clear();
+		if (numberOfElements <= 0)
+			return;
+
+		_firstElementPointer = createElementPtrAndChangeSize(value);
+		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
+		for (size_type i = 1; i < numberOfElements; i++)
+		{
+			currentElement->NextElementPointer = createElementPtrAndChangeSize(value);
+			currentElement = currentElement->NextElementPointer;
+		}
+
+		_lastElementPointer = currentElement;
 	}
 
 	void push_back(const Type& value)
