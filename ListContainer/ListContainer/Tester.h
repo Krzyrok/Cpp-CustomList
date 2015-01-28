@@ -26,6 +26,8 @@ private:
 	void TestClear(List<int>& testingList);
 	void TestEmpty(List<int>& testingList);
 	void TestMaxSize(List<int>& testingList);
+	void TestFront(List<int>& testingList);
+	void TestBack(List<int>& testingList);
 };
 
 #endif 

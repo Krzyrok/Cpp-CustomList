@@ -11,11 +11,13 @@ void Tester::Exeute(void)
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
-	//TestListIterator(myIntList);
+	TestListIterator(myIntList);
 	TestClear(myIntList);
 	TestBeginEndIterator(myIntList);
 	TestEmpty(myIntList);
 	TestMaxSize(myIntList);
+	TestFront(myIntList);
+	TestBack(myIntList);
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -256,5 +258,32 @@ void Tester::TestMaxSize(List<int>& testingList)
 {
 	cout << "Max size for list: " << testingList.max_size() << endl;
 	cout << "Max size for classic list: " << List<int>().max_size() << endl;
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestFront(List<int>& testingList)
+{
+	int& variable = testingList.front();
+	const List<int> constList(testingList);
+	const int& constVariable = constList.front();
+
+	cout << "Front (1): " << variable << endl;
+	cout << "Const front (1): " << constVariable << endl;
+
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestBack(List<int>& testingList)
+{
+	int& variable = testingList.back();
+	const List<int> constList(testingList);
+	const int& constVariable = constList.back();
+
+	cout << "Back (6): " << variable << endl;
+	cout << "Const back (6): " << constVariable << endl;
+
+	testingList.push_back(7);
+	cout << "Back (7): " << testingList.back() << endl;
+
 	cout << "\n----------------\n\n";
 }

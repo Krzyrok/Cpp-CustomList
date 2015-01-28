@@ -62,6 +62,8 @@ public:
 			currentElement->NextElementPointer = createElementPtrAndChangeSize(*currentIterator);
 			currentElement = currentElement->NextElementPointer;
 		}
+
+		_lastElementPointer = currentElement;
 	}
 
 	List(const List& listToCopy)
@@ -106,7 +108,7 @@ public:
 
 
 	// Capacity
-	bool empty() const
+	bool empty(void) const
 	{
 		return (size() == 0);
 	}
@@ -116,11 +118,32 @@ public:
 		return _numberOfElements;
 	}
 
-	size_type max_size() const
+	size_type max_size(void) const
 	{
 		return _allocator.max_size();
 	}
 
+
+	// Element access
+	reference front(void)
+	{
+		return _firstElementPointer->GetValue();
+	}
+
+	const_reference front(void) const
+	{
+		return _firstElementPointer->GetValue();
+	}
+
+	reference back(void)
+	{
+		return _lastElementPointer->GetValue();
+	}
+
+	const_reference back(void) const
+	{
+		return _lastElementPointer->GetValue();
+	}
 
 	void push_back(const Type& value)
 	{
@@ -129,15 +152,14 @@ public:
 			return;
 		}
 
-		shared_ptr<ListElement<Type, Allocator>> previousElement = _firstElementPointer;
-		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer->NextElementPointer;
-		while (currentElement != nullptr)
+		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
+		while (currentElement->NextElementPointer != nullptr)
 		{
-			previousElement = currentElement;
 			currentElement = currentElement->NextElementPointer;
 		}
 
-		previousElement->NextElementPointer = createElementPtrAndChangeSize(value);
+		currentElement->NextElementPointer = createElementPtrAndChangeSize(value);
+		_lastElementPointer = currentElement->NextElementPointer;
 	}
 
 	void push_front(const Type& value)
@@ -155,12 +177,14 @@ public:
 	
 	void clear(void)
 	{
+		_lastElementPointer.reset();
 		_firstElementPointer.reset();
 		_numberOfElements = 0;
 	}
 
 private:
 	shared_ptr<ListElement<Type, Allocator>> _firstElementPointer;
+	shared_ptr<ListElement<Type, Allocator>> _lastElementPointer;
 	Allocator _allocator;
 	size_type _numberOfElements;
 
@@ -170,6 +194,7 @@ private:
 		if (_firstElementPointer == nullptr)
 		{
 			_firstElementPointer = createElementPtrAndChangeSize(value);
+			_lastElementPointer = _firstElementPointer;
 			return true;
 		}
 
