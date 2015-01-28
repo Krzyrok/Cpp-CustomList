@@ -7,7 +7,7 @@ void Tester::Exeute(void)
 	allocator <int> alloc;
 	List<int> myIntList(alloc);
 
-	//TestConstructors();
+	TestConstructors();
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
@@ -100,6 +100,12 @@ void Tester::TestConstructors(void)
 	cout << "Should be 13 and 1772: " << endl;
 	PrintList(copiedList);
 	cout << endl;
+
+	listToCopy.clear();
+	cout << "Should be nothing:" << endl;
+	PrintList(listToCopy);
+	cout << "Should be 13 and 1772: " << endl;
+	PrintList(copiedList);
 
 	cout << "\n----------------\n\n";
 }
