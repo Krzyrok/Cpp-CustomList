@@ -34,6 +34,8 @@ private:
 	void TestPopFront(List<int>& testingList);
 	void TestPopBack(List<int>& testingList);
 	void TestInsert(List<int>& testingList);
+	void TestErase(List<int>& testingList);
+
 };
 
 #endif 

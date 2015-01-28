@@ -24,7 +24,7 @@ void Tester::Exeute(void)
 	TestPopFront(myIntList);
 	TestPopBack(myIntList);
 	TestInsert(myIntList);
-
+	TestErase(myIntList);
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -50,7 +50,7 @@ void Tester::PrintList(List<int>& printingList)
 
 void Tester::PrepareStandardList(List<int>& printingList)
 {
-	TestClear(printingList);
+	printingList.clear();
 	TestPushBack(printingList);
 	TestPushFront(printingList);
 }
@@ -367,6 +367,45 @@ void Tester::TestInsert(List<int>& testingList)
 	cout << "Complete list: \n";
 	PrintList(testingList);
 	cout << endl;
+
+	newIterator++;
+	testingList.insert(newIterator, 3, 44);
+	cout << "Size (10): " << testingList.size() << endl;
+	cout << "Complete list (should be 3 x 44 after no 3): \n";
+	PrintList(testingList);
+	cout << endl;
+
+	PrepareStandardList(testingList);
+	listIterator = testingList.begin();
+	listIterator++;
+	listIterator++;
+	listIterator++;
+	list<int> standardList;
+	standardList.push_back(2);
+	standardList.push_back(1);
+	standardList.push_back(3);
+	testingList.insert(listIterator, standardList.begin(), standardList.end());
+	cout << "Size (9): " << testingList.size() << endl;
+	cout << "Complete list (should be 2 1 3 after no 3): \n";
+	PrintList(testingList);
+	cout << endl;
+
+	PrepareStandardList(testingList);
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestErase(List<int>& testingList)
+{
+	List<int>::iterator listIterator = testingList.begin();
+	testingList.erase(listIterator);
+	List<int>::iterator resultIterator = testingList.erase(++++listIterator);
+	testingList.erase(resultIterator);
+	cout << "Should be without 2, 5, 6:" << endl;
+	PrintList(testingList);
+
+	resultIterator = testingList.erase(testingList.begin(), ++++(testingList.begin()));
+	cout << "Should be only 6:" << endl;
+	PrintList(testingList);
 
 	cout << "\n----------------\n\n";
 }

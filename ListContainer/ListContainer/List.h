@@ -211,25 +211,85 @@ public:
 		_numberOfElements--;
 	}
 
-	iterator insert(iterator iteratorPosition, const value_type& value)
+	iterator insert(iterator positionIterator, const Type& value)
 	{
-		if (iteratorPosition == begin())
+		if (positionIterator == begin())
 		{
 			push_front(value);
 			return begin();
 		}
-		else if (iteratorPosition == end())
+		else if (positionIterator == end())
 		{
 			push_back(value);
 			return iterator(_lastElementPointer);
 		}
 
-		shared_ptr<ListElement<Type, Allocator>> elementBefore = findElementBefore(iteratorPosition);
+		shared_ptr<ListElement<Type, Allocator>> elementBefore = findElementBefore(positionIterator);
 		shared_ptr<ListElement<Type, Allocator>> newElement = createElementPtrAndChangeSize(value);
 		newElement->NextElementPointer = elementBefore->NextElementPointer;
 		elementBefore->NextElementPointer = newElement;
 
 		return iterator(newElement);
+	}
+
+	void insert(iterator positionIterator, size_type numberOfValues, const Type& value)
+	{
+		for (size_type i = 0; i < numberOfValues; i++)
+		{
+			insert(positionIterator, value);
+		}
+	}
+
+	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
+	void insert(iterator positionIterator, InputIterator firstIterator, InputIterator lastIterator)
+	{
+		if (firstIterator == lastIterator)
+			return;
+
+		for (InputIterator currentIterator = firstIterator; currentIterator != lastIterator; currentIterator++)
+		{
+			insert(positionIterator, *currentIterator);
+		}
+	}
+
+	iterator erase(iterator positionIterator)
+	{
+		if (positionIterator == begin())
+		{
+			pop_front();
+			return begin();
+		}
+		else if (positionIterator == end())
+		{
+			return nullptr;
+		}
+
+		shared_ptr<ListElement<Type, Allocator>> elementBefore = findElementBefore(positionIterator);
+		if (elementBefore->NextElementPointer == _lastElementPointer)
+		{
+			pop_back();
+			return end();
+		}
+
+		elementBefore->NextElementPointer = elementBefore->NextElementPointer->NextElementPointer;
+		_numberOfElements--;
+		return iterator(elementBefore->NextElementPointer);
+	}
+
+	iterator erase(iterator firstPosition, iterator lastPosition)
+	{
+		if (firstPosition == lastPosition)
+			return nullptr;
+		
+		iterator result;
+
+		for (iterator currentIterator = firstPosition; currentIterator != lastPosition; currentIterator++)
+		{
+			result = erase(currentIterator);
+		}
+
+
+		return result;
 	}
 	
 	void clear(void)
@@ -278,10 +338,10 @@ private:
 		return findElementBefore(iterator(nextPointer));
 	}
 
-	shared_ptr<ListElement<Type, Allocator>> findElementBefore(iterator iteratorPosition)
+	shared_ptr<ListElement<Type, Allocator>> findElementBefore(iterator positionIterator)
 	{
 		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
-		while (currentElement->NextElementPointer->ValuePointer.get() != (iteratorPosition.operator->()))
+		while (currentElement->NextElementPointer->ValuePointer.get() != (positionIterator.operator->()))
 		{
 			currentElement = currentElement->NextElementPointer;
 		}
