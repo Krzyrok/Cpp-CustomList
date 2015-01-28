@@ -25,6 +25,7 @@ void Tester::Exeute(void)
 	TestPopBack(myIntList);
 	TestInsert(myIntList);
 	TestErase(myIntList);
+	TestSwap(myIntList);
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -79,6 +80,13 @@ void Tester::TestClassicList(void)
 	//itek = itConst;
 	//*itConst = 77;
 
+	list<int> list2;
+	list2.push_front(22);
+	list2.push_front(77);
+	itek = c.begin();
+	list2.swap(c);
+	cout << "Po zamianie it1: " << *itek << endl;
+	cout << "A w liscie: " << *c.begin() << endl;
 }
 
 void Tester::TestConstructors(void)
@@ -406,6 +414,24 @@ void Tester::TestErase(List<int>& testingList)
 	resultIterator = testingList.erase(testingList.begin(), ++++(testingList.begin()));
 	cout << "Should be only 6:" << endl;
 	PrintList(testingList);
+
+	PrepareStandardList(testingList);
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestSwap(List<int>& testingList)
+{
+	List<int> randomList = PrepareRandonIntList();
+	cout << "Before swap, list1:" << endl;
+	PrintList(testingList);
+	cout << "Before swap, list2:" << endl;
+	PrintList(randomList);
+
+	randomList.swap(testingList);
+	cout << "After swap, list1, size:" << testingList.size() << endl;
+	PrintList(testingList);
+	cout << "After swap, list2:" << randomList.size() << endl;
+	PrintList(randomList);
 
 	cout << "\n----------------\n\n";
 }

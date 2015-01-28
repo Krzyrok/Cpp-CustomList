@@ -291,6 +291,25 @@ public:
 
 		return result;
 	}
+
+	void swap(List& otherList)
+	{
+		shared_ptr <ListElement<Type, Allocator>> tmpPointer = _firstElementPointer;
+		_firstElementPointer = otherList._firstElementPointer;
+		otherList._firstElementPointer = tmpPointer;
+
+		tmpPointer = _lastElementPointer;
+		_lastElementPointer = otherList._lastElementPointer;
+		otherList._lastElementPointer = tmpPointer;
+
+		Allocator tmpAllocator = _allocator;
+		_allocator = otherList._allocator;
+		otherList._allocator = tmpAllocator;
+
+		size_type tmpNumberOfElements = _numberOfElements;
+		_numberOfElements = otherList._numberOfElements;
+		otherList._numberOfElements = tmpNumberOfElements;
+	}
 	
 	void clear(void)
 	{
