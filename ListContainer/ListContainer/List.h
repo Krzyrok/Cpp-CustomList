@@ -2,6 +2,7 @@
 #define LIST_HEADER
 
 #include "ListIterator.h"
+#include "Functor.h"
 
 #include <xmemory0>
 
@@ -311,7 +312,7 @@ public:
 		otherList._numberOfElements = tmpNumberOfElements;
 	}
 
-	void resize(size_type newSize, value_type newValue = value_type())
+	void resize(size_type newSize, Type newValue = Type())
 	{
 		if (newSize < 0)
 			return;
@@ -429,6 +430,24 @@ public:
 		//otherList._numberOfElements -= numberOfMovingElements;
 	}
 
+	void remove(const Type& value)
+	{
+		IsEqual<Type> predicate;
+		predicate.SetComparingValue(value);
+		remove_if(predicate);
+	}
+
+	template <class Predicate>
+	void remove_if(Predicate predicate)
+	{
+		for (iterator listIterator = begin(); listIterator != end(); listIterator++)
+		{
+			if (predicate(*listIterator))
+			{
+				erase(listIterator);
+			}
+		}
+	}
 
 	// Observers
 	allocator_type get_allocator(void) const

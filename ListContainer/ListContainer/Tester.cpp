@@ -28,6 +28,7 @@ void Tester::Exeute(void)
 	TestSwap(myIntList);
 	TestResize(myIntList);
 	TestSplice(myIntList);
+	TestRemove(myIntList);
 
 }
 
@@ -529,4 +530,20 @@ void Tester::TestSplice(List<int>& testingList)
 
 	cout << "\n----------------\n\n";
 
+}
+
+void Tester::TestRemove(List<int>& testingList)
+{
+	PrepareStandardList(testingList);
+	testingList.remove_if(IsEven<int>());
+	cout << "List after remove, size (3) - 1,3,5: " << testingList.size() << endl;
+	PrintList(testingList);
+
+	PrepareStandardList(testingList);
+	testingList.remove(5);
+	testingList.remove(1);
+	cout << "List after remove, size (4) - 2,3,4,6: " << testingList.size() << endl;
+	PrintList(testingList);
+
+	cout << "\n----------------\n\n";
 }
