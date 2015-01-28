@@ -473,14 +473,60 @@ void Tester::TestSplice(List<int>& testingList)
 
 	testingList.splice(positionIterator, otherList, firstIterator, lastIterator);
 
-	cout << "List 1 after splice, size (8): " << testingList.size() << endl;
+	cout << "List 1 after splice, size (8) - 1, 256, 512, 2: " << testingList.size() << endl;
 	PrintList(testingList);
-	cout << "List 2 after splice, size (3): " << otherList.size() << endl;
+	cout << "List 2 after splice, size (3) - 128, 1024, 2048: " << otherList.size() << endl;
 	PrintList(otherList);
 
 
+	PrepareStandardList(testingList);
+	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
+	testingList.splice(testingList.begin(), otherList);
+	cout << "List after splice, size (11) - 128-2048, 1-6: " << testingList.size() << endl;
+	PrintList(testingList);
+	cout << "List 2 after splice, size (0, non elements): " << otherList.size() << endl;
+	PrintList(otherList);
 
-	
+	PrepareStandardList(testingList);
+	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
+	testingList.splice(testingList.end(), otherList);
+	cout << "List after splice, size (11) - 1-6, 128-2048 : " << testingList.size() << endl;
+	PrintList(testingList);
+	cout << "List 2 after splice, size (0, non elements): " << otherList.size() << endl;
+	PrintList(otherList);
+
+	PrepareStandardList(testingList);
+	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
+	firstIterator = otherList.begin();
+	firstIterator++;
+	firstIterator++;
+	firstIterator++;
+	firstIterator++;
+	testingList.splice(testingList.begin(), otherList, firstIterator);
+	cout << "List after splice, size (7) - 2048, 1-6: " << testingList.size() << endl;
+	PrintList(testingList);
+	cout << "List 2 after splice, size (4) - 128-1024: " << otherList.size() << endl;
+	PrintList(otherList);
+
+	testingList.splice(testingList.end(), otherList, otherList.begin());
+	cout << "List after splice, size (8) - 2048, 1-6, 128: " << testingList.size() << endl;
+	PrintList(testingList);
+	cout << "List 2 after splice, size (3) - 256-1024: " << otherList.size() << endl;
+	PrintList(otherList);
+
+
+	PrepareStandardList(testingList);
+	positionIterator = testingList.begin();
+	positionIterator++;
+	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
+	firstIterator = otherList.begin();
+	firstIterator++;
+	testingList.splice(positionIterator, otherList, firstIterator);
+	cout << "List after splice, size (7) - 1,256,2-6: " << testingList.size() << endl;
+	PrintList(testingList);
+	cout << "List 2 after splice, size (4) - 128,512-2048: " << otherList.size() << endl;
+	PrintList(otherList);
+
 	cout << "\n----------------\n\n";
 
 }

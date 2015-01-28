@@ -353,14 +353,19 @@ public:
 
 
 	// Operations
-	void splice(iterator positionIterator, List& otherList)
+	void splice(iterator positionIteratorForNewElements, List& otherList)
 	{
-
+		splice(positionIteratorForNewElements, otherList, otherList.begin(), otherList.end());
 	}
 
 	void splice(iterator positionIteratorForNewElements, List& otherList, iterator positionIteratorInOtherList)
 	{
+		if (positionIteratorInOtherList == end())
+			return;
 
+		iterator lastIteratorInOtherList = positionIteratorInOtherList;
+		lastIteratorInOtherList++;
+		splice(positionIteratorForNewElements, otherList, positionIteratorInOtherList, lastIteratorInOtherList);
 	}
 
 	void splice(iterator positionIteratorForNewElements, List& otherList, iterator firstIteratorInOtherList, iterator lastIteratorInOtherList)
@@ -368,53 +373,60 @@ public:
 		if (firstIteratorInOtherList == lastIteratorInOtherList)
 			return;
 
-		iterator currentIteratorForOtherList = firstIteratorInOtherList;
-		int numberOfMovingElements;
-		for (numberOfMovingElements = 0; currentIteratorForOtherList != lastIteratorInOtherList; currentIteratorForOtherList++)
-		{
-			numberOfMovingElements++;
-		}
+		//iterator currentIteratorForOtherList = firstIteratorInOtherList;
+		//int numberOfMovingElements;
+		//for (numberOfMovingElements = 0; currentIteratorForOtherList != lastIteratorInOtherList; currentIteratorForOtherList++)
+		//{
+		//	numberOfMovingElements++;
+		//}
 
-		bool isFirstIteratorAtListBeginning = false;
-		if (otherList.begin() == firstIteratorInOtherList)
-			isFirstIteratorAtListBeginning = true;
+		//bool isFirstIteratorAtListBeginning = false;
+		//if (otherList.begin() == firstIteratorInOtherList)
+		//	isFirstIteratorAtListBeginning = true;
 
-		bool isLastIteratorAtListEnding = false;
-		if (otherList.end() == lastIteratorInOtherList)
-			isLastIteratorAtListEnding = true;
+		//bool isLastIteratorAtListEnding = false;
+		//if (otherList.end() == lastIteratorInOtherList)
+		//	isLastIteratorAtListEnding = true;
 
-		
-		bool isPositionIteratorAtListBeginning = false;
-		if (begin() == positionIteratorForNewElements)
-			isPositionIteratorAtListBeginning = true;
+		//
+		//bool isPositionIteratorAtListBeginning = false;
+		//if (begin() == positionIteratorForNewElements)
+		//	isPositionIteratorAtListBeginning = true;
 
-		bool isPositionIteratorAtListEnding = false;
-		if (end() == positionIteratorForNewElements)
-			isPositionIteratorAtListEnding = true;
-		
-		shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeLastInOtherList = otherList.findElementBefore(lastIteratorInOtherList);
-		if (isPositionIteratorAtListBeginning)
-		{
-
-		}
+		//bool isPositionIteratorAtListEnding = false;
+		//if (end() == positionIteratorForNewElements)
+		//	isPositionIteratorAtListEnding = true;
+		//
+		//shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeLastInOtherList;
+		//if (isLastIteratorAtListEnding)
+		//{
+		//	elementPointerBeforeLastInOtherList = otherList._lastElementPointer;
+		//}
+		//else
+		//{
+		//	elementPointerBeforeLastInOtherList = otherList.findElementBefore(lastIteratorInOtherList);
+		//}
 
 
 
 		// magic ...
+		//if ()
+		insert(positionIteratorForNewElements, firstIteratorInOtherList, lastIteratorInOtherList);
+		otherList.erase(firstIteratorInOtherList, lastIteratorInOtherList);
 
-		shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeFirstInOtherList = otherList.findElementBefore(firstIteratorInOtherList);
-		shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeInsertingPositionInCurrentList = findElementBefore(positionIteratorForNewElements);
+		//shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeFirstInOtherList = otherList.findElementBefore(firstIteratorInOtherList);
+		//shared_ptr <ListElement<Type, Allocator>> elementPointerBeforeInsertingPositionInCurrentList = findElementBefore(positionIteratorForNewElements);
 
-		shared_ptr <ListElement<Type, Allocator>> tmpElementPointer = elementPointerBeforeInsertingPositionInCurrentList->NextElementPointer;
-		elementPointerBeforeInsertingPositionInCurrentList->NextElementPointer = elementPointerBeforeFirstInOtherList->NextElementPointer;
+		//shared_ptr <ListElement<Type, Allocator>> tmpElementPointer = elementPointerBeforeInsertingPositionInCurrentList->NextElementPointer;
+		//elementPointerBeforeInsertingPositionInCurrentList->NextElementPointer = elementPointerBeforeFirstInOtherList->NextElementPointer;
 
-		shared_ptr <ListElement<Type, Allocator>> tmpElementPointer2 = elementPointerBeforeLastInOtherList->NextElementPointer;
-		elementPointerBeforeLastInOtherList->NextElementPointer = tmpElementPointer;
+		//shared_ptr <ListElement<Type, Allocator>> tmpElementPointer2 = elementPointerBeforeLastInOtherList->NextElementPointer;
+		//elementPointerBeforeLastInOtherList->NextElementPointer = tmpElementPointer;
 
-		elementPointerBeforeFirstInOtherList->NextElementPointer = tmpElementPointer2;
+		//elementPointerBeforeFirstInOtherList->NextElementPointer = tmpElementPointer2;
 
-		_numberOfElements += numberOfMovingElements;
-		otherList._numberOfElements -= numberOfMovingElements;
+		//_numberOfElements += numberOfMovingElements;
+		//otherList._numberOfElements -= numberOfMovingElements;
 	}
 
 
@@ -467,6 +479,17 @@ private:
 	{
 		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
 		while (currentElement->NextElementPointer->ValuePointer.get() != (positionIterator.operator->()))
+		{
+			currentElement = currentElement->NextElementPointer;
+		}
+
+		return currentElement;
+	}
+
+	shared_ptr<ListElement<Type, Allocator>> findElement(iterator positionIterator)
+	{
+		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
+		while (currentElement->ValuePointer.get() != (positionIterator.operator->()))
 		{
 			currentElement = currentElement->NextElementPointer;
 		}
