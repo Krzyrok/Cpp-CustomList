@@ -310,12 +310,24 @@ public:
 		_numberOfElements = otherList._numberOfElements;
 		otherList._numberOfElements = tmpNumberOfElements;
 	}
+
+	void resize(size_type n, value_type val = value_type())
+	{
+
+	}
 	
 	void clear(void)
 	{
 		_lastElementPointer.reset();
 		_firstElementPointer.reset();
 		_numberOfElements = 0;
+	}
+
+
+	// Observers
+	allocator_type get_allocator(void) const
+	{
+		return _allocator;
 	}
 
 private:
