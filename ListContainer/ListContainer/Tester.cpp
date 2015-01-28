@@ -31,6 +31,7 @@ void Tester::Exeute(void)
 	TestRemoveAndRemoveIf(myIntList);
 	TestUnique();
 	TestReverse(myIntList);
+	TestSort();
 }
 
 List<int> Tester::PrepareRandonIntList(int size)
@@ -582,6 +583,27 @@ void Tester::TestReverse(List<int>& testingList)
 	testingList.pop_back();
 	testingList.reverse();
 	cout << "After reverse (5) 2-6: " << testingList.size() << endl;
+	PrintList(testingList);
+
+	cout << "\n----------------\n\n";
+}
+
+void Tester::TestSort(void)
+{
+	int elementsForList[5] = { 2, 1, 3, 0, 1 };
+	List<int> testingList(elementsForList, elementsForList + 5);
+	cout << "Before sorting (5): " << testingList.size() << endl;
+	PrintList(testingList);
+	testingList.sort();
+	cout << "After sorting (5): " << testingList.size() << endl;
+	PrintList(testingList);
+
+	int elementsForList2[5] = { 77, 2, 128, 55, 974 };
+	testingList = List<int>(elementsForList2, elementsForList2 + 5);
+	cout << "Before sorting (5): " << testingList.size() << endl;
+	PrintList(testingList);
+	testingList.sort(FirstGraterEqualThanSecond<int>());
+	cout << "After sorting (5): " << testingList.size() << endl;
 	PrintList(testingList);
 
 	cout << "\n----------------\n\n";

@@ -41,6 +41,7 @@ private:
 	void TestRemoveAndRemoveIf(List<int>& testingList);
 	void TestUnique(void);
 	void TestReverse(List<int>& testingList);
+	void TestSort();
 
 
 };

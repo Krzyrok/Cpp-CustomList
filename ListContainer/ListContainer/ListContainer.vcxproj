@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="BinaryFunctor.h" />
     <ClInclude Include="CommonHeaders.h" />
+    <ClInclude Include="CompareFunctor.h" />
     <ClInclude Include="Deleter.h" />
     <ClInclude Include="Functor.h" />
     <ClInclude Include="List.h" />

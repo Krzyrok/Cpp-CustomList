@@ -42,6 +42,9 @@
     <ClInclude Include="BinaryFunctor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CompareFunctor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

@@ -4,6 +4,7 @@
 #include "ListIterator.h"
 #include "Functor.h"
 #include "BinaryFunctor.h"
+#include "CompareFunctor.h"
 
 #include <xmemory0>
 
@@ -419,6 +420,57 @@ public:
 				erase(firstIterator);
 			}
 		}
+	}
+
+	void sort(void)
+	{
+		sort(FirstSmallerThanSecond<Type>());
+	}
+
+	template <class Compare>
+	void sort(Compare compare)
+	{
+		if (size() < 2)
+			return;
+
+		shared_ptr<ListElement<Type, Allocator>> currentElementPointer;
+		shared_ptr<ListElement<Type, Allocator>> nextElementPointer;
+
+
+		size_type n = size();
+		do
+		{
+			currentElementPointer = _firstElementPointer;
+			nextElementPointer = _firstElementPointer->NextElementPointer;
+			for (size_type i = 0; i < n - 1; i++)
+			{
+				if (!compare(currentElementPointer->GetValue(), nextElementPointer->GetValue()))
+				{
+					shared_ptr<ListElement<Type, Allocator>> afterNextPointer = nextElementPointer->NextElementPointer;
+					nextElementPointer->NextElementPointer = currentElementPointer;
+					currentElementPointer->NextElementPointer = afterNextPointer;
+					if (i == 0)
+					{
+						_firstElementPointer = nextElementPointer;
+					}
+					else
+					{
+						shared_ptr<ListElement<Type, Allocator>> previousPointer = findElementBefore(currentElementPointer);
+						previousPointer->NextElementPointer = nextElementPointer;
+
+					}
+					nextElementPointer = currentElementPointer->NextElementPointer;
+				}
+				else
+				{
+					currentElementPointer = currentElementPointer->NextElementPointer;
+					nextElementPointer = nextElementPointer->NextElementPointer;
+				}
+			}
+			n--;
+		}
+		while (n > 1);
+			
 	}
 
 	void reverse(void)
