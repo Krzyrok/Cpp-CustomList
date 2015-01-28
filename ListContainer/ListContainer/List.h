@@ -430,6 +430,11 @@ public:
 	template <class Compare>
 	void merge(List& otherList, Compare compare)
 	{
+		if (this == &otherList)
+			return;
+		if (otherList.size() < 1)
+			return;
+
 
 	}
 

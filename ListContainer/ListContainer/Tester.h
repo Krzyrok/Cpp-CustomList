@@ -43,8 +43,6 @@ private:
 	void TestReverse(List<int>& testingList);
 	void TestSort(void);
 	void TestMerge(void);
-
-
 };
 
 #endif 

@@ -94,6 +94,21 @@ void Tester::TestClassicList(void)
 	list2.swap(c);
 	cout << "Po zamianie it1: " << *itek << endl;
 	cout << "A w liscie: " << *c.begin() << endl;
+
+	int values1[4] = {1, 5, 88, 94};
+	list<int> list1(values1, values1 + 4);
+	int values2[4] = { 3, 17, 44, 102 };
+	list2 = list<int>(values2, values2 + 4);
+	list<int>::iterator itL2 = list2.begin();
+	itL2++;
+	itL2++;
+	list1.merge(list2);
+	cout << "It 2 : " << *itL2 << endl;
+	cout << "list 2 size : " << list2.size() << endl;
+	cout << "It 2++ : " << *++itL2 << endl;
+
+
+
 }
 
 void Tester::TestConstructors(void)
