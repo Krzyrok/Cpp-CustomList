@@ -17,7 +17,7 @@ private:
 
 	List<int> PrepareRandonIntList(int size = 4);
 	void PrintList(List<int>& printingList);
-	void PrepareStandardList(List<int>& printingList);
+	void PrepareTestList(List<int>& testList);
 
 	void TestConstructors(void);
 	void TestPushBack(List<int>& testingList);

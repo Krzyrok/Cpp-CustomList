@@ -9,11 +9,11 @@ void Tester::Exeute(void)
 	allocator <int> alloc;
 	List<int> myIntList(alloc);
 
-	//TestConstructors();
+	TestConstructors();
 	TestPushBack(myIntList);
 	TestPushFront(myIntList);
 	TestSize(myIntList);
-	//TestListIterator(myIntList);
+	TestListIterator(myIntList);
 	TestClear(myIntList);
 	TestBeginEndIterator(myIntList);
 	TestEmpty(myIntList);
@@ -56,11 +56,11 @@ void Tester::PrintList(List<int>& printingList)
 	}
 }
 
-void Tester::PrepareStandardList(List<int>& printingList)
+void Tester::PrepareTestList(List<int>& testList)
 {
-	printingList.clear();
-	TestPushBack(printingList);
-	TestPushFront(printingList);
+	testList.clear();
+	TestPushBack(testList);
+	TestPushFront(testList);
 }
 
 void Tester::TestClassicList(void)
@@ -405,7 +405,7 @@ void Tester::TestInsert(List<int>& testingList)
 	PrintList(testingList);
 	cout << endl;
 
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	listIterator = testingList.begin();
 	listIterator++;
 	listIterator++;
@@ -420,7 +420,7 @@ void Tester::TestInsert(List<int>& testingList)
 	PrintList(testingList);
 	cout << endl;
 
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	cout << "\n----------------\n\n";
 }
 
@@ -437,7 +437,7 @@ void Tester::TestErase(List<int>& testingList)
 	cout << "Should be only 6:" << endl;
 	PrintList(testingList);
 
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	cout << "\n----------------\n\n";
 }
 
@@ -460,7 +460,7 @@ void Tester::TestSwap(List<int>& testingList)
 
 void Tester::TestResize(List<int>& testingList)
 {
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	testingList.resize(3);
 	cout << "Should be 1-3, size::" << testingList.size() << endl;
 	PrintList(testingList);
@@ -474,7 +474,7 @@ void Tester::TestResize(List<int>& testingList)
 
 void Tester::TestSplice(List<int>& testingList)
 {
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	
 	int elementsForOtherList[5] = {128, 256, 512, 1024, 2048};
 	List<int> otherList(elementsForOtherList, elementsForOtherList + 5);
@@ -498,7 +498,7 @@ void Tester::TestSplice(List<int>& testingList)
 	PrintList(otherList);
 
 
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
 	testingList.splice(testingList.begin(), otherList);
 	cout << "List after splice, size (11) - 128-2048, 1-6: " << testingList.size() << endl;
@@ -506,7 +506,7 @@ void Tester::TestSplice(List<int>& testingList)
 	cout << "List 2 after splice, size (0, non elements): " << otherList.size() << endl;
 	PrintList(otherList);
 
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
 	testingList.splice(testingList.end(), otherList);
 	cout << "List after splice, size (11) - 1-6, 128-2048 : " << testingList.size() << endl;
@@ -514,7 +514,7 @@ void Tester::TestSplice(List<int>& testingList)
 	cout << "List 2 after splice, size (0, non elements): " << otherList.size() << endl;
 	PrintList(otherList);
 
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
 	firstIterator = otherList.begin();
 	firstIterator++;
@@ -534,7 +534,7 @@ void Tester::TestSplice(List<int>& testingList)
 	PrintList(otherList);
 
 
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	positionIterator = testingList.begin();
 	positionIterator++;
 	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
@@ -552,12 +552,12 @@ void Tester::TestSplice(List<int>& testingList)
 
 void Tester::TestRemoveAndRemoveIf(List<int>& testingList)
 {
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	testingList.remove_if(IsEven<int>());
 	cout << "List after remove, size (3) - 1,3,5: " << testingList.size() << endl;
 	PrintList(testingList);
 
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	testingList.remove(5);
 	testingList.remove(1);
 	cout << "List after remove, size (4) - 2,3,4,6: " << testingList.size() << endl;
@@ -591,7 +591,7 @@ void Tester::TestUnique(void)
 
 void Tester::TestReverse(List<int>& testingList)
 {
-	PrepareStandardList(testingList);
+	PrepareTestList(testingList);
 	testingList.reverse();
 	cout << "After reverse (6) 6-1: " << testingList.size() << endl;
 	PrintList(testingList);
