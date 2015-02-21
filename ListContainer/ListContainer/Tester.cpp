@@ -114,45 +114,46 @@ void Tester::TestClassicList(void)
 void Tester::TestConstructors(void)
 {
 	List<int> emptyList;
-	cout << "size (0): " << emptyList.size() << endl << endl;
+	cout << "Size (0): " << emptyList.size() << endl << endl;
 
 	allocator<int> alloc;
 	List<int, allocator<int>> emptyList2(alloc);
-	cout << "size (0): " << emptyList2.size() << endl << endl;
+	cout << "Size (0): " << emptyList2.size() << endl << endl;
 
 	List<int> listWithTheSameValues(5, 1410);
-	cout << "size (5, 1410): " << listWithTheSameValues.size() << endl;
+	cout << "List: 5 x 1410; size (5): " << listWithTheSameValues.size() << endl;
 	PrintList(listWithTheSameValues);
 	cout << endl;
 
-	List<int> randomList = PrepareRandonIntList();
-	cout << "Size: " << randomList.size() << ". Random list: \n";
+	List<int> randomList = PrepareRandonIntList(4);
+	cout << "Size (4): " << randomList.size() << endl;
 	PrintList(randomList);
-	List<int> iteratorCopiedList(randomList.begin(), randomList.end());
-	cout << "Size: " << iteratorCopiedList.size() << ". Copied (by iterators) list: \n";
-	PrintList(iteratorCopiedList);
+	List<int> copiedListUsingIterators(randomList.begin(), randomList.end());
+	cout << "Should be the same values as above; size (4): " << copiedListUsingIterators.size() << endl;
+	PrintList(copiedListUsingIterators);
 	cout << endl;
 
 	list<int> originalList;
+	originalList.push_front(1085);
 	originalList.push_front(5);
 	originalList.push_front(966);
-	List<int> iteratorCopiedList2(originalList.begin(), originalList.end());
-	cout << "Should be 966 and 5: " << endl;
-	PrintList(iteratorCopiedList2);
+	List<int> copiedListUsingIterators2(originalList.begin(), ++++originalList.begin());
+	cout << "List: 966, 5; size (2): " << copiedListUsingIterators2.size() << endl;
+	PrintList(copiedListUsingIterators2);
 	cout << endl;
 
 	List<int> listToCopy;
 	listToCopy.push_front(1772);
 	listToCopy.push_front(13);
 	List<int> copiedList(listToCopy);
-	cout << "Should be 13 and 1772: " << endl;
+	cout << "List: 13, 1772; size (2): " << copiedList.size() << endl;
 	PrintList(copiedList);
 	cout << endl;
 
 	listToCopy.clear();
-	cout << "Should be nothing:" << endl;
+	cout << "Should be nothing; size (0):" << listToCopy.size() << endl;
 	PrintList(listToCopy);
-	cout << "Should be 13 and 1772: " << endl;
+	cout << "List: 13, 1772; size (2): " << copiedList.size() << endl;
 	PrintList(copiedList);
 
 	cout << "\n----------------\n\n";
@@ -176,11 +177,11 @@ void Tester::TestSize(List<int>& testingList)
 {
 	if (testingList.size() == 6)
 	{
-		cout << "size works corretly: " << testingList.size() << endl << endl;
+		cout << "Size works corretly, (6): " << testingList.size() << endl << endl;
 	}
 	else
 	{
-		cout << "size DOESN'T work!!!! RESULT: " << testingList.size() << endl << endl;
+		cout << "Size DOESN'T work!!!! RESULT (should be 6): " << testingList.size() << endl << endl;
 	}
 
 	cout << "----------------\n\n";
@@ -197,23 +198,23 @@ void Tester::TestListIterator(List<int>& testingList)
 	
 	testingIterator = testingList.begin();
 	List<int>::iterator testingIterator2 = testingList.begin();
-	cout << "checking difference (should be false): " << (testingIterator != testingIterator2) << endl;
-	cout << "checking equality (should be true): " << (testingIterator == testingIterator2) << endl << endl;
+	cout << "Checking iterators difference (false, 0): " << (testingIterator != testingIterator2) << endl;
+	cout << "Checking iterators equality (true, 1): " << (testingIterator == testingIterator2) << endl << endl;
 
 	testingIterator++;
-	cout << "checking equality (should be false): " << (testingIterator == testingIterator2) << endl;
+	cout << "Checking iterators equality (false, 0): " << (testingIterator == testingIterator2) << endl;
 	testingIterator2++;
-	cout << "checking equality (should be true): " << (testingIterator == testingIterator2) << endl << endl;
+	cout << "Checking iterators equality (true, 1): " << (testingIterator == testingIterator2) << endl << endl;
 
 	testingIterator2++;
-	cout << "checking equality (should be false): " << (testingIterator == testingIterator2) << endl;
+	cout << "Checking iterators equality (false, 0): " << (testingIterator == testingIterator2) << endl;
 	testingIterator = testingIterator2;
-	cout << "checking equality (should be true): " << (testingIterator == testingIterator2) << endl << endl;
+	cout << "Checking iterators equality (true, 1): " << (testingIterator == testingIterator2) << endl << endl;
 
 	testingIterator = testingList.begin();
 	List<int>::iterator iterator3(testingIterator);
-	cout << "checking difference (should be false): " << (testingIterator != iterator3) << endl;
-	cout << "checking equality (should be true): " << (testingIterator == iterator3) << endl;
+	cout << "Checking iterators difference (false, 0): " << (testingIterator != iterator3) << endl;
+	cout << "Checking iterators equality (true, 1): " << (testingIterator == iterator3) << endl;
 	cout << "1: " << *iterator3 << endl << endl;
 
 	testingIterator = testingList.begin();
@@ -227,6 +228,7 @@ void Tester::TestListIterator(List<int>& testingList)
 	listTestObject.push_front(TestObject());
 	listTestObject.push_front(TestObject());
 	List<TestObject>::iterator iteratorForTestObject = listTestObject.begin();
+	cout << "Test message: \n";
 	iteratorForTestObject->PrintSomething();
 
 
@@ -236,8 +238,8 @@ void Tester::TestListIterator(List<int>& testingList)
 	cout << "77: " << (*constTestingIterator++) << endl;
 	cout << "3: " << (*++constTestingIterator) << endl;
 	constTestingIterator = testingList.begin();
-	cout << "checking difference (should be false): " << (constTestingIterator != testingIterator) << endl;
-	cout << "checking equality (should be true): " << (constTestingIterator == testingIterator) << endl << endl;
+	cout << "Checking const iterators difference (false, 0): " << (constTestingIterator != testingIterator) << endl;
+	cout << "Checking const iterators equality (true, 1): " << (constTestingIterator == testingIterator) << endl << endl;
 	
 	constTestingIterator++;
 	constTestingIterator++;
@@ -246,8 +248,8 @@ void Tester::TestListIterator(List<int>& testingList)
 
 
 	List<int>::const_iterator constTestingIterator2 = testingList.begin();
-	cout << "checking difference (should be false): " << (constTestingIterator != constTestingIterator2) << endl;
-	cout << "checking equality (should be true): " << (constTestingIterator == constTestingIterator2) << endl << endl;
+	cout << "Checking const iterators difference (false, 0): " << (constTestingIterator != constTestingIterator2) << endl;
+	cout << "Checking const iterators equality (true, 1): " << (constTestingIterator == constTestingIterator2) << endl << endl;
 	
 	
 	shared_ptr<ListElement<int, allocator<int>>> pointer(new ListElement<int, allocator<int>>(777, allocator<int>()));
@@ -278,20 +280,20 @@ void Tester::TestBeginEndIterator(List<int>& testingList)
 void Tester::TestClear(List<int>& testingList)
 {
 	testingList.clear();
-	cout << "Size after clear(): " << testingList.size() << endl ;
+	cout << "Size after clear (0): " << testingList.size() << endl ;
 	cout << "\n----------------\n\n";
 }
 
 void Tester::TestEmpty(List<int>& testingList)
 {
-	cout << "Size before clear: " << testingList.size() << endl;
-	cout << "Is empty (false): " << testingList.empty() << endl;
+	cout << "Size before clear (6): " << testingList.size() << endl;
+	cout << "Is empty (false, 0): " << testingList.empty() << endl;
 	testingList.clear();
-	cout << "Size after clear: " << testingList.size() << endl;
-	cout << "Is empty (true): " << testingList.empty() << endl;
+	cout << "Size after clear (0): " << testingList.size() << endl;
+	cout << "Is empty (true, 1): " << testingList.empty() << endl;
 
 	List<int> newList;
-	cout << "Is empty (true): " << newList.empty() << endl;
+	cout << "Is empty (true, 1): " << newList.empty() << endl;
 
 	TestPushBack(testingList);
 	TestPushFront(testingList);
@@ -301,7 +303,7 @@ void Tester::TestEmpty(List<int>& testingList)
 void Tester::TestMaxSize(List<int>& testingList)
 {
 	cout << "Max size for list: " << testingList.max_size() << endl;
-	cout << "Max size for classic list: " << List<int>().max_size() << endl;
+	cout << "Max size for classic list: " << list<int>().max_size() << endl;
 	cout << "\n----------------\n\n";
 }
 
@@ -338,12 +340,12 @@ void Tester::TestAssign(List<int>& testingList)
 	classicList.push_back(7);
 	classicList.push_back(14);
 	testingList.assign(classicList.begin(), classicList.end());
-	cout << "Should be 7, 14:" << endl;
+	cout << "Should be: 7, 14; size (2): " << testingList.size() << endl;
 	PrintList(testingList);
 	cout << endl;
 
 	testingList.assign(5, 128);
-	cout << "Should be 5 x 128:" << endl;
+	cout << "Should be: 5 x 128; size (5): " << testingList.size() << endl;
 	PrintList(testingList);
 	cout << endl;
 
@@ -351,7 +353,7 @@ void Tester::TestAssign(List<int>& testingList)
 	TestPushBack(originalList);
 	TestPushFront(originalList);
 	testingList.assign(originalList.begin(), originalList.end());
-	cout << "Should be 1 - 6:" << endl;
+	cout << "Should be: 1-6; size (6): " << testingList.size() << endl;
 	PrintList(testingList);
 	cout << endl;
 
@@ -360,11 +362,11 @@ void Tester::TestAssign(List<int>& testingList)
 
 void Tester::TestPopFront(List<int>& testingList)
 {
-	cout << "Size before deleting (6): " << testingList.size() << endl;
+	cout << "Size before deleting from the front (6): " << testingList.size() << endl;
 	cout << "First element (1): " << testingList.front() << endl;
 
 	testingList.pop_front();
-	cout << "Size after deleting (5): " << testingList.size() << endl;
+	cout << "Size after deleting from the front (5): " << testingList.size() << endl;
 	cout << "First element (2): " << testingList.front() << endl;
 
 	testingList.push_front(1);
@@ -373,11 +375,11 @@ void Tester::TestPopFront(List<int>& testingList)
 
 void Tester::TestPopBack(List<int>& testingList)
 {
-	cout << "Size before deleting (6): " << testingList.size() << endl;
+	cout << "Size before deleting from the back (6): " << testingList.size() << endl;
 	cout << "Last element (6): " << testingList.back() << endl;
 
 	testingList.pop_back();
-	cout << "Size after deleting (5): " << testingList.size() << endl;
+	cout << "Size after deleting from the back (5): " << testingList.size() << endl;
 	cout << "Last element (5): " << testingList.back() << endl;
 
 	testingList.push_back(6);
@@ -393,15 +395,14 @@ void Tester::TestInsert(List<int>& testingList)
 	cout << "Added value (749): " << *newIterator << endl;
 	newIterator++;
 	cout << "Next value (3): " << *newIterator << endl;
-	cout << "Size (7): " << testingList.size() << endl;
-	cout << "Complete list: \n";
+	cout << "List: 1-2, 749, 3-6; size (7):" << testingList.size() << endl;
 	PrintList(testingList);
 	cout << endl;
 
 	newIterator++;
 	testingList.insert(newIterator, 3, 44);
 	cout << "Size (10): " << testingList.size() << endl;
-	cout << "Complete list (should be 3 x 44 after no 3): \n";
+	cout << "List: 1-2, 749, 3, 3 x 44, 4-6: \n";
 	PrintList(testingList);
 	cout << endl;
 
@@ -416,7 +417,7 @@ void Tester::TestInsert(List<int>& testingList)
 	standardList.push_back(3);
 	testingList.insert(listIterator, standardList.begin(), standardList.end());
 	cout << "Size (9): " << testingList.size() << endl;
-	cout << "Complete list (should be 2 1 3 after no 3): \n";
+	cout << "List: 1-3, 2, 1, 3, 4-6: \n";
 	PrintList(testingList);
 	cout << endl;
 
@@ -430,11 +431,11 @@ void Tester::TestErase(List<int>& testingList)
 	testingList.erase(listIterator);
 	List<int>::iterator resultIterator = testingList.erase(++++listIterator);
 	testingList.erase(resultIterator);
-	cout << "Should be without 2, 5, 6:" << endl;
+	cout << "List after erase: 2, 5, 6; size (3): " << testingList.size() << endl;
 	PrintList(testingList);
 
 	resultIterator = testingList.erase(testingList.begin(), ++++(testingList.begin()));
-	cout << "Should be only 6:" << endl;
+	cout << "List after erase with iterators: 6; size (1): " << testingList.size() << endl;
 	PrintList(testingList);
 
 	PrepareTestList(testingList);
@@ -443,11 +444,12 @@ void Tester::TestErase(List<int>& testingList)
 
 void Tester::TestSwap(List<int>& testingList)
 {
-	List<int> randomList = PrepareRandonIntList();
+	List<int> randomList = PrepareRandonIntList(4);
 	cout << "Before swap, list1:" << endl;
 	PrintList(testingList);
 	cout << "Before swap, list2:" << endl;
 	PrintList(randomList);
+	cout << endl;
 
 	randomList.swap(testingList);
 	cout << "After swap, list1, size:" << testingList.size() << endl;
@@ -462,11 +464,12 @@ void Tester::TestResize(List<int>& testingList)
 {
 	PrepareTestList(testingList);
 	testingList.resize(3);
-	cout << "Should be 1-3, size::" << testingList.size() << endl;
+	cout << "List after resize (smaller): 1-3; size (3): " << testingList.size() << endl;
 	PrintList(testingList);
+	cout << endl;
 
 	testingList.resize(7, 256);
-	cout << "Should be + 4 x 256, size::" << testingList.size() << endl;
+	cout << "List after resize (bigger): 1-3, 4 x 256; size (7): " << testingList.size() << endl;
 	PrintList(testingList);
 
 	cout << "\n----------------\n\n";
@@ -492,27 +495,29 @@ void Tester::TestSplice(List<int>& testingList)
 
 	testingList.splice(positionIterator, otherList, firstIterator, lastIterator);
 
-	cout << "List 1 after splice, size (8) - 1, 256, 512, 2: " << testingList.size() << endl;
+	cout << "List 1 after splice: 1, 256, 512, 2-6; size (8): " << testingList.size() << endl;
 	PrintList(testingList);
-	cout << "List 2 after splice, size (3) - 128, 1024, 2048: " << otherList.size() << endl;
+	cout << "List 2 after splice: 128, 1024, 2048; size (3): " << otherList.size() << endl;
 	PrintList(otherList);
-
+	cout << endl;
 
 	PrepareTestList(testingList);
 	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
 	testingList.splice(testingList.begin(), otherList);
-	cout << "List after splice, size (11) - 128-2048, 1-6: " << testingList.size() << endl;
+	cout << "List 1 after splice: 128-2048, 1-6; size (11): " << testingList.size() << endl;
 	PrintList(testingList);
-	cout << "List 2 after splice, size (0, non elements): " << otherList.size() << endl;
+	cout << "List 2 after splice: no elements; size (0): " << otherList.size() << endl;
 	PrintList(otherList);
+	cout << endl;
 
 	PrepareTestList(testingList);
 	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
 	testingList.splice(testingList.end(), otherList);
-	cout << "List after splice, size (11) - 1-6, 128-2048 : " << testingList.size() << endl;
+	cout << "List 1 after splice: 1-6, 128-2048; size (11): " << testingList.size() << endl;
 	PrintList(testingList);
-	cout << "List 2 after splice, size (0, non elements): " << otherList.size() << endl;
+	cout << "List 2 after splice: no elements; size (0): " << otherList.size() << endl;
 	PrintList(otherList);
+	cout << endl;
 
 	PrepareTestList(testingList);
 	otherList = List<int>(elementsForOtherList, elementsForOtherList + 5);
@@ -522,17 +527,18 @@ void Tester::TestSplice(List<int>& testingList)
 	firstIterator++;
 	firstIterator++;
 	testingList.splice(testingList.begin(), otherList, firstIterator);
-	cout << "List after splice, size (7) - 2048, 1-6: " << testingList.size() << endl;
+	cout << "List 1 after splice: 2048, 1-6; size (7): " << testingList.size() << endl;
 	PrintList(testingList);
-	cout << "List 2 after splice, size (4) - 128-1024: " << otherList.size() << endl;
+	cout << "List 2 after splice: 128-1024; size (4): " << otherList.size() << endl;
 	PrintList(otherList);
+	cout << endl;
 
 	testingList.splice(testingList.end(), otherList, otherList.begin());
-	cout << "List after splice, size (8) - 2048, 1-6, 128: " << testingList.size() << endl;
+	cout << "List 1 after splice: 2048, 1-6, 128; size (8): " << testingList.size() << endl;
 	PrintList(testingList);
-	cout << "List 2 after splice, size (3) - 256-1024: " << otherList.size() << endl;
+	cout << "List 2 after splice; 256-1024; size (3): " << otherList.size() << endl;
 	PrintList(otherList);
-
+	cout << endl;
 
 	PrepareTestList(testingList);
 	positionIterator = testingList.begin();
@@ -541,9 +547,9 @@ void Tester::TestSplice(List<int>& testingList)
 	firstIterator = otherList.begin();
 	firstIterator++;
 	testingList.splice(positionIterator, otherList, firstIterator);
-	cout << "List after splice, size (7) - 1,256,2-6: " << testingList.size() << endl;
+	cout << "List 1 after splice: 1, 256, 2-6; size (7): " << testingList.size() << endl;
 	PrintList(testingList);
-	cout << "List 2 after splice, size (4) - 128,512-2048: " << otherList.size() << endl;
+	cout << "List 2 after splice: 128, 512-2048; size (4): " << otherList.size() << endl;
 	PrintList(otherList);
 
 	cout << "\n----------------\n\n";
@@ -554,13 +560,14 @@ void Tester::TestRemoveAndRemoveIf(List<int>& testingList)
 {
 	PrepareTestList(testingList);
 	testingList.remove_if(IsEven<int>());
-	cout << "List after remove, size (3) - 1,3,5: " << testingList.size() << endl;
+	cout << "List after remove_if: 1, 3, 5; size (3): " << testingList.size() << endl;
 	PrintList(testingList);
+	cout << endl;
 
 	PrepareTestList(testingList);
 	testingList.remove(5);
 	testingList.remove(1);
-	cout << "List after remove, size (4) - 2,3,4,6: " << testingList.size() << endl;
+	cout << "List after remove: 2, 3, 4, 6; size (4): " << testingList.size() << endl;
 	PrintList(testingList);
 
 	cout << "\n----------------\n\n";
@@ -571,19 +578,21 @@ void Tester::TestUnique(void)
 	int elementsForList[5] = { 2, 3, 3, 3, 1 };
 	List<int> testingList(elementsForList, elementsForList + 5);
 	testingList.unique();
-	cout << "List after unique, size (3) - 2,3,1: " << testingList.size() << endl;
+	cout << "List after unique: 2, 3, 1; size (3): " << testingList.size() << endl;
 	PrintList(testingList);
+	cout << endl;
 
-	int elementsForList2[5] = { 5, 5, 1, 6, 6 };
-	testingList = List<int>(elementsForList2, elementsForList2 + 5);
+	int elementsForList2[6] = { 5, 5, 1, 6, 6, 5 };
+	testingList = List<int>(elementsForList2, elementsForList2 + 6);
 	testingList.unique();
-	cout << "List after unique, size (3) - 5,1,6: " << testingList.size() << endl;
+	cout << "List after unique: 5, 1, 6, 5; size (4): " << testingList.size() << endl;
 	PrintList(testingList);
+	cout << endl;
 
 	int elementsForList3[5] = { 1, 3, 5, 1, 2 };
 	testingList = List<int>(elementsForList3, elementsForList3 + 5);
 	testingList.unique(SecondIsGreater<int>());
-	cout << "List after unique with predicate, size (2) - 5,1: " << testingList.size() << endl;
+	cout << "List after unique with predicate: 5, 2; size (2): " << testingList.size() << endl;
 	PrintList(testingList);
 
 	cout << "\n----------------\n\n";
@@ -593,12 +602,13 @@ void Tester::TestReverse(List<int>& testingList)
 {
 	PrepareTestList(testingList);
 	testingList.reverse();
-	cout << "After reverse (6) 6-1: " << testingList.size() << endl;
+	cout << "List after reverse: 6-1; size (6): " << testingList.size() << endl;
 	PrintList(testingList);
+	cout << endl;
 
 	testingList.pop_back();
 	testingList.reverse();
-	cout << "After reverse (5) 2-6: " << testingList.size() << endl;
+	cout << "List after reverse: 2-6; size (5): " << testingList.size() << endl;
 	PrintList(testingList);
 
 	cout << "\n----------------\n\n";
@@ -608,18 +618,19 @@ void Tester::TestSort(void)
 {
 	int elementsForList[5] = { 2, 1, 3, 0, 1 };
 	List<int> testingList(elementsForList, elementsForList + 5);
-	cout << "Before sorting (5): " << testingList.size() << endl;
+	cout << "List before sorting (5): " << testingList.size() << endl;
 	PrintList(testingList);
 	testingList.sort();
-	cout << "After sorting (5): " << testingList.size() << endl;
+	cout << "List after sorting: 0, 1, 1, 2, 3; size (5): " << testingList.size() << endl;
 	PrintList(testingList);
+	cout << endl;
 
-	int elementsForList2[5] = { 77, 2, 128, 55, 974 };
-	testingList = List<int>(elementsForList2, elementsForList2 + 5);
-	cout << "Before sorting (5): " << testingList.size() << endl;
+	int elementsForList2[6] = { 77, 2, 128, 55, 974, 55 };
+	testingList = List<int>(elementsForList2, elementsForList2 + 6);
+	cout << "List before sorting with comparator (6): " << testingList.size() << endl;
 	PrintList(testingList);
 	testingList.sort(FirstGraterEqualThanSecond<int>());
-	cout << "After sorting (5): " << testingList.size() << endl;
+	cout << "List after sorting with comparator: 974, 128, 77, 55, 55, 2; size (6): " << testingList.size() << endl;
 	PrintList(testingList);
 
 	cout << "\n----------------\n\n";
@@ -643,6 +654,7 @@ void Tester::TestMerge(void)
 	cout << "List 2 after merging (0): " << secondList.size() << endl;
 	PrintList(secondList);
 
+	cout << endl;
 
 
 	firstList = PrepareRandonIntList(10);
@@ -656,9 +668,9 @@ void Tester::TestMerge(void)
 	PrintList(secondList);
 
 	firstList.merge(secondList, FirstGraterEqualThanSecond<int>());
-	cout << "List 1 after merging (16): " << firstList.size() << endl;
+	cout << "List 1 after merging with comparator (16): " << firstList.size() << endl;
 	PrintList(firstList);
-	cout << "List 2 after merging (0): " << secondList.size() << endl;
+	cout << "List 2 after merging with comparator (0): " << secondList.size() << endl;
 	PrintList(secondList);
 	cout << "\n----------------\n\n";
 }
