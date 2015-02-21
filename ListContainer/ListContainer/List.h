@@ -206,7 +206,7 @@ public:
 			return;
 		}
 
-		shared_ptr<ListElement<Type, Allocator>> currentElement = findElementBefore(_lastElementPointer);
+		shared_ptr<ListElement<Type, Allocator>> currentElement = findElementPointerBefore(_lastElementPointer);
 
 		currentElement->NextElementPointer.reset();
 		_lastElementPointer = currentElement;
@@ -227,7 +227,7 @@ public:
 			return iterator(_lastElementPointer);
 		}
 
-		shared_ptr<ListElement<Type, Allocator>> elementBefore = findElementBefore(positionIterator);
+		shared_ptr<ListElement<Type, Allocator>> elementBefore = findElementPointerBefore(positionIterator);
 		shared_ptr<ListElement<Type, Allocator>> newElement = createElementPtrAndChangeSize(value);
 		newElement->NextElementPointer = elementBefore->NextElementPointer;
 		elementBefore->NextElementPointer = newElement;
@@ -267,7 +267,7 @@ public:
 			return nullptr;
 		}
 
-		shared_ptr<ListElement<Type, Allocator>> elementBefore = findElementBefore(positionIterator);
+		shared_ptr<ListElement<Type, Allocator>> elementBefore = findElementPointerBefore(positionIterator);
 		if (elementBefore->NextElementPointer == _lastElementPointer)
 		{
 			pop_back();
@@ -452,7 +452,7 @@ public:
 		shared_ptr<ListElement<Type, Allocator>> currentElementPointer;
 		shared_ptr<ListElement<Type, Allocator>> nextElementPointer;
 
-
+		// buble sort
 		size_type n = size();
 		do
 		{
@@ -471,10 +471,12 @@ public:
 					}
 					else
 					{
-						shared_ptr<ListElement<Type, Allocator>> previousPointer = findElementBefore(currentElementPointer);
+						shared_ptr<ListElement<Type, Allocator>> previousPointer = findElementPointerBefore(currentElementPointer);
 						previousPointer->NextElementPointer = nextElementPointer;
 
 					}
+					// move nextElement one position after currentElement 
+					// (because currentElement is pointing to the next item in the row after changing places)
 					nextElementPointer = currentElementPointer->NextElementPointer;
 				}
 				else
@@ -501,6 +503,7 @@ public:
 		shared_ptr<ListElement<Type, Allocator>> tmpPointer;
 		for (size_type i = 1; i < size(); i++)
 		{
+			// tmpPointer is essential to not lose pointer to the element after current element
 			tmpPointer = currentPointer->NextElementPointer;
 			currentPointer->NextElementPointer = previousPointer;
 			previousPointer = currentPointer;
@@ -553,12 +556,12 @@ private:
 		return false;
 	}
 
-	shared_ptr<ListElement<Type, Allocator>> findElementBefore(shared_ptr<ListElement<Type, Allocator>> nextPointer)
+	shared_ptr<ListElement<Type, Allocator>> findElementPointerBefore(shared_ptr<ListElement<Type, Allocator>> nextElementPointer)
 	{
-		return findElementBefore(iterator(nextPointer));
+		return findElementPointerBefore(iterator(nextElementPointer));
 	}
 
-	shared_ptr<ListElement<Type, Allocator>> findElementBefore(iterator positionIterator)
+	shared_ptr<ListElement<Type, Allocator>> findElementPointerBefore(iterator positionIterator)
 	{
 		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
 		while (currentElement->NextElementPointer->ValuePointer.get() != (positionIterator.operator->()))
@@ -569,7 +572,7 @@ private:
 		return currentElement;
 	}
 
-	shared_ptr<ListElement<Type, Allocator>> findElement(iterator positionIterator)
+	shared_ptr<ListElement<Type, Allocator>> findElementPointer(iterator positionIterator)
 	{
 		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
 		while (currentElement->ValuePointer.get() != (positionIterator.operator->()))
