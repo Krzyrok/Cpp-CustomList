@@ -237,10 +237,11 @@ public:
 
 	void insert(iterator positionIterator, size_type numberOfValues, const Type& value)
 	{
-		for (size_type i = 0; i < numberOfValues; i++)
-		{
-			insert(positionIterator, value);
-		}
+		if (numberOfValues < 1)
+			return;
+
+		List<Type, Allocator> listWithInsertingValues(numberOfValues, value, _allocator);
+		insertFromOtherList(positionIterator, listWithInsertingValues);
 	}
 
 	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
@@ -249,10 +250,8 @@ public:
 		if (firstIterator == lastIterator)
 			return;
 
-		for (InputIterator currentIterator = firstIterator; currentIterator != lastIterator; currentIterator++)
-		{
-			insert(positionIterator, *currentIterator);
-		}
+		List<Type, Allocator> listWithInsertingValues(firstIterator, lastIterator, _allocator);
+		insertFromOtherList(positionIterator, listWithInsertingValues);
 	}
 
 	iterator erase(iterator positionIterator)
@@ -528,6 +527,21 @@ private:
 	Allocator _allocator;
 	size_type _numberOfElements;
 
+
+	void insertFromOtherList(iterator positionIterator, const List& listWithInsertingValues)
+	{
+		_numberOfElements += listWithInsertingValues.size();
+		if (positionIterator == iterator(end()))
+		{
+			_lastElementPointer->NextElementPointer = listWithInsertingValues._firstElementPointer;
+			_lastElementPointer = listWithInsertingValues._lastElementPointer;
+			return;
+		}
+
+		shared_ptr<ListElement<Type, Allocator>>& currentElementPointer = findElementPointer(positionIterator);
+		listWithInsertingValues._lastElementPointer->NextElementPointer = currentElementPointer;
+		currentElementPointer = listWithInsertingValues._firstElementPointer;
+	}
 
 	bool checkIfEmptyAndPushElement(const Type& value)
 	{

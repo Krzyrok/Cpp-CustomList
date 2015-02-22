@@ -59,7 +59,7 @@ public:
 
 
 	friend class ConstListIterator<Type, Allocator>;
-
+	
 private:
 	shared_ptr<ListElement<Type, Allocator>> _pointer;
 };

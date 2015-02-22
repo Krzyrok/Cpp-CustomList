@@ -426,7 +426,7 @@ void Tester::TestInsert(void)
 	cout << "Added value (749): " << *newIterator << endl;
 	newIterator++;
 	cout << "Next value (3): " << *newIterator << endl;
-	cout << "List: 1-2, 749, 3-6; size (7):" << testingList.size() << endl;
+	cout << "List: 1-2, 749, 3-6; size (7): " << testingList.size() << endl;
 	PrintList(testingList);
 	cout << endl;
 
@@ -452,6 +452,30 @@ void Tester::TestInsert(void)
 	PrintList(testingList);
 	cout << endl;
 
+	testingList = PrepareTestList();
+	listIterator = testingList.begin();
+	standardList.clear();
+	standardList.push_back(74);
+	standardList.push_back(477);
+	standardList.push_back(125);
+	testingList.insert(listIterator, standardList.begin(), standardList.end());
+	cout << "Size (9): " << testingList.size() << endl;
+	cout << "List (insert on the front): 74, 477, 125, 1-6: \n";
+	PrintList(testingList);
+	cout << endl;
+
+	testingList = PrepareTestList();
+	listIterator = testingList.end();
+	standardList.clear();
+	standardList.push_back(12);
+	standardList.push_back(17);
+	standardList.push_back(22);
+	testingList.insert(listIterator, standardList.begin(), standardList.end());
+	cout << "Size (9): " << testingList.size() << endl;
+	cout << "List (insert on the back): 1-6, 12, 17, 22: \n";
+	PrintList(testingList);
+	cout << endl;
+
 	cout << "\n----------------\n\n";
 }
 
@@ -465,6 +489,7 @@ void Tester::TestErase(void)
 	testingList.erase(resultIterator);
 	cout << "List after erase: 2, 5, 6; size (3): " << testingList.size() << endl;
 	PrintList(testingList);
+	cout << endl;
 
 	resultIterator = testingList.erase(testingList.begin(), ++++(testingList.begin()));
 	cout << "List after erase with iterators: 6; size (1): " << testingList.size() << endl;
