@@ -80,6 +80,7 @@
     <ClInclude Include="CommonHeaders.h" />
     <ClInclude Include="CompareFunctor.h" />
     <ClInclude Include="CyclicList.h" />
+    <ClInclude Include="CyclicListTester.h" />
     <ClInclude Include="Deleter.h" />
     <ClInclude Include="Functor.h" />
     <ClInclude Include="List.h" />
@@ -89,8 +90,9 @@
     <ClInclude Include="TestObject.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CyclicListTester.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Tester.cpp" />
+    <ClCompile Include="ListTester.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

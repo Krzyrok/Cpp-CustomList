@@ -48,12 +48,18 @@
     <ClInclude Include="ListTester.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CyclicListTester.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tester.cpp">
+    <ClCompile Include="CyclicListTester.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListTester.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

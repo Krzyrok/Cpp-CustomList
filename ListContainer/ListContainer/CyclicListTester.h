@@ -1,28 +1,26 @@
-#ifndef LIST_TESTER_HEADER
-#define LIST_TESTER_HEADER
+#ifndef CYCLIC_LIST_TESTER_HEADER
+#define CYCLIC_LIST_TESTER_HEADER
 
-#include "List.h"
+#include "CyclicList.h"
 #include "TestObject.h"
 
 #include <list>
 #include <ctime>
 
-class ListTester
+class CyclicListTester
 {
-public: 
+public:
 	void Exeute(void);
 
 private:
-	void TestClassicList(void);
-
-	List<int> PrepareRandonIntList(int size);
-	void PrintList(List<int>& printingList);
-	List<int> PrepareTestList(void);
+	CyclicList<int> PrepareRandonIntList(int size);
+	void PrintList(CyclicList<int>& printingList);
+	CyclicList<int> PrepareTestList(void);
 
 	void TestConstructors(void);
 	void TestPushBack(void);
 	void TestPushFront(void);
-	void TestSize(void); 
+	void TestSize(void);
 	void TestListIterator(void);
 	void TestBeginEndIterator(void);
 	void TestClear(void);
