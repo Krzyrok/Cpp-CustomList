@@ -389,7 +389,7 @@ public:
 	template <class Predicate>
 	void remove_if(Predicate predicate)
 	{
-		if (size() < 1)
+		if (empty())
 			return;
 
 		for (iterator listIterator = begin(); listIterator != end(); listIterator++)
@@ -431,7 +431,7 @@ public:
 	{
 		if (this == &otherList)
 			return;
-		if (otherList.size() < 1)
+		if (otherList.empty())
 			return;
 
 
