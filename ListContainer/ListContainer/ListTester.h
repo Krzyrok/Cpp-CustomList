@@ -1,13 +1,13 @@
-#ifndef TESTER_HEADER
-#define TESTER_HEADER
+#ifndef LIST_TESTER_HEADER
+#define LIST_TESTER_HEADER
 
-#include "List.h"
+#include "CyclicList.h"
 #include "TestObject.h"
 
 #include <list>
 #include <ctime>
 
-class Tester
+class ListTester
 {
 public: 
 	void Exeute(void);

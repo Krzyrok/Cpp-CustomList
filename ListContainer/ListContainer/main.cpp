@@ -1,9 +1,9 @@
-#include "Tester.h"
+#include "ListTester.h"
 
 int main()
 {
-	Tester tester;
-	tester.Exeute();
+	ListTester listTester;
+	listTester.Exeute();
 
 	system("Pause");
 	return 0;

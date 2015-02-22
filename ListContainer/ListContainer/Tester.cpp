@@ -1,11 +1,9 @@
-#include "Tester.h"
+#include "ListTester.h"
 
-void Tester::Exeute(void)
+void ListTester::Exeute(void)
 {
 	//TestClassicList();
-
 	srand((unsigned int)time(NULL));
-
 
 	TestConstructors();
 	TestPushBack();
@@ -33,7 +31,7 @@ void Tester::Exeute(void)
 	TestMerge();
 }
 
-List<int> Tester::PrepareRandonIntList(int size)
+List<int> ListTester::PrepareRandonIntList(int size)
 {
 	List<int> result;
 	for (int i = 0; i < size; i++)
@@ -45,7 +43,7 @@ List<int> Tester::PrepareRandonIntList(int size)
 	return result;
 }
 
-void Tester::PrintList(List<int>& printingList)
+void ListTester::PrintList(List<int>& printingList)
 {
 	int i = 1;
 	for (List<int>::iterator it = printingList.begin(); it != printingList.end(); it++, i++)
@@ -54,7 +52,7 @@ void Tester::PrintList(List<int>& printingList)
 	}
 }
 
-List<int> Tester::PrepareTestList(void)
+List<int> ListTester::PrepareTestList(void)
 {
 	List<int> newList;
 	newList.push_front(6);
@@ -67,7 +65,7 @@ List<int> Tester::PrepareTestList(void)
 	return newList;
 }
 
-void Tester::TestClassicList(void)
+void ListTester::TestClassicList(void)
 {
 	list<int> c;
 	c.size();
@@ -113,7 +111,7 @@ void Tester::TestClassicList(void)
 
 }
 
-void Tester::TestConstructors(void)
+void ListTester::TestConstructors(void)
 {
 	List<int> emptyList;
 	cout << "Size (0): " << emptyList.size() << endl << endl;
@@ -161,7 +159,7 @@ void Tester::TestConstructors(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestPushBack(void)
+void ListTester::TestPushBack(void)
 {
 	List<int> testingList;
 	testingList.push_back(4);
@@ -172,7 +170,7 @@ void Tester::TestPushBack(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestPushFront(void)
+void ListTester::TestPushFront(void)
 {
 	List<int> testingList;
 	testingList.push_front(3);
@@ -183,7 +181,7 @@ void Tester::TestPushFront(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestSize(void)
+void ListTester::TestSize(void)
 {
 	List<int>& testingList = PrepareTestList();
 	if (testingList.size() == 6)
@@ -198,7 +196,7 @@ void Tester::TestSize(void)
 	cout << "----------------\n\n";
 }
 
-void Tester::TestListIterator(void)
+void ListTester::TestListIterator(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -282,14 +280,14 @@ void Tester::TestListIterator(void)
 	//cout << "should not compile for const_interator -> 124: " << (*constTestingIterator) << endl;
 }
 
-void Tester::TestBeginEndIterator(void)
+void ListTester::TestBeginEndIterator(void)
 {
 	List<int>& testingList = PrepareTestList();
 	PrintList(testingList);
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestClear(void)
+void ListTester::TestClear(void)
 {
 	List<int>& testingList = PrepareTestList();
 	cout << "List before clear: 1-6; size (6): " << testingList.size() << endl;
@@ -302,7 +300,7 @@ void Tester::TestClear(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestEmpty(void)
+void ListTester::TestEmpty(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -318,7 +316,7 @@ void Tester::TestEmpty(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestMaxSize(void)
+void ListTester::TestMaxSize(void)
 {
 	List<int> testingList;
 	cout << "Max size for list: " << testingList.max_size() << endl;
@@ -330,7 +328,7 @@ void Tester::TestMaxSize(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestFront(void)
+void ListTester::TestFront(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -344,7 +342,7 @@ void Tester::TestFront(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestBack(void)
+void ListTester::TestBack(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -361,7 +359,7 @@ void Tester::TestBack(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestAssign(void)
+void ListTester::TestAssign(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -387,7 +385,7 @@ void Tester::TestAssign(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestPopFront(void)
+void ListTester::TestPopFront(void)
 {
 	List<int>& testingList = PrepareTestList();
 	
@@ -401,7 +399,7 @@ void Tester::TestPopFront(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestPopBack(void)
+void ListTester::TestPopBack(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -415,7 +413,7 @@ void Tester::TestPopBack(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestInsert(void)
+void ListTester::TestInsert(void)
 {
 	List<int>& testingList = PrepareTestList();
 	
@@ -479,7 +477,7 @@ void Tester::TestInsert(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestErase(void)
+void ListTester::TestErase(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -498,7 +496,7 @@ void Tester::TestErase(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestSwap(void)
+void ListTester::TestSwap(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -517,7 +515,7 @@ void Tester::TestSwap(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestResize(void)
+void ListTester::TestResize(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -533,7 +531,7 @@ void Tester::TestResize(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestSplice(void)
+void ListTester::TestSplice(void)
 {
 	List<int>& testingList = PrepareTestList();
 	
@@ -614,7 +612,7 @@ void Tester::TestSplice(void)
 
 }
 
-void Tester::TestRemoveAndRemoveIf(void)
+void ListTester::TestRemoveAndRemoveIf(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -632,7 +630,7 @@ void Tester::TestRemoveAndRemoveIf(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestUnique(void)
+void ListTester::TestUnique(void)
 {
 	int elementsForList[5] = { 2, 3, 3, 3, 1 };
 	List<int> testingList(elementsForList, elementsForList + 5);
@@ -657,7 +655,7 @@ void Tester::TestUnique(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestReverse(void)
+void ListTester::TestReverse(void)
 {
 	List<int>& testingList = PrepareTestList();
 
@@ -674,7 +672,7 @@ void Tester::TestReverse(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestSort(void)
+void ListTester::TestSort(void)
 {
 	int elementsForList[5] = { 2, 1, 3, 0, 1 };
 	List<int> testingList(elementsForList, elementsForList + 5);
@@ -696,7 +694,7 @@ void Tester::TestSort(void)
 	cout << "\n----------------\n\n";
 }
 
-void Tester::TestMerge(void)
+void ListTester::TestMerge(void)
 {
 	List<int> firstList = PrepareRandonIntList(4);
 	List<int> secondList = PrepareRandonIntList(5);
