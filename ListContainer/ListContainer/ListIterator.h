@@ -58,10 +58,18 @@ public:
 	}
 
 
+protected:
+	shared_ptr<ListElement<Type, Allocator>> _pointer;
+
+
+private:
 	friend class ConstListIterator<Type, Allocator>;
 	
-private:
-	shared_ptr<ListElement<Type, Allocator>> _pointer;
+	template<class TypeForCLI, class TypeForA>
+	friend class CyclicListIterator;
+
+	template<class TypeForCCLI, class TypeForA>
+	friend class ConstCyclicListIterator;
 };
 
 template <class Type, class Allocator>
@@ -116,8 +124,13 @@ public:
 	}
 
 
-private:
+protected:
 	shared_ptr<ListElement<Type, Allocator>> _pointer;
+
+
+private:
+	template<class TypeForCCLI, class TypeForA>
+	friend class ConstCyclicListIterator;
 };
 
 #endif

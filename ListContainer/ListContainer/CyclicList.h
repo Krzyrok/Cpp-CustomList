@@ -2,12 +2,17 @@
 #define CYCLIC_LIST_HEADER
 
 #include "List.h"
+#include "CyclicListIterator.h"
 
 template<class Type, class Allocator = allocator<Type>>
 class CyclicList
 	: public List<Type, Allocator>
 {
 public:
+	typedef typename CyclicListIterator<Type, Allocator> iterator;
+	typedef typename ConstCyclicListIterator<Type, Allocator> const_iterator;
+
+
 	// Constructors
 	explicit CyclicList(const Allocator& passedAlloc = Allocator())
 		: List(passedAlloc)
@@ -29,6 +34,12 @@ public:
 		: List(listToCopy.begin(), listToCopy.end())
 	{
 	}
+
+	// -------------------------------------------------------------------
+
+	// Methods
+
+	// Iterators
 };
 
 #endif

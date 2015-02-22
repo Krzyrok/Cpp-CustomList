@@ -80,6 +80,7 @@
     <ClInclude Include="CommonHeaders.h" />
     <ClInclude Include="CompareFunctor.h" />
     <ClInclude Include="CyclicList.h" />
+    <ClInclude Include="CyclicListIterator.h" />
     <ClInclude Include="CyclicListTester.h" />
     <ClInclude Include="Deleter.h" />
     <ClInclude Include="Functor.h" />

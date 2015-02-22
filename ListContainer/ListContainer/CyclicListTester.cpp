@@ -2,7 +2,6 @@
 
 void CyclicListTester::Exeute(void)
 {
-	//TestClassicList();
 	srand((unsigned int)time(NULL));
 
 	TestConstructors();
