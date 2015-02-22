@@ -434,7 +434,34 @@ public:
 		if (otherList.empty())
 			return;
 
+		List<Type> resultList;
+		do
+		{
+			Type& valueFromFirstList = _firstElementPointer->GetValue();
+			Type& valueFromSecondList = otherList._firstElementPointer->GetValue();
+			if (compare(valueFromFirstList, valueFromSecondList))
+			{
+				resultList.push_back(valueFromFirstList);
+				pop_front();
+			}
+			else
+			{
+				resultList.push_back(valueFromSecondList);
+				otherList.pop_front();
+			}
+		}
+		while (!empty() && !otherList.empty());
 
+		if (!empty())
+		{
+			resultList.insert(resultList.end(), begin(), end());
+		}
+		else if (!otherList.empty())
+		{
+			resultList.insert(resultList.end(), otherList.begin(), otherList.end());
+		}
+
+		assign(resultList.begin(), resultList.end());
 	}
 
 	void sort(void)
