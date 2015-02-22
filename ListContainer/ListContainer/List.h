@@ -471,8 +471,8 @@ public:
 					}
 					else
 					{
-						shared_ptr<ListElement<Type, Allocator>> previousPointer = findElementPointerBefore(currentElementPointer);
-						previousPointer->NextElementPointer = nextElementPointer;
+						shared_ptr<ListElement<Type, Allocator>>& currentElementPointerInStructure = findElementPointer(currentElementPointer);
+						currentElementPointerInStructure = nextElementPointer;
 
 					}
 					// move nextElement one position after currentElement 
