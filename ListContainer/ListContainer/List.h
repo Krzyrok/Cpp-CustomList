@@ -227,12 +227,12 @@ public:
 			return iterator(_lastElementPointer);
 		}
 
-		shared_ptr<ListElement<Type, Allocator>> elementBefore = findElementPointerBefore(positionIterator);
-		shared_ptr<ListElement<Type, Allocator>> newElement = createElementPtrAndChangeSize(value);
-		newElement->NextElementPointer = elementBefore->NextElementPointer;
-		elementBefore->NextElementPointer = newElement;
+		shared_ptr<ListElement<Type, Allocator>>& currentElementPointer = findElementPointer(positionIterator);
+		shared_ptr<ListElement<Type, Allocator>> newElementPointer = createElementPtrAndChangeSize(value);
+		newElementPointer->NextElementPointer = currentElementPointer;
+		currentElementPointer = newElementPointer;
 
-		return iterator(newElement);
+		return iterator(currentElementPointer);
 	}
 
 	void insert(iterator positionIterator, size_type numberOfValues, const Type& value)
@@ -267,16 +267,16 @@ public:
 			return nullptr;
 		}
 
-		shared_ptr<ListElement<Type, Allocator>> elementBefore = findElementPointerBefore(positionIterator);
-		if (elementBefore->NextElementPointer == _lastElementPointer)
+		shared_ptr<ListElement<Type, Allocator>>& currentElementPointer = findElementPointer(positionIterator);
+		if (currentElementPointer == _lastElementPointer)
 		{
 			pop_back();
 			return end();
 		}
 
-		elementBefore->NextElementPointer = elementBefore->NextElementPointer->NextElementPointer;
+		currentElementPointer = currentElementPointer->NextElementPointer;
 		_numberOfElements--;
-		return iterator(elementBefore->NextElementPointer);
+		return iterator(currentElementPointer);
 	}
 
 	iterator erase(iterator firstPosition, iterator lastPosition)
@@ -460,7 +460,7 @@ public:
 			nextElementPointer = _firstElementPointer->NextElementPointer;
 			for (size_type i = 0; i < n - 1; i++)
 			{
-				if (!compare(currentElementPointer->GetValue(), nextElementPointer->GetValue()))
+				if (compare(nextElementPointer->GetValue(), currentElementPointer->GetValue()))
 				{
 					shared_ptr<ListElement<Type, Allocator>> afterNextPointer = nextElementPointer->NextElementPointer;
 					nextElementPointer->NextElementPointer = currentElementPointer;
@@ -572,15 +572,13 @@ private:
 		return currentElement;
 	}
 
-	shared_ptr<ListElement<Type, Allocator>> findElementPointer(iterator positionIterator)
+	shared_ptr<ListElement<Type, Allocator>>& findElementPointer(iterator positionIterator)
 	{
-		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
-		while (currentElement->ValuePointer.get() != (positionIterator.operator->()))
-		{
-			currentElement = currentElement->NextElementPointer;
-		}
+		if (_firstElementPointer->ValuePointer.get() == positionIterator.operator->())
+			return _firstElementPointer;
 
-		return currentElement;
+		shared_ptr<ListElement<Type, Allocator>> elementPointerBefore = findElementPointerBefore(positionIterator);
+		return elementPointerBefore->NextElementPointer;
 	}
 
 	shared_ptr<ListElement<Type, Allocator>> createElementPtrAndChangeSize(const Type& value)
