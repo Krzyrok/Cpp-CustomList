@@ -43,7 +43,8 @@ public:
 	bool operator==(const CyclicListIterator& secondIterator)
 	{
 		bool result = (_pointer == nullptr) && (secondIterator._pointer == nullptr)
-			|| (_pointer == secondIterator._pointer) && (!_isFirstIteration || !secondIterator._isFirstIteration);
+			|| (_pointer == secondIterator._pointer) && (!_isFirstIteration || !secondIterator._isFirstIteration)
+			|| (_isMadeByEndMethod && secondIterator._isMadeByEndMethod);
 		return result;
 	}
 
@@ -102,7 +103,8 @@ public:
 	bool operator==(const ConstCyclicListIterator& secondIterator)
 	{
 		bool result = (_pointer == nullptr) && (secondIterator._pointer == nullptr)
-			|| (_pointer == secondIterator._pointer) && (!_isFirstIteration || !secondIterator._isFirstIteration);
+			|| (_pointer == secondIterator._pointer) && (!_isFirstIteration || !secondIterator._isFirstIteration)
+			|| (_isMadeByEndMethod && secondIterator._isMadeByEndMethod);
 		return result;
 	}
 
