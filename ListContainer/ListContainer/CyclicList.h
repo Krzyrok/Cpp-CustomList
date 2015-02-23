@@ -143,6 +143,8 @@ public:
 
 	void clear(void)
 	{
+		if (empty())
+			return;
 		createNonCyclicList();
 		List<Type, Allocator>::clear();
 	}

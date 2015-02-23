@@ -392,6 +392,8 @@ public:
 	
 	void clear(void)
 	{
+		if (empty())
+			return;
 		_lastElementPointer.reset();
 		_firstElementPointer.reset();
 		_numberOfElements = 0;
