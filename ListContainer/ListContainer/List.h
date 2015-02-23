@@ -575,7 +575,7 @@ private:
 
 	bool checkIfEmptyAndPushElement(const Type& value)
 	{
-		if (_firstElementPointer == nullptr)
+		if (size() == 0)
 		{
 			_firstElementPointer = createElementPtrAndChangeSize(value);
 			_lastElementPointer = _firstElementPointer;
