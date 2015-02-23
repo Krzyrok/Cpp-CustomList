@@ -29,6 +29,9 @@ void CyclicListTester::Exeute(void)
 	TestReverse();
 	TestSort();
 	TestMerge();
+	TestEmplaceFront();
+	TestEmplaceBack();
+	TestEmplace();
 }
 
 CyclicList<int> CyclicListTester::PrepareRandonIntList(int size)
@@ -738,5 +741,70 @@ void CyclicListTester::TestMerge(void)
 	cout << "CyclicList 2 after merging with comparator (0): " << secondList.size() << endl;
 	PrintList(secondList);
 	cout << "\n----------------\n\n";
+}
+
+void CyclicListTester::TestEmplaceFront(void)
+{
+	CyclicList<TestObjectMoreComplex> testingList;
+	testingList.emplace_front(1, 2, 'Z');
+	testingList.emplace_front(14, 28, 'j');
+
+	CyclicList<TestObjectMoreComplex>::iterator iteratorForPrint = testingList.begin();
+	cout << "emplace_front; size (2): " << testingList.size() << endl << endl;
+
+	cout << "14, 28, j: \n";
+	iteratorForPrint->Print();
+
+	iteratorForPrint++;
+	cout << "1, 2, Z: \n";
+	iteratorForPrint->Print();
+
+	cout << "----------------\n\n";
+}
+
+void CyclicListTester::TestEmplaceBack(void)
+{
+	CyclicList<TestObjectMoreComplex> testingList;
+	testingList.emplace_back(11, 33, 'h');
+	testingList.emplace_back(77, 154, 'f');
+
+	CyclicList<TestObjectMoreComplex>::iterator iteratorForPrint = testingList.begin();
+	cout << "emplace_back; size (2): " << testingList.size() << endl << endl;
+
+	cout << "11, 33, h: \n";
+	iteratorForPrint->Print();
+
+	iteratorForPrint++;
+	cout << "77, 154, f: \n";
+	iteratorForPrint->Print();
+
+	cout << "----------------\n\n";
+}
+
+void CyclicListTester::TestEmplace(void)
+{
+	CyclicList<TestObjectMoreComplex> testingList;
+	CyclicList<TestObjectMoreComplex>::const_iterator iteratorForList = testingList.cbegin();
+	iteratorForList = testingList.emplace(iteratorForList, 5, 6, 'c');
+	iteratorForList = testingList.emplace(iteratorForList, 0, 1, 'a');
+	iteratorForList++;
+	testingList.emplace(iteratorForList, 3, 4, 'b');
+
+
+	CyclicList<TestObjectMoreComplex>::iterator iteratorForPrint = testingList.begin();
+	cout << "emplace; size (3): " << testingList.size() << endl << endl;
+
+	cout << "0, 1, a: \n";
+	iteratorForPrint->Print();
+
+	iteratorForPrint++;
+	cout << "3, 4, b: \n";
+	iteratorForPrint->Print();
+
+	iteratorForPrint++;
+	cout << "5, 6, c: \n";
+	iteratorForPrint->Print();
+
+	cout << "----------------\n\n";
 }
 

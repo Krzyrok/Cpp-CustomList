@@ -3,6 +3,7 @@
 
 #include "CyclicList.h"
 #include "TestObject.h"
+#include "TestObjectMoreComplex.h"
 
 #include <list>
 #include <ctime>
@@ -41,6 +42,9 @@ private:
 	void TestReverse(void);
 	void TestSort(void);
 	void TestMerge(void);
+	void TestEmplaceFront(void);
+	void TestEmplaceBack(void);
+	void TestEmplace(void);
 };
 
 #endif 
