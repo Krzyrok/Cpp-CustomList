@@ -556,6 +556,17 @@ protected:
 	Allocator _allocator;
 	size_type _numberOfElements;
 
+	shared_ptr<ListElement<Type, Allocator>> findElementPointerBefore(iterator positionIterator)
+	{
+		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
+		while (currentElement->NextElementPointer->ValuePointer.get() != (positionIterator.operator->()))
+		{
+			currentElement = currentElement->NextElementPointer;
+		}
+
+		return currentElement;
+	}
+
 
 private:
 	void insertFromOtherList(iterator positionIterator, const List& listWithInsertingValues)
@@ -603,17 +614,6 @@ private:
 	shared_ptr<ListElement<Type, Allocator>> findElementPointerBefore(shared_ptr<ListElement<Type, Allocator>> nextElementPointer)
 	{
 		return findElementPointerBefore(iterator(nextElementPointer));
-	}
-
-	shared_ptr<ListElement<Type, Allocator>> findElementPointerBefore(iterator positionIterator)
-	{
-		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
-		while (currentElement->NextElementPointer->ValuePointer.get() != (positionIterator.operator->()))
-		{
-			currentElement = currentElement->NextElementPointer;
-		}
-
-		return currentElement;
 	}
 
 	shared_ptr<ListElement<Type, Allocator>>& findElementPointer(iterator positionIterator)
