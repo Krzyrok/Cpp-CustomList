@@ -167,6 +167,18 @@ public:
 		_lastElementPointer = currentElement;
 	}
 
+	template <class... Args>
+	void emplace_front(Args&&... args)
+	{
+		if (checkIfEmptyAndPushElement(args...))
+		{
+			return;
+		}
+
+		shared_ptr<ListElement<Type, Allocator>> newFirstElement = createElementPtrAndChangeSize(args...);
+		setFirstElementPointer(newFirstElement);
+	}
+
 	void push_front(const Type& value)
 	{
 		if (checkIfEmptyAndPushElement(value))
@@ -175,8 +187,7 @@ public:
 		}
 
 		shared_ptr<ListElement<Type, Allocator>> newFirstElement = createElementPtrAndChangeSize(value);
-		newFirstElement->NextElementPointer = _firstElementPointer;
-		_firstElementPointer = newFirstElement;
+		setFirstElementPointer(newFirstElement);
 	}
 
 	void pop_front(void)
@@ -585,6 +596,19 @@ private:
 		currentElementPointer = listWithInsertingValues._firstElementPointer;
 	}
 
+	template <class... Args>
+	bool checkIfEmptyAndPushElement(Args&&... args)
+	{
+		if (size() == 0)
+		{
+			_firstElementPointer = createElementPtrAndChangeSize(args...);
+			_lastElementPointer = _firstElementPointer;
+			return true;
+		}
+
+		return false;
+	}
+
 	bool checkIfEmptyAndPushElement(const Type& value)
 	{
 		if (size() == 0)
@@ -632,6 +656,22 @@ private:
 		_numberOfElements++;
 
 		return result;
+	}
+
+	template <class... Args>
+	shared_ptr<ListElement<Type, Allocator>> createElementPtrAndChangeSize(Args&&... args)
+	{
+		shared_ptr <ListElement<Type, Allocator>> result 
+			= shared_ptr <ListElement<Type, Allocator>>(new ListElement<Type, Allocator>(_allocator, args...));
+		_numberOfElements++;
+
+		return result;
+	}
+
+	void setFirstElementPointer(shared_ptr<ListElement<Type, Allocator>>& elementPointer)
+	{
+		elementPointer->NextElementPointer = _firstElementPointer;
+		_firstElementPointer = elementPointer;
 	}
 };
 

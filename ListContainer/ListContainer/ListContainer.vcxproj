@@ -89,6 +89,7 @@
     <ClInclude Include="ListIterator.h" />
     <ClInclude Include="ListTester.h" />
     <ClInclude Include="TestObject.h" />
+    <ClInclude Include="TestObjectMoreComplex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CyclicListTester.cpp" />

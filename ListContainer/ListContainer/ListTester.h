@@ -3,6 +3,7 @@
 
 #include "List.h"
 #include "TestObject.h"
+#include "TestObjectMoreComplex.h"
 
 #include <list>
 #include <ctime>
@@ -43,6 +44,7 @@ private:
 	void TestReverse(void);
 	void TestSort(void);
 	void TestMerge(void);
+	void TestEmplaceFront(void);
 };
 
 #endif 

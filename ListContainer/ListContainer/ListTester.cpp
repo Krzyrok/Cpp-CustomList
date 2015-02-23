@@ -29,6 +29,7 @@ void ListTester::Exeute(void)
 	TestReverse();
 	TestSort();
 	TestMerge();
+	TestEmplaceFront();
 }
 
 List<int> ListTester::PrepareRandonIntList(int size)
@@ -108,6 +109,8 @@ void ListTester::TestClassicList(void)
 	cout << "It 2 : " << *itL2 << endl;
 	cout << "list 2 size : " << list2.size() << endl;
 	cout << "It 2++ : " << *++itL2 << endl;
+
+	list1.emplace_front();
 
 }
 
@@ -747,5 +750,24 @@ void ListTester::TestMerge(void)
 	cout << "List 2 after merging with comparator (0): " << secondList.size() << endl;
 	PrintList(secondList);
 	cout << "\n----------------\n\n";
+}
+
+void ListTester::TestEmplaceFront(void)
+{
+	List<TestObjectMoreComplex> testingList;
+	testingList.emplace_front(1, 2, 'Z');
+	testingList.emplace_front(14, 28, 'j');
+
+	List<TestObjectMoreComplex>::iterator iteratorForPrint = testingList.begin();
+	cout << "Emplace_front; size (2): " << testingList.size() << endl << endl;
+	
+	cout << "14, 28, j: \n";
+	iteratorForPrint->Print();
+	
+	iteratorForPrint++;
+	cout << "1, 2, Z: \n";
+	iteratorForPrint->Print();
+
+	cout << "----------------\n\n";
 }
 
