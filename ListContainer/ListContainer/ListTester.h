@@ -45,6 +45,7 @@ private:
 	void TestSort(void);
 	void TestMerge(void);
 	void TestEmplaceFront(void);
+	void TestEmplaceBack(void);
 };
 
 #endif 

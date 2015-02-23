@@ -175,8 +175,8 @@ public:
 			return;
 		}
 
-		shared_ptr<ListElement<Type, Allocator>> newFirstElement = createElementPtrAndChangeSize(args...);
-		setFirstElementPointer(newFirstElement);
+		shared_ptr<ListElement<Type, Allocator>> newElementPointer = createElementPtrAndChangeSize(args...);
+		setFirstElementPointer(newElementPointer);
 	}
 
 	void push_front(const Type& value)
@@ -186,8 +186,8 @@ public:
 			return;
 		}
 
-		shared_ptr<ListElement<Type, Allocator>> newFirstElement = createElementPtrAndChangeSize(value);
-		setFirstElementPointer(newFirstElement);
+		shared_ptr<ListElement<Type, Allocator>> newElementPointer = createElementPtrAndChangeSize(value);
+		setFirstElementPointer(newElementPointer);
 	}
 
 	void pop_front(void)
@@ -200,6 +200,18 @@ public:
 		_numberOfElements--;
 	}
 
+	template <class... Args>
+	void emplace_back(Args&&... args)
+	{
+		if (checkIfEmptyAndPushElement(args...))
+		{
+			return;
+		}
+
+		shared_ptr<ListElement<Type, Allocator>> newElementPointer = createElementPtrAndChangeSize(args...);
+		setLastElementPointer(newElementPointer);
+	}
+
 	void push_back(const Type& value)
 	{
 		if (checkIfEmptyAndPushElement(value))
@@ -207,8 +219,8 @@ public:
 			return;
 		}
 
-		_lastElementPointer->NextElementPointer = createElementPtrAndChangeSize(value);
-		_lastElementPointer = _lastElementPointer->NextElementPointer;
+		shared_ptr<ListElement<Type, Allocator>> newElementPointer = createElementPtrAndChangeSize(value);
+		setLastElementPointer(newElementPointer);
 	}
 
 	void pop_back(void)
@@ -652,26 +664,33 @@ private:
 
 	shared_ptr<ListElement<Type, Allocator>> createElementPtrAndChangeSize(const Type& value)
 	{
-		shared_ptr <ListElement<Type, Allocator>> result = shared_ptr <ListElement<Type, Allocator>>(new ListElement<Type, Allocator>(value, _allocator));
-		_numberOfElements++;
-
-		return result;
+		return createPtrForListElementAndChangeSize(new ListElement<Type, Allocator>(value, _allocator));
 	}
 
 	template <class... Args>
 	shared_ptr<ListElement<Type, Allocator>> createElementPtrAndChangeSize(Args&&... args)
 	{
-		shared_ptr <ListElement<Type, Allocator>> result 
-			= shared_ptr <ListElement<Type, Allocator>>(new ListElement<Type, Allocator>(_allocator, args...));
+		return createPtrForListElementAndChangeSize(new ListElement<Type, Allocator>(_allocator, args...));
+	}
+
+	inline shared_ptr<ListElement<Type, Allocator>> createPtrForListElementAndChangeSize(ListElement<Type, Allocator>* listElementPointer)
+	{
+		shared_ptr <ListElement<Type, Allocator>> result = shared_ptr <ListElement<Type, Allocator>>(listElementPointer);
 		_numberOfElements++;
 
 		return result;
 	}
 
-	void setFirstElementPointer(shared_ptr<ListElement<Type, Allocator>>& elementPointer)
+	inline void setFirstElementPointer(shared_ptr<ListElement<Type, Allocator>>& elementPointer)
 	{
 		elementPointer->NextElementPointer = _firstElementPointer;
 		_firstElementPointer = elementPointer;
+	}
+
+	inline void setLastElementPointer(shared_ptr<ListElement<Type, Allocator>>& elementPointer)
+	{
+		_lastElementPointer->NextElementPointer = elementPointer;
+		_lastElementPointer = elementPointer;
 	}
 };
 

@@ -30,6 +30,7 @@ void ListTester::Exeute(void)
 	TestSort();
 	TestMerge();
 	TestEmplaceFront();
+	TestEmplaceBack();
 }
 
 List<int> ListTester::PrepareRandonIntList(int size)
@@ -282,7 +283,7 @@ void ListTester::TestListIterator(void)
 	cout << "Checking const iterators equality (true, 1): " << (constTestingIterator == constTestingIterator2) << endl << endl;
 	
 	
-	shared_ptr<ListElement<int, allocator<int>>> pointer(new ListElement<int, allocator<int>>(777, allocator<int>()));
+	shared_ptr<ListElement<int, allocator<int>>> pointer(new ListElement<int, allocator<int>>(allocator<int>(), 777));
 	List<int>::const_iterator constTestingIterator3(pointer);
 	cout << "777: " << (*constTestingIterator3) << endl << endl;
 
@@ -759,13 +760,32 @@ void ListTester::TestEmplaceFront(void)
 	testingList.emplace_front(14, 28, 'j');
 
 	List<TestObjectMoreComplex>::iterator iteratorForPrint = testingList.begin();
-	cout << "Emplace_front; size (2): " << testingList.size() << endl << endl;
+	cout << "emplace_front; size (2): " << testingList.size() << endl << endl;
 	
 	cout << "14, 28, j: \n";
 	iteratorForPrint->Print();
 	
 	iteratorForPrint++;
 	cout << "1, 2, Z: \n";
+	iteratorForPrint->Print();
+
+	cout << "----------------\n\n";
+}
+
+void ListTester::TestEmplaceBack(void)
+{
+	List<TestObjectMoreComplex> testingList;
+	testingList.emplace_back(11, 33, 'h');
+	testingList.emplace_back(77, 154, 'f');
+
+	List<TestObjectMoreComplex>::iterator iteratorForPrint = testingList.begin();
+	cout << "emplace_back; size (2): " << testingList.size() << endl << endl;
+
+	cout << "11, 33, h: \n";
+	iteratorForPrint->Print();
+
+	iteratorForPrint++;
+	cout << "77, 154, f: \n";
 	iteratorForPrint->Print();
 
 	cout << "----------------\n\n";
