@@ -83,9 +83,10 @@ public:
 			return;
 		}
 
-		createNonCyclicList();
-		List<Type, Allocator>::assign(firstIterator, lastIterator);
+		if (size() > 0)
+			createNonCyclicList();
 
+		List<Type, Allocator>::assign(firstIterator, lastIterator);
 		createCyclicList();
 	}
 
@@ -97,9 +98,10 @@ public:
 			return;
 		}
 
-		createNonCyclicList();
+		if (size() > 0)
+			createNonCyclicList();
+
 		List<Type, Allocator>::assign(numberOfElements, value);
-		
 		createCyclicList();
 	}
 

@@ -5,8 +5,6 @@ void CyclicListTester::Exeute(void)
 	srand((unsigned int)time(NULL));
 
 	TestConstructors();
-	
-	return;
 	TestPushBack();
 	TestPushFront();
 	TestSize();
