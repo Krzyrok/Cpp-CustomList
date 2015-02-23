@@ -556,7 +556,7 @@ protected:
 	Allocator _allocator;
 	size_type _numberOfElements;
 
-	shared_ptr<ListElement<Type, Allocator>> findElementPointerBefore(iterator positionIterator)
+	shared_ptr<ListElement<Type, Allocator>> findElementPointerBefore(const_iterator positionIterator)
 	{
 		shared_ptr<ListElement<Type, Allocator>> currentElement = _firstElementPointer;
 		while (currentElement->NextElementPointer->ValuePointer.get() != (positionIterator.operator->()))
