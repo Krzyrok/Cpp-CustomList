@@ -549,13 +549,15 @@ public:
 		return _allocator;
 	}
 
-private:
+
+protected:
 	shared_ptr<ListElement<Type, Allocator>> _firstElementPointer;
 	shared_ptr<ListElement<Type, Allocator>> _lastElementPointer;
 	Allocator _allocator;
 	size_type _numberOfElements;
 
 
+private:
 	void insertFromOtherList(iterator positionIterator, const List& listWithInsertingValues)
 	{
 		_numberOfElements += listWithInsertingValues.size();
