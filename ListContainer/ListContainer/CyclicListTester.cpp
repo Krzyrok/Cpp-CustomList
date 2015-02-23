@@ -130,6 +130,24 @@ void CyclicListTester::TestConstructors(void)
 	PrintList(testingList);
 	cout << endl;
 
+	testingList = PrepareTestList();
+	testingIterator = testingList.begin();
+	++++testingIterator;
+	testingIterator = testingList.end(testingIterator);
+	cout << "Value pointed by iterator (3): " << *testingIterator << endl;
+	cout << "CyclicList: 3-6, 1-2; size (6): " << testingList.size() << endl;
+	PrintList(testingList);
+	cout << endl;
+
+	testingList = PrepareTestList();
+	testingIterator2 = testingList.begin();
+	++testingIterator2;
+	testingIterator2 = testingList.end(testingIterator2);
+	cout << "Value pointed by const_iterator (2): " << *testingIterator2 << endl;
+	cout << "CyclicList: 2-6, 1; size (6): " << testingList.size() << endl;
+	PrintList(testingList);
+	cout << endl;
+
 	cout << "\n----------------\n\n";
 }
 

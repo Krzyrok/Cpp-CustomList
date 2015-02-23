@@ -52,19 +52,15 @@ public:
 		return cbegin();
 	}
 
-	iterator begin(iterator startPositionIterator)
+	iterator begin(iterator positionIterator)
 	{
-		shared_ptr<ListElement<Type, Allocator>> elementPointerBefore = findElementPointerBefore(startPositionIterator);
-		_lastElementPointer = elementPointerBefore;
-		_firstElementPointer = elementPointerBefore->NextElementPointer;
+		setFirstElementPointerAndMoveLast(positionIterator);
 		return begin();
 	}
 
-	const_iterator begin(const_iterator startPositionIterator)
+	const_iterator begin(const_iterator positionIterator)
 	{
-		shared_ptr<ListElement<Type, Allocator>> elementPointerBefore = findElementPointerBefore(startPositionIterator);
-		_lastElementPointer = elementPointerBefore;
-		_firstElementPointer = elementPointerBefore->NextElementPointer;
+		setFirstElementPointerAndMoveLast(positionIterator);
 		return cbegin();
 	}
 
@@ -75,6 +71,18 @@ public:
 
 	const_iterator end(void) const
 	{
+		return cend();
+	}
+
+	iterator end(iterator positionIterator)
+	{
+		setFirstElementPointerAndMoveLast(positionIterator);
+		return end();
+	}
+
+	const_iterator end(const_iterator positionIterator)
+	{
+		setFirstElementPointerAndMoveLast(positionIterator);
 		return cend();
 	}
 
@@ -149,6 +157,13 @@ private:
 	inline void createCyclicList(void)
 	{
 		_lastElementPointer->NextElementPointer = _firstElementPointer;
+	}
+
+	void setFirstElementPointerAndMoveLast(const_iterator positionIterator)
+	{
+		shared_ptr<ListElement<Type, Allocator>> elementPointerBefore = findElementPointerBefore(positionIterator);
+		_lastElementPointer = elementPointerBefore;
+		_firstElementPointer = elementPointerBefore->NextElementPointer;
 	}
 };
 
