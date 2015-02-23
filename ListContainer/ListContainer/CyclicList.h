@@ -42,6 +42,35 @@ public:
 	// Methods
 
 	// Iterators
+	iterator begin(void)
+	{
+		return iterator(_firstElementPointer);
+	}
+
+	const_iterator begin(void) const
+	{
+		return cbegin();
+	}
+
+	iterator end(void)
+	{
+		return iterator(_firstElementPointer, true);
+	}
+
+	const_iterator end(void) const
+	{
+		return cend();
+	}
+
+	const_iterator cbegin(void) const
+	{
+		return const_iterator(_firstElementPointer);
+	}
+
+	const_iterator cend(void) const
+	{
+		return const_iterator(_firstElementPointer, true);
+	}
 
 
 	// Modifiers
