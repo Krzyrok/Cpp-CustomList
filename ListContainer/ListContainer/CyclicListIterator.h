@@ -25,7 +25,7 @@ public:
 		: CyclicListIterator(originalIterator._pointer, isMadeByEndMethod) {}
 
 
-	CyclicListIterator operator++()
+	CyclicListIterator& operator++()
 	{
 		_pointer = _pointer->NextElementPointer;
 		_isFirstIteration = false;
@@ -85,7 +85,7 @@ public:
 		: ConstCyclicListIterator(originalIterator._pointer, isMadeByEndMethod) {}
 
 
-	ConstCyclicListIterator operator++()
+	ConstCyclicListIterator& operator++()
 	{
 		_pointer = _pointer->NextElementPointer;
 		_isFirstIteration = false;

@@ -52,6 +52,22 @@ public:
 		return cbegin();
 	}
 
+	iterator begin(iterator startPositionIterator)
+	{
+		shared_ptr<ListElement<Type, Allocator>> elementPointerBefore = findElementPointerBefore(startPositionIterator);
+		_lastElementPointer = elementPointerBefore;
+		_firstElementPointer = elementPointerBefore->NextElementPointer;
+		return begin();
+	}
+
+	const_iterator begin(const_iterator startPositionIterator) const
+	{
+		shared_ptr<ListElement<Type, Allocator>> elementPointerBefore = findElementPointerBefore(startPositionIterator);
+		_lastElementPointer = elementPointerBefore;
+		_firstElementPointer = elementPointerBefore->NextElementPointer;
+		return cbegin();
+	}
+
 	iterator end(void)
 	{
 		return iterator(_firstElementPointer, true);

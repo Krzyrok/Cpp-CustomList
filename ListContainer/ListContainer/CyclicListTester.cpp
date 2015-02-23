@@ -108,6 +108,16 @@ void CyclicListTester::TestConstructors(void)
 	PrintList(listToCopy);
 	cout << "CyclicList: 13, 1772; size (2): " << copiedList.size() << endl;
 	PrintList(copiedList);
+	cout << endl;
+
+	CyclicList<int> testingList = PrepareTestList();
+	CyclicList<int>::iterator testingIterator = testingList.begin();
+	++++++++testingIterator;
+	testingIterator = testingList.begin(testingIterator);
+	cout << "Value pointed by iterator (6): " << *testingIterator << endl;
+	cout << "CyclicList: 6, 1-5; size (6): " << testingList.size() << endl;
+	PrintList(testingList);
+	cout << endl;
 
 	cout << "\n----------------\n\n";
 }
