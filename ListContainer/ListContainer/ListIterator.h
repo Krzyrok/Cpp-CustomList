@@ -24,7 +24,7 @@ public:
 	ListIterator(const ListIterator &originalIterator)
 		: _pointer(originalIterator._pointer) {}
 
-	ListIterator operator++() 
+	ListIterator& operator++() 
 	{  
 		_pointer = _pointer->NextElementPointer;
 		return *this;
@@ -90,7 +90,7 @@ public:
 	ConstListIterator(const ListIterator<Type, Allocator> &originalIterator)
 		: _pointer(originalIterator._pointer) {}
 
-	ConstListIterator operator++()
+	ConstListIterator& operator++()
 	{
 		_pointer = _pointer->NextElementPointer;
 		return *this;
