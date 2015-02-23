@@ -460,6 +460,7 @@ public:
 		else if (!otherList.empty())
 		{
 			resultList.insert(resultList.end(), otherList.begin(), otherList.end());
+			otherList.clear();
 		}
 
 		assign(resultList.begin(), resultList.end());
@@ -566,7 +567,7 @@ protected:
 
 		return currentElement;
 	}
-
+	
 
 private:
 	void insertFromOtherList(iterator positionIterator, const List& listWithInsertingValues)
