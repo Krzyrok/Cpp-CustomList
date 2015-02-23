@@ -9,7 +9,7 @@ template<class Type, class Allocator>
 class ListElement
 {
 public:
-	ListElement(const Type& insertingValue, Allocator& passedAllocator)
+	ListElement(Allocator& passedAllocator, const Type& insertingValue)
 	{
 		NextElementPointer = nullptr;
 		

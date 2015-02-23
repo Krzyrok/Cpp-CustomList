@@ -664,7 +664,7 @@ private:
 
 	shared_ptr<ListElement<Type, Allocator>> createElementPtrAndChangeSize(const Type& value)
 	{
-		return createPtrForListElementAndChangeSize(new ListElement<Type, Allocator>(value, _allocator));
+		return createPtrForListElementAndChangeSize(new ListElement<Type, Allocator>(_allocator, value));
 	}
 
 	template <class... Args>

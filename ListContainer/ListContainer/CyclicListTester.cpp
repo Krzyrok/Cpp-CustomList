@@ -270,7 +270,7 @@ void CyclicListTester::TestListIterator(void)
 	cout << "Checking const iterators equality (true, 1): " << (constTestingIterator == constTestingIterator2) << endl << endl;
 
 
-	shared_ptr<ListElement<int, allocator<int>>> pointer(new ListElement<int, allocator<int>>(777, allocator<int>()));
+	shared_ptr<ListElement<int, allocator<int>>> pointer(new ListElement<int, allocator<int>>(allocator<int>(), 777));
 	CyclicList<int>::const_iterator constTestingIterator3(pointer);
 	cout << "777: " << (*constTestingIterator3) << endl << endl;
 
