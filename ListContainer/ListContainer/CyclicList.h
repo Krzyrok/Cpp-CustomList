@@ -40,6 +40,67 @@ public:
 	// Methods
 
 	// Iterators
+
+
+	// Modifiers
+	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
+	void assign(InputIterator firstIterator, InputIterator lastIterator)
+	{
+		if (firstIterator == lastIterator)
+		{
+			clear();
+			return;
+		}
+
+		createNonCyclicList();
+		List<Type, Allocator>::assign(firstIterator, lastIterator);
+
+		createCyclicList();
+	}
+
+	void assign(size_type numberOfElements, const Type& value)
+	{
+		if (numberOfElements < 1)
+		{
+			clear();
+			return;
+		}
+
+		createNonCyclicList();
+		List<Type, Allocator>::assign(numberOfElements, value);
+		
+		createCyclicList();
+	}
+
+	void push_front(const Type& value)
+	{
+		//if (checkIfEmptyAndPushElement(value))
+		//{
+		//	return;
+		//}
+
+		//shared_ptr<ListElement<Type, Allocator>> newFirstElement = createElementPtrAndChangeSize(value);
+		//newFirstElement->NextElementPointer = _firstElementPointer;
+		//_firstElementPointer = newFirstElement;
+	}
+
+	void clear(void)
+	{
+		createNonCyclicList();
+		List<Type, Allocator>::clear();
+	}
+
+
+private:
+	inline void createNonCyclicList(void)
+	{
+		_lastElementPointer->NextElementPointer.reset();
+	}
+
+	inline void createCyclicList(void)
+	{
+		_lastElementPointer->NextElementPointer = _firstElementPointer;
+	}
 };
 
 #endif
