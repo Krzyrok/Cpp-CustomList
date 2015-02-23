@@ -111,6 +111,21 @@ void CyclicListTester::TestConstructors(void)
 	PrintList(copiedList);
 	cout << endl;
 
+	listToCopy.clear();
+	copiedList.clear();
+	listToCopy.push_front(1772);
+	listToCopy.push_front(13);
+	copiedList = listToCopy;
+	cout << "List: 13, 1772; size (2): " << copiedList.size() << endl;
+	PrintList(copiedList);
+	cout << endl;
+
+	listToCopy.clear();
+	cout << "Should be nothing; size (0):" << listToCopy.size() << endl;
+	PrintList(listToCopy);
+	cout << "List: 13, 1772; size (2): " << copiedList.size() << endl;
+	PrintList(copiedList);
+
 	CyclicList<int> testingList = PrepareTestList();
 	CyclicList<int>::iterator testingIterator = testingList.begin();
 	++++++++++testingIterator;
