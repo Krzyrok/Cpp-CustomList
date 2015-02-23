@@ -29,6 +29,7 @@ public:
 	explicit List(const Allocator& passedAlloc = Allocator())
 	{
 		_firstElementPointer = nullptr;
+		_lastElementPointer = nullptr;
 		_allocator = passedAlloc;
 		_numberOfElements = 0;
 	}
