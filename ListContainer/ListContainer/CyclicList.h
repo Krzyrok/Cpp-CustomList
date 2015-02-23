@@ -20,18 +20,20 @@ public:
 	}
 
 	explicit CyclicList(size_type numberOfElements, const Type& value = Type(), const Allocator& passedAlloc = Allocator())
-		: List(numberOfElements, value, passedAlloc)
+		: CyclicList(passedAlloc)
 	{
+		assign(numberOfElements, value);
 	}
 
 	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
 	CyclicList(InputIterator firstIterator, InputIterator lastIterator, const Allocator& passedAlloc = Allocator())
-		: List(firstIterator, lastIterator, passedAlloc)
+		: CyclicList(passedAlloc)
 	{
+		assign(firstIterator, lastIterator);
 	}
 
 	CyclicList(const CyclicList& listToCopy)
-		: List(listToCopy.begin(), listToCopy.end())
+		: CyclicList(listToCopy.begin(), listToCopy.end())
 	{
 	}
 
@@ -74,6 +76,7 @@ public:
 
 	void push_front(const Type& value)
 	{
+
 		//if (checkIfEmptyAndPushElement(value))
 		//{
 		//	return;
