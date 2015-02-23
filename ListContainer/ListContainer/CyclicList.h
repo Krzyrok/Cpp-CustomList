@@ -60,7 +60,7 @@ public:
 		return begin();
 	}
 
-	const_iterator begin(const_iterator startPositionIterator) const
+	const_iterator begin(const_iterator startPositionIterator)
 	{
 		shared_ptr<ListElement<Type, Allocator>> elementPointerBefore = findElementPointerBefore(startPositionIterator);
 		_lastElementPointer = elementPointerBefore;

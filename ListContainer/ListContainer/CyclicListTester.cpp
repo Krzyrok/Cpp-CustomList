@@ -5,6 +5,7 @@ void CyclicListTester::Exeute(void)
 	srand((unsigned int)time(NULL));
 
 	TestConstructors();
+	return;
 	TestPushBack();
 	TestPushFront();
 	TestSize();
@@ -112,10 +113,20 @@ void CyclicListTester::TestConstructors(void)
 
 	CyclicList<int> testingList = PrepareTestList();
 	CyclicList<int>::iterator testingIterator = testingList.begin();
-	++++++++testingIterator;
+	++++++++++testingIterator;
 	testingIterator = testingList.begin(testingIterator);
 	cout << "Value pointed by iterator (6): " << *testingIterator << endl;
 	cout << "CyclicList: 6, 1-5; size (6): " << testingList.size() << endl;
+	PrintList(testingList);
+	cout << endl;
+
+	testingList.clear();
+	testingList.push_front(5);
+	CyclicList<int>::const_iterator testingIterator2 = testingList.begin();
+	++testingIterator;
+	testingIterator2 = testingList.begin(testingIterator2);
+	cout << "Value pointed by const_iterator (5): " << *testingIterator2 << endl;
+	cout << "CyclicList: 5; size (1): " << testingList.size() << endl;
 	PrintList(testingList);
 	cout << endl;
 
