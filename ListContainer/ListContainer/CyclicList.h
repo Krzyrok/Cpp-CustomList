@@ -76,15 +76,14 @@ public:
 
 	void push_front(const Type& value)
 	{
+		List<Type, Allocator>::push_front(value);
+		createCyclicList();
+	}
 
-		//if (checkIfEmptyAndPushElement(value))
-		//{
-		//	return;
-		//}
-
-		//shared_ptr<ListElement<Type, Allocator>> newFirstElement = createElementPtrAndChangeSize(value);
-		//newFirstElement->NextElementPointer = _firstElementPointer;
-		//_firstElementPointer = newFirstElement;
+	void push_back(const Type& value)
+	{
+		List<Type, Allocator>::push_back(value);
+		createCyclicList();
 	}
 
 	void clear(void)
