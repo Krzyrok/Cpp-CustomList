@@ -238,6 +238,27 @@ public:
 		_numberOfElements--;
 	}
 
+	template <class... Args>
+	iterator emplace(const_iterator positionIterator, Args&&... args)
+	{
+		if (positionIterator == cbegin())
+		{
+			emplace_front(args...);
+			return begin();
+		}
+		else if (positionIterator == end())
+		{
+			emplace_back(args...);
+			return iterator(_lastElementPointer);
+		}
+
+		shared_ptr<ListElement<Type, Allocator>> newElementPointer = createElementPtrAndChangeSize(args...);
+		shared_ptr<ListElement<Type, Allocator>>& currentElementPointer = findElementPointer(positionIterator);
+		insertNewElementPtr(currentElementPointer, newElementPointer);
+
+		return iterator(currentElementPointer);
+	}
+
 	iterator insert(iterator positionIterator, const Type& value)
 	{
 		if (positionIterator == begin())
@@ -251,10 +272,9 @@ public:
 			return iterator(_lastElementPointer);
 		}
 
-		shared_ptr<ListElement<Type, Allocator>>& currentElementPointer = findElementPointer(positionIterator);
 		shared_ptr<ListElement<Type, Allocator>> newElementPointer = createElementPtrAndChangeSize(value);
-		newElementPointer->NextElementPointer = currentElementPointer;
-		currentElementPointer = newElementPointer;
+		shared_ptr<ListElement<Type, Allocator>>& currentElementPointer = findElementPointer(positionIterator);
+		insertNewElementPtr(currentElementPointer, newElementPointer);
 
 		return iterator(currentElementPointer);
 	}
@@ -653,7 +673,7 @@ private:
 		return findElementPointerBefore(iterator(nextElementPointer));
 	}
 
-	shared_ptr<ListElement<Type, Allocator>>& findElementPointer(iterator positionIterator)
+	shared_ptr<ListElement<Type, Allocator>>& findElementPointer(const_iterator positionIterator)
 	{
 		if (_firstElementPointer->ValuePointer.get() == positionIterator.operator->())
 			return _firstElementPointer;
@@ -664,16 +684,16 @@ private:
 
 	shared_ptr<ListElement<Type, Allocator>> createElementPtrAndChangeSize(const Type& value)
 	{
-		return createPtrForListElementAndChangeSize(new ListElement<Type, Allocator>(_allocator, value));
+		return createPtrForListElementPtrAndChangeSize(new ListElement<Type, Allocator>(_allocator, value));
 	}
 
 	template <class... Args>
 	shared_ptr<ListElement<Type, Allocator>> createElementPtrAndChangeSize(Args&&... args)
 	{
-		return createPtrForListElementAndChangeSize(new ListElement<Type, Allocator>(_allocator, args...));
+		return createPtrForListElementPtrAndChangeSize(new ListElement<Type, Allocator>(_allocator, args...));
 	}
 
-	inline shared_ptr<ListElement<Type, Allocator>> createPtrForListElementAndChangeSize(ListElement<Type, Allocator>* listElementPointer)
+	inline shared_ptr<ListElement<Type, Allocator>> createPtrForListElementPtrAndChangeSize(ListElement<Type, Allocator>* listElementPointer)
 	{
 		shared_ptr <ListElement<Type, Allocator>> result = shared_ptr <ListElement<Type, Allocator>>(listElementPointer);
 		_numberOfElements++;
@@ -691,6 +711,13 @@ private:
 	{
 		_lastElementPointer->NextElementPointer = elementPointer;
 		_lastElementPointer = elementPointer;
+	}
+
+	inline void insertNewElementPtr(shared_ptr<ListElement<Type, Allocator>>& elementPointerBeforeShouldInsertNewElement,
+		shared_ptr<ListElement<Type, Allocator>>& newElementPointer)
+	{
+		newElementPointer->NextElementPointer = elementPointerBeforeShouldInsertNewElement;
+		elementPointerBeforeShouldInsertNewElement = newElementPointer;
 	}
 };
 

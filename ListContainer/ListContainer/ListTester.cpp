@@ -31,6 +31,7 @@ void ListTester::Exeute(void)
 	TestMerge();
 	TestEmplaceFront();
 	TestEmplaceBack();
+	TestEmplace();
 }
 
 List<int> ListTester::PrepareRandonIntList(int size)
@@ -786,6 +787,33 @@ void ListTester::TestEmplaceBack(void)
 
 	iteratorForPrint++;
 	cout << "77, 154, f: \n";
+	iteratorForPrint->Print();
+
+	cout << "----------------\n\n";
+}
+
+void ListTester::TestEmplace(void)
+{
+	List<TestObjectMoreComplex> testingList;
+	List<TestObjectMoreComplex>::const_iterator iteratorForList = testingList.cbegin();
+	iteratorForList = testingList.emplace(iteratorForList, 5, 6, 'c');
+	iteratorForList = testingList.emplace(iteratorForList, 0, 1, 'a');
+	iteratorForList++;
+	testingList.emplace(iteratorForList, 3, 4, 'b');
+
+
+	List<TestObjectMoreComplex>::iterator iteratorForPrint = testingList.begin();
+	cout << "emplace; size (3): " << testingList.size() << endl << endl;
+
+	cout << "0, 1, a: \n";
+	iteratorForPrint->Print();
+
+	iteratorForPrint++;
+	cout << "3, 4, b: \n";
+	iteratorForPrint->Print();
+
+	iteratorForPrint++;
+	cout << "5, 6, c: \n";
 	iteratorForPrint->Print();
 
 	cout << "----------------\n\n";
