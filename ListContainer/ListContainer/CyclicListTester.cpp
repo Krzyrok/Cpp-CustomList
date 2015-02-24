@@ -498,7 +498,6 @@ void CyclicListTester::TestInsert(void)
 	cout << "Size (9): " << testingList.size() << endl;
 	cout << "CyclicList (insert on the back): 1-6, 12, 17, 22: \n";
 	PrintList(testingList);
-	cout << endl;
 
 	cout << "\n----------------\n\n";
 }

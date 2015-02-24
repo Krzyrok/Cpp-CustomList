@@ -96,7 +96,7 @@ public:
 
 	iterator end(void)
 	{
-		return iterator(_firstElementPointer, true, true);
+		return iterator(_firstElementPointer, false, true);
 	}
 
 	const_iterator end(void) const
@@ -123,7 +123,7 @@ public:
 
 	const_iterator cend(void) const
 	{
-		return const_iterator(_firstElementPointer, true, true);
+		return const_iterator(_firstElementPointer, false, true);
 	}
 
 
@@ -223,21 +223,24 @@ public:
 	template <class... Args>
 	iterator emplace(const_iterator positionIterator, Args&&... args)
 	{
-		iterator result = List<Type, Allocator>::emplace(positionIterator, args...);
+		bool isInsertingOnBegin = changeIteratorIfEndAndCheckIfBegin(positionIterator);
+		iterator result(List<Type, Allocator>::emplace(positionIterator, args...), isInsertingOnBegin);
 		createCyclicList();
 		return result;
 	}
 
 	iterator insert(const_iterator positionIterator, const Type& value)
 	{
-		iterator result = List<Type, Allocator>::insert(positionIterator, value);
+		bool isInsertingOnBegin = changeIteratorIfEndAndCheckIfBegin(positionIterator);
+		iterator result(List<Type, Allocator>::insert(positionIterator, value), isInsertingOnBegin);
 		createCyclicList();
 		return result;
 	}
 
 	iterator insert(const_iterator positionIterator, size_type numberOfValues, const Type& value)
 	{
-		iterator result = List<Type, Allocator>::insert(positionIterator, numberOfValues, value);
+		bool isInsertingOnBegin = changeIteratorIfEndAndCheckIfBegin(positionIterator);
+		iterator result(List<Type, Allocator>::insert(positionIterator, numberOfValues, value), isInsertingOnBegin);
 		createCyclicList();
 		return result;
 	}
@@ -245,7 +248,8 @@ public:
 	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
 	iterator insert(const_iterator positionIterator, InputIterator firstIterator, InputIterator lastIterator)
 	{
-		iterator result = List<Type, Allocator>::insert(positionIterator, firstIterator, lastIterator);
+		bool isInsertingOnBegin = changeIteratorIfEndAndCheckIfBegin(positionIterator);
+		iterator result(List<Type, Allocator>::insert(positionIterator, firstIterator, lastIterator), isInsertingOnBegin);
 		createCyclicList();
 		return result;
 	}
@@ -313,6 +317,17 @@ private:
 			result = true;
 
 		return result;
+	}
+
+	inline bool changeIteratorIfEndAndCheckIfBegin(const_iterator& positionIterator)
+	{
+		bool isInsertingOnBegin = checkIfBegin(positionIterator);
+		if (positionIterator == cend())
+		{
+			positionIterator = const_iterator();
+		}
+
+		return isInsertingOnBegin;
 	}
 
 	void setFirstElementPointerAndMoveLast(const_iterator positionIterator)
