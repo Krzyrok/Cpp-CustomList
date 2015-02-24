@@ -13,7 +13,6 @@ void CyclicListTester::Exeute(void)
 	TestBeginEndIterator();
 	TestEmpty();
 	TestMaxSize();
-	return;
 	TestFront();
 	TestBack();
 	TestAssign();
@@ -21,6 +20,7 @@ void CyclicListTester::Exeute(void)
 	TestPopBack();
 	TestInsert();
 	TestErase();
+	return;
 	TestSwap();
 	TestResize();
 	TestSplice();
