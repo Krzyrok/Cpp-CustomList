@@ -389,6 +389,37 @@ public:
 		}
 	}
 
+	void unique(void)
+	{
+		unique(BinaryIsEqual<Type>());
+	}
+
+	template <class BinaryPredicate>
+	void unique(BinaryPredicate binaryPredicate)
+	{
+		if (size() < 2)
+			return;
+
+		for (iterator firstIterator = begin(), secondIterator = (++begin()); secondIterator != end();)
+		{
+			if (binaryPredicate(*secondIterator, *firstIterator))
+			{
+				firstIterator = erase(firstIterator);
+				secondIterator = firstIterator;
+				secondIterator++;
+				continue;
+			}
+			firstIterator++;
+			secondIterator++;
+		}
+	}
+
+	void reverse(void)
+	{
+		List<Type, Allocator>::reverse();
+		createCyclicList();
+	}
+
 
 private:
 	inline void createNonCyclicList(void)
