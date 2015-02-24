@@ -661,6 +661,9 @@ public:
 					nextElementPointer = nextElementPointer->NextElementPointer;
 				}
 			}
+			if (n == size())
+				_lastElementPointer = currentElementPointer;
+
 			n--;
 		}
 		while (n > 1);

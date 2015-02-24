@@ -419,6 +419,32 @@ public:
 		}
 	}
 
+	void merge(List& otherList)
+	{
+		merge(otherList, FirstSmallerThanSecond<Type>());
+	}
+
+	void merge(List&& otherList)
+	{
+		merge(otherList);
+	}
+
+	template <class Compare>
+	void merge(List& otherList, Compare compare)
+	{
+		createNonCyclicList();
+		List<Type, Allocator>::merge(otherList, compare);
+		if (empty())
+			return;
+		createCyclicList();
+	}
+
+	template <class Compare>
+	void merge(List&& otherList, Compare compare)
+	{
+		merge(otherList, compare);
+	}
+
 	void sort(void)
 	{
 		sort(FirstSmallerThanSecond<Type>());
