@@ -289,7 +289,7 @@ public:
 			emplace_front(args...);
 			return begin();
 		}
-		else if (positionIterator == end())
+		else if (positionIterator == cend())
 		{
 			emplace_back(args...);
 			return iterator(_lastElementPointer);
@@ -304,12 +304,12 @@ public:
 
 	iterator insert(const_iterator positionIterator, const Type& value)
 	{
-		if (positionIterator == begin())
+		if (positionIterator == cbegin())
 		{
 			push_front(value);
 			return begin();
 		}
-		else if (positionIterator == end())
+		else if (positionIterator == cend())
 		{
 			push_back(value);
 			return iterator(_lastElementPointer);
