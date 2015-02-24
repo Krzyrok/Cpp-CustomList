@@ -414,7 +414,7 @@ public:
 		otherList._numberOfElements = tmpNumberOfElements;
 	}
 
-	void resize(size_type newSize, Type newValue = Type())
+	void resize(size_type newSize, const Type newValue = Type())
 	{
 		if (newSize < 0)
 			return;
