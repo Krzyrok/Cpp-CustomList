@@ -23,13 +23,12 @@ void CyclicListTester::Exeute(void)
 	TestSwap();
 	TestResize();
 	TestSplice();
-	//return;
 	TestRemoveAndRemoveIf();
 	TestUnique();
 	TestReverse();
 	TestSort();
-
 	TestMerge();
+	return;
 	TestEmplaceFront();
 	TestEmplaceBack();
 	TestEmplace();
