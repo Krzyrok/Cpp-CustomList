@@ -81,7 +81,7 @@ public:
 
 	List& operator=(initializer_list<Type> listWithObjects)
 	{
-		assign(listWithObjects.begin(), listWithObjects.end());
+		assign(listWithObjects);
 		return *this;
 	}
 
@@ -195,6 +195,11 @@ public:
 		}
 
 		_lastElementPointer = currentElement;
+	}
+
+	void assign(initializer_list<value_type> listWithValues)
+	{
+		assign(listWithValues.begin(), listWithValues.end());
 	}
 
 	template <class... Args>
@@ -370,7 +375,7 @@ public:
 
 	void swap(List& otherList)
 	{
-		shared_ptr <ListElement<Type, Allocator>> tmpPointer = _firstElementPointer;
+		shared_ptr <ListElement<Type, Allocator>> tmpPointer = _firstElementPointer;a
 		_firstElementPointer = otherList._firstElementPointer;
 		otherList._firstElementPointer = tmpPointer;
 

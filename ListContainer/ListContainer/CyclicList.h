@@ -66,7 +66,7 @@ public:
 
 	CyclicList& operator=(initializer_list<Type> listWithObjects)
 	{
-		assign(listWithObjects.begin(), listWithObjects.end());
+		assign(listWithObjects);
 		return *this;
 	}
 
@@ -157,6 +157,11 @@ public:
 
 		List<Type, Allocator>::assign(numberOfElements, value);
 		createCyclicList();
+	}
+
+	void assign(initializer_list<value_type> listWithValues)
+	{
+		assign(listWithValues.begin(), listWithValues.end());
 	}
 
 	void push_front(const Type& value)
