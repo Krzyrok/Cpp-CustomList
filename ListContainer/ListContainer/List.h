@@ -523,12 +523,14 @@ public:
 		if (empty())
 			return;
 
-		for (iterator listIterator = begin(); listIterator != end(); listIterator++)
+		for (iterator listIterator = begin(); listIterator != end();)
 		{
 			if (predicate(*listIterator))
 			{
-				erase(listIterator);
+				listIterator = erase(listIterator);
+				continue;
 			}
+			listIterator++;
 		}
 	}
 
@@ -543,12 +545,17 @@ public:
 		if (size() < 2)
 			return;
 
-		for (iterator firstIterator = begin(), secondIterator = (++begin()); secondIterator != end(); firstIterator++, secondIterator++)
+		for (iterator firstIterator = begin(), secondIterator = (++begin()); secondIterator != end(); )
 		{
 			if (binaryPredicate(*secondIterator, *firstIterator))
 			{
-				erase(firstIterator);
+				firstIterator = erase(firstIterator);
+				secondIterator = firstIterator;
+				secondIterator++;
+				continue;
 			}
+			firstIterator++;
+			secondIterator++;
 		}
 	}
 
