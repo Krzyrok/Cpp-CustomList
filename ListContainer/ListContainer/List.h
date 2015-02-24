@@ -304,7 +304,7 @@ public:
 		return iterator(currentElementPointer);
 	}
 
-	iterator insert(iterator positionIterator, const Type& value)
+	iterator insert(const_iterator positionIterator, const Type& value)
 	{
 		if (positionIterator == begin())
 		{
@@ -324,7 +324,7 @@ public:
 		return iterator(currentElementPointer);
 	}
 
-	void insert(iterator positionIterator, size_type numberOfValues, const Type& value)
+	void insert(const_iterator positionIterator, size_type numberOfValues, const Type& value)
 	{
 		if (numberOfValues < 1)
 			return;
@@ -334,13 +334,23 @@ public:
 	}
 
 	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
-	void insert(iterator positionIterator, InputIterator firstIterator, InputIterator lastIterator)
+	void insert(const_iterator positionIterator, InputIterator firstIterator, InputIterator lastIterator)
 	{
 		if (firstIterator == lastIterator)
 			return;
 
 		List<Type, Allocator> listWithInsertingValues(firstIterator, lastIterator, _allocator);
 		insertFromOtherList(positionIterator, listWithInsertingValues);
+	}
+
+	void insert(const_iterator positionIterator, Type&& value)
+	{
+		insert(positionIterator, value);
+	}
+
+	void insert(const_iterator positionIterator, initializer_list<Type> listWithValues)
+	{
+		insert(positionIterator, listWithValues.begin(), listWithValues.end());
 	}
 
 	iterator erase(iterator positionIterator)
