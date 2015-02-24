@@ -519,10 +519,10 @@ void ListTester::TestErase(void)
 	List<int>& testingList = PrepareTestList();
 
 	List<int>::iterator listIterator = testingList.begin();
-	testingList.erase(listIterator);
+	listIterator = testingList.erase(listIterator);
 	List<int>::iterator resultIterator = testingList.erase(++++listIterator);
-	testingList.erase(resultIterator);
-	cout << "List after erase: 2, 5, 6; size (3): " << testingList.size() << endl;
+	resultIterator = testingList.erase(resultIterator);
+	cout << "List after erase: 2, 3, 6; size (3): " << testingList.size() << endl;
 	PrintList(testingList);
 	cout << endl;
 

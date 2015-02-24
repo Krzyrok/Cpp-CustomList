@@ -507,10 +507,10 @@ void CyclicListTester::TestErase(void)
 	CyclicList<int>& testingList = PrepareTestList();
 
 	CyclicList<int>::iterator listIterator = testingList.begin();
-	testingList.erase(listIterator);
+	listIterator = testingList.erase(listIterator);
 	CyclicList<int>::iterator resultIterator = testingList.erase(++++listIterator);
-	testingList.erase(resultIterator);
-	cout << "CyclicList after erase: 2, 5, 6; size (3): " << testingList.size() << endl;
+	resultIterator = testingList.erase(resultIterator);
+	cout << "CyclicList after erase: 2, 3, 6; size (3): " << testingList.size() << endl;
 	PrintList(testingList);
 	cout << endl;
 

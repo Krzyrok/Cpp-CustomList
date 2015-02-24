@@ -43,9 +43,10 @@ public:
 	bool operator==(const CyclicListIterator& secondIterator)
 	{
 		bool result = (_pointer == nullptr && secondIterator._pointer == nullptr)
-			|| (_pointer == secondIterator._pointer) && (!_isFirstIteration || !secondIterator._isFirstIteration)
-			|| (_isMadeByBeginMethod == secondIterator._isMadeByBeginMethod)
-			|| (_isMadeByEndMethod == secondIterator._isMadeByEndMethod);
+			|| (_pointer == secondIterator._pointer)
+			&& ((!_isFirstIteration || !secondIterator._isFirstIteration)
+				|| (_isMadeByBeginMethod == secondIterator._isMadeByBeginMethod == true)
+				|| (_isMadeByEndMethod == secondIterator._isMadeByEndMethod == true));
 		return result;
 	}
 
@@ -105,9 +106,10 @@ public:
 	bool operator==(const ConstCyclicListIterator& secondIterator)
 	{
 		bool result = (_pointer == nullptr && secondIterator._pointer == nullptr)
-			|| (_pointer == secondIterator._pointer) && (!_isFirstIteration || !secondIterator._isFirstIteration)
-			|| (_isMadeByBeginMethod == secondIterator._isMadeByBeginMethod)
-			|| (_isMadeByEndMethod == secondIterator._isMadeByEndMethod);
+			|| (_pointer == secondIterator._pointer) 
+			&& ((!_isFirstIteration || !secondIterator._isFirstIteration)
+				|| (_isMadeByBeginMethod == secondIterator._isMadeByBeginMethod == true)
+				|| (_isMadeByEndMethod == secondIterator._isMadeByEndMethod == true));
 		return result;
 	}
 

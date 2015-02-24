@@ -267,26 +267,44 @@ public:
 	iterator erase(const_iterator positionIterator)
 	{
 		createNonCyclicList();
-		bool isDeletingBeginning = checkIfBegin(positionIterator);
+		const_iterator positionAfter = positionIterator;
+		positionAfter++;
+		
+		// if delete last element, then new iterator should has _isMadeByBeginMethod = true 
+		// (bacause comparison of that new iterator with end() should return true -- look at operator== in Iterator)
+		bool isDeletingLastElement = checkIfEnd(positionAfter);
 
-		iterator result(List<Type, Allocator>::erase(positionIterator), isDeletingBeginning);
-		if (empty())
-			return iterator();
+		iterator result = List<Type, Allocator>::erase(positionIterator);
 
 		createCyclicList();
+		if (isDeletingLastElement)
+			return end();
+
 		return result;
 	}
 
 	iterator erase(const_iterator firstPosition, const_iterator lastPosition)
 	{
-		createNonCyclicList();
-		bool isDeletingBeginning = checkIfBegin(firstPosition);
+		if (firstPosition == begin() && lastPosition == end())
+		{
+			clear();
+			return nullptr;
+		}
 
-		iterator result(List<Type, Allocator>::erase(firstPosition, lastPosition), isDeletingBeginning);
-		if (empty())
-			return iterator();
+		createNonCyclicList();
+				
+		// if delete last element, then new iterator should has _isMadeByBeginMethod = true 
+		// (bacause comparison of that new iterator with end() should return true -- look at operator== in Iterator)
+		bool isDeletingLastElement = checkIfEnd(lastPosition);
+		if (isDeletingLastElement)
+			lastPosition = const_iterator();
+
+		iterator result = List<Type, Allocator>::erase(firstPosition, lastPosition);
 
 		createCyclicList();
+		if (isDeletingLastElement)
+			return end();
+
 		return result;
 	}
 
@@ -314,6 +332,15 @@ private:
 	{
 		bool result = false;
 		if (positionIterator == cbegin())
+			result = true;
+
+		return result;
+	}
+
+	inline bool checkIfEnd(const_iterator& positionIterator)
+	{
+		bool result = false;
+		if (positionIterator == cend())
 			result = true;
 
 		return result;
