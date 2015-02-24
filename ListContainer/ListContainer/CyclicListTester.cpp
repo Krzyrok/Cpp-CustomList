@@ -26,10 +26,9 @@ void CyclicListTester::Exeute(void)
 	//return;
 	TestRemoveAndRemoveIf();
 	TestUnique();
-	
 	TestReverse();
-
 	TestSort();
+
 	TestMerge();
 	TestEmplaceFront();
 	TestEmplaceBack();

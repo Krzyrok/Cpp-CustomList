@@ -274,6 +274,8 @@ public:
 		bool isDeletingLastElement = checkIfEnd(positionAfter);
 
 		iterator result = List<Type, Allocator>::erase(positionIterator);
+		if (empty())
+			return iterator();
 
 		createCyclicList();
 		if (isDeletingLastElement)
@@ -299,6 +301,8 @@ public:
 		//createNonCyclicList();
 
 		iterator result = List<Type, Allocator>::erase(firstPosition, lastPosition);
+		if (empty())
+			return iterator();
 
 		createCyclicList();
 		if (isDeletingLastElement)
@@ -312,6 +316,7 @@ public:
 		if (newSize == 0)
 		{
 			clear();
+			return;
 		}
 		List<Type, Allocator>::resize(newSize, newValue);
 		createCyclicList();
@@ -414,8 +419,26 @@ public:
 		}
 	}
 
+	void sort(void)
+	{
+		sort(FirstSmallerThanSecond<Type>());
+	}
+
+	template <class Compare>
+	void sort(Compare compare)
+	{
+		if (empty())
+			return;
+
+		List<Type, Allocator>::sort(compare);
+		createCyclicList();
+	}
+
 	void reverse(void)
 	{
+		if (empty())
+			return;
+
 		List<Type, Allocator>::reverse();
 		createCyclicList();
 	}
