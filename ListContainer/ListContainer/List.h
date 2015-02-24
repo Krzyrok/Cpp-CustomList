@@ -324,33 +324,35 @@ public:
 		return iterator(currentElementPointer);
 	}
 
-	void insert(const_iterator positionIterator, size_type numberOfValues, const Type& value)
+	iterator insert(const_iterator positionIterator, size_type numberOfValues, const Type& value)
 	{
 		if (numberOfValues < 1)
-			return;
+			return iterator(nullptr);
 
 		List<Type, Allocator> listWithInsertingValues(numberOfValues, value, _allocator);
 		insertFromOtherList(positionIterator, listWithInsertingValues);
+		return iterator(listWithInsertingValues._firstElementPointer);
 	}
 
 	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
-	void insert(const_iterator positionIterator, InputIterator firstIterator, InputIterator lastIterator)
+	iterator insert(const_iterator positionIterator, InputIterator firstIterator, InputIterator lastIterator)
 	{
 		if (firstIterator == lastIterator)
-			return;
+			return iterator(nullptr);
 
 		List<Type, Allocator> listWithInsertingValues(firstIterator, lastIterator, _allocator);
 		insertFromOtherList(positionIterator, listWithInsertingValues);
+		return iterator(listWithInsertingValues._firstElementPointer);
 	}
 
-	void insert(const_iterator positionIterator, Type&& value)
+	iterator insert(const_iterator positionIterator, Type&& value)
 	{
-		insert(positionIterator, value);
+		return insert(positionIterator, value);
 	}
 
-	void insert(const_iterator positionIterator, initializer_list<Type> listWithValues)
+	iterator insert(const_iterator positionIterator, initializer_list<Type> listWithValues)
 	{
-		insert(positionIterator, listWithValues.begin(), listWithValues.end());
+		return insert(positionIterator, listWithValues.begin(), listWithValues.end());
 	}
 
 	iterator erase(const_iterator positionIterator)
@@ -384,7 +386,7 @@ public:
 		
 		iterator result;
 
-		for (iterator currentIterator = firstPosition; currentIterator != lastPosition; currentIterator++)
+		for (const_iterator currentIterator = firstPosition; currentIterator != lastPosition; currentIterator++)
 		{
 			result = erase(currentIterator);
 		}
@@ -471,7 +473,7 @@ public:
 		if (positionIteratorInOtherList == end())
 			return;
 
-		iterator lastIteratorInOtherList = positionIteratorInOtherList;
+		const_iterator lastIteratorInOtherList = positionIteratorInOtherList;
 		lastIteratorInOtherList++;
 		splice(positionIteratorForNewElements, otherList, positionIteratorInOtherList, lastIteratorInOtherList);
 	}
@@ -698,10 +700,10 @@ protected:
 	
 
 private:
-	void insertFromOtherList(iterator positionIterator, const List& listWithInsertingValues)
+	void insertFromOtherList(const_iterator positionIterator, const List& listWithInsertingValues)
 	{
 		_numberOfElements += listWithInsertingValues.size();
-		if (positionIterator == iterator(end()))
+		if (positionIterator == const_iterator(end()))
 		{
 			_lastElementPointer->NextElementPointer = listWithInsertingValues._firstElementPointer;
 			_lastElementPointer = listWithInsertingValues._lastElementPointer;
