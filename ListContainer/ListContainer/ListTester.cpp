@@ -529,6 +529,12 @@ void ListTester::TestErase(void)
 	resultIterator = testingList.erase(testingList.begin(), ++++(testingList.begin()));
 	cout << "List after erase with iterators: 6; size (1): " << testingList.size() << endl;
 	PrintList(testingList);
+	cout << endl;
+
+	testingList = PrepareTestList();
+	testingList.erase(testingList.begin(), testingList.end());
+	cout << "Should be: no elements; size (0): " << testingList.size() << endl;
+	PrintList(testingList);
 
 	cout << "\n----------------\n\n";
 }

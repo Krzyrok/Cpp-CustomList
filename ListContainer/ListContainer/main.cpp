@@ -3,8 +3,8 @@
 
 int main()
 {
-	//ListTester listTester;
-	//listTester.Exeute();
+	ListTester listTester;
+	listTester.Exeute();
 
 	CyclicListTester cyclicListTester;
 	cyclicListTester.Exeute();
