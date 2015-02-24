@@ -260,7 +260,27 @@ public:
 		return insert(positionIterator, listWithValues.begin(), listWithValues.end());
 	}
 
+	iterator erase(const_iterator positionIterator)
+	{
+		createNonCyclicList();
+		iterator result = List<Type, Allocator>::erase(positionIterator);
+		if (empty())
+			return iterator(nullptr);
 
+		createCyclicList();
+		return result;
+	}
+
+	iterator erase(const_iterator firstPosition, const_iterator lastPosition)
+	{
+		createNonCyclicList();
+		iterator result = List<Type, Allocator>::erase(firstPosition, lastPosition);
+		if (empty())
+			return iterator(nullptr);
+
+		createCyclicList();
+		return result;
+	}
 
 	void clear(void)
 	{

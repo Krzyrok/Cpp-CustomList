@@ -391,7 +391,6 @@ public:
 			result = erase(currentIterator);
 		}
 
-
 		return result;
 	}
 
