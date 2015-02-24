@@ -383,15 +383,32 @@ public:
 	{
 		if (firstPosition == lastPosition)
 			return nullptr;
-		
-		iterator result;
-
-		for (const_iterator currentIterator = firstPosition; currentIterator != lastPosition; currentIterator++)
+		if (firstPosition == begin() && lastPosition == end())
 		{
-			result = erase(currentIterator);
+			clear();
+			return nullptr;
+		}
+		int elementsNumberToErase = 0;
+
+		shared_ptr<ListElement<Type, Allocator>>& firstElementPointerToErase = findElementPointer(firstPosition);
+		shared_ptr<ListElement<Type, Allocator>> lastElementPointerToErase;
+
+		if (lastPosition == end())
+		{
+			lastElementPointerToErase = _lastElementPointer;
+			_lastElementPointer = findElementPointerBefore(firstPosition);
+			elementsNumberToErase = countElementsNumberIncludingEndElements(firstElementPointerToErase, lastElementPointerToErase);
+		}
+		else
+		{
+			lastElementPointerToErase =
+				findElementPointerBeforeFromStartPositionAndCountElements(firstElementPointerToErase, lastPosition, elementsNumberToErase);
 		}
 
-		return result;
+		firstElementPointerToErase = lastElementPointerToErase->NextElementPointer;
+		_numberOfElements -= elementsNumberToErase;
+
+		return iterator(firstElementPointerToErase);
 	}
 
 	void swap(List& otherList)
@@ -766,6 +783,36 @@ private:
 
 		shared_ptr<ListElement<Type, Allocator>> elementPointerBefore = findElementPointerBefore(positionIterator);
 		return elementPointerBefore->NextElementPointer;
+	}
+
+	shared_ptr<ListElement<Type, Allocator>> findElementPointerBeforeFromStartPositionAndCountElements
+		(shared_ptr<ListElement<Type, Allocator>>& startElementPointer, const_iterator endPositionIterator, int& elementsAmount)
+	{
+		shared_ptr<ListElement<Type, Allocator>> currentElementPointer = startElementPointer;
+		elementsAmount = 1;
+		while (currentElementPointer->NextElementPointer->ValuePointer.get() != (endPositionIterator.operator->()))
+		{
+			currentElementPointer = currentElementPointer->NextElementPointer;
+			elementsAmount++;
+		}
+
+		return currentElementPointer;
+
+	}
+
+	int countElementsNumberIncludingEndElements(shared_ptr<ListElement<Type, Allocator>>& startElementPointer, 
+		shared_ptr<ListElement<Type, Allocator>>& endElementPointer)
+	{
+		int result = 1;
+		shared_ptr<ListElement<Type, Allocator>> currentElementPointer = startElementPointer;
+
+		while (currentElementPointer != endElementPointer)
+		{
+			result++;
+			currentElementPointer = currentElementPointer->NextElementPointer;
+		}
+
+		return result;
 	}
 
 	shared_ptr<ListElement<Type, Allocator>> createElementPtrAndChangeSize(const Type& value)
