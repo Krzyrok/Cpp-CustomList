@@ -47,14 +47,44 @@ public:
 		assign(firstIterator, lastIterator);
 	}
 
-	List(const List& listToCopy)
-		: List(listToCopy.begin(), listToCopy.end())
+	List(const List& listToCopy, const Allocator& passedAlloc = Allocator())
+		: List(listToCopy.begin(), listToCopy.end(), passedAlloc)
 	{
 	}
+
+	List(List&& listToCopy, const Allocator& passedAlloc = Allocator())
+		: List(passedAlloc)
+	{
+		swap(listToCopy);
+	}
+
+	List(initializer_list<value_type> listWithObjects, const Allocator& passedAlloc = Allocator())
+		: List(listWithObjects.begin(), listWithObjects.end(), passedAlloc)
+	{
+	}
+
 
 	// -------------------------------------------------------------------
 
 	// Methods
+	List& operator=(const List& otherList)
+	{
+		assign(otherList.begin(), otherList.end());
+		return *this;
+	}
+
+	List& operator=(List&& otherList)
+	{
+		swap(otherList);
+		return *this;
+	}
+
+	List& operator=(initializer_list<Type> listWithObjects)
+	{
+		assign(listWithObjects.begin(), listWithObjects.end());
+		return *this;
+	}
+
 
 	// Iterators
 	iterator begin(void)

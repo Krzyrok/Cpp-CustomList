@@ -130,7 +130,8 @@ void ListTester::TestConstructors(void)
 	PrintList(listWithTheSameValues);
 	cout << endl;
 
-	List<int> randomList = PrepareRandonIntList(4);
+	List<int> randomList;
+	randomList = PrepareRandonIntList(4);
 	cout << "Size (4): " << randomList.size() << endl;
 	PrintList(randomList);
 	List<int> copiedListUsingIterators(randomList.begin(), randomList.end());
@@ -151,6 +152,8 @@ void ListTester::TestConstructors(void)
 	listToCopy.push_front(1772);
 	listToCopy.push_front(13);
 	List<int> copiedList(listToCopy);
+	List<int>::iterator iteratorForList = listToCopy.begin();
+	*iteratorForList = 4;
 	cout << "List: 13, 1772; size (2): " << copiedList.size() << endl;
 	PrintList(copiedList);
 	cout << endl;
@@ -167,6 +170,8 @@ void ListTester::TestConstructors(void)
 	listToCopy.push_front(1772);
 	listToCopy.push_front(13);
 	copiedList = listToCopy;
+	iteratorForList = listToCopy.begin();
+	*iteratorForList = 4;
 	cout << "List: 13, 1772; size (2): " << copiedList.size() << endl;
 	PrintList(copiedList);
 	cout << endl;
@@ -175,6 +180,17 @@ void ListTester::TestConstructors(void)
 	cout << "Should be nothing; size (0):" << listToCopy.size() << endl;
 	PrintList(listToCopy);
 	cout << "List: 13, 1772; size (2): " << copiedList.size() << endl;
+	PrintList(copiedList);
+	cout << endl;
+
+	initializer_list<int> li = { 1, 2, 7 };
+	copiedList = li;
+	cout << "List: 1, 2, 7; size (3): " << copiedList.size() << endl;
+	PrintList(copiedList);
+	cout << endl;
+
+	List<int> copiedList2(li);
+	cout << "List: 1, 2, 7; size (3): " << copiedList.size() << endl;
 	PrintList(copiedList);
 
 	cout << "\n----------------\n\n";

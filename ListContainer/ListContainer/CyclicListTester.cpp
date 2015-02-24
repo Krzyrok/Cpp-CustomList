@@ -82,7 +82,8 @@ void CyclicListTester::TestConstructors(void)
 	PrintList(listWithTheSameValues);
 	cout << endl;
 
-	CyclicList<int> randomList = PrepareRandonIntList(4);
+	CyclicList<int> randomList;
+	randomList = PrepareRandonIntList(4);
 	cout << "Size (4): " << randomList.size() << endl;
 	PrintList(randomList);
 	CyclicList<int> copiedListUsingIterators(randomList.begin(), randomList.end());
@@ -103,6 +104,8 @@ void CyclicListTester::TestConstructors(void)
 	listToCopy.push_front(1772);
 	listToCopy.push_front(13);
 	CyclicList<int> copiedList(listToCopy);
+	CyclicList<int>::iterator iteratorForList = listToCopy.begin();
+	*iteratorForList = 4;
 	cout << "CyclicList: 13, 1772; size (2): " << copiedList.size() << endl;
 	PrintList(copiedList);
 	cout << endl;
@@ -119,6 +122,8 @@ void CyclicListTester::TestConstructors(void)
 	listToCopy.push_front(1772);
 	listToCopy.push_front(13);
 	copiedList = listToCopy;
+	iteratorForList = listToCopy.begin();
+	*iteratorForList = 4;
 	cout << "List: 13, 1772; size (2): " << copiedList.size() << endl;
 	PrintList(copiedList);
 	cout << endl;
@@ -127,6 +132,16 @@ void CyclicListTester::TestConstructors(void)
 	cout << "Should be nothing; size (0):" << listToCopy.size() << endl;
 	PrintList(listToCopy);
 	cout << "List: 13, 1772; size (2): " << copiedList.size() << endl;
+	PrintList(copiedList);
+
+	initializer_list<int> li = { 1, 2, 7 };
+	copiedList = li;
+	cout << "List: 1, 2, 7; size (3): " << copiedList.size() << endl;
+	PrintList(copiedList);
+	cout << endl;
+
+	CyclicList<int> copiedList2(li);
+	cout << "List: 1, 2, 7; size (3): " << copiedList.size() << endl;
 	PrintList(copiedList);
 
 	CyclicList<int> testingList = PrepareTestList();

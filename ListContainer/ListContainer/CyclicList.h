@@ -32,14 +32,44 @@ public:
 		assign(firstIterator, lastIterator);
 	}
 
-	CyclicList(const CyclicList& listToCopy)
-		: CyclicList(listToCopy.begin(), listToCopy.end())
+	CyclicList(const CyclicList& listToCopy, const Allocator& passedAlloc = Allocator())
+		: CyclicList(listToCopy.begin(), listToCopy.end(), passedAlloc)
 	{
 	}
+
+	CyclicList(CyclicList&& listToCopy, const Allocator& passedAlloc = Allocator())
+		: CyclicList(passedAlloc)
+	{
+		swap(listToCopy);
+	}
+
+	CyclicList(initializer_list<value_type> listWithObjects, const Allocator& passedAlloc = Allocator())
+		: CyclicList(listWithObjects.begin(), listWithObjects.end(), passedAlloc)
+	{
+	}
+
 
 	// -------------------------------------------------------------------
 
 	// Methods
+	CyclicList& operator=(const CyclicList& otherList)
+	{
+		assign(otherList.begin(), otherList.end());
+		return *this;
+	}
+
+	CyclicList& operator=(CyclicList&& otherList)
+	{
+		swap(otherList);
+		return *this;
+	}
+
+	CyclicList& operator=(initializer_list<Type> listWithObjects)
+	{
+		assign(listWithObjects.begin(), listWithObjects.end());
+		return *this;
+	}
+
 
 	// Iterators
 	iterator begin(void)
