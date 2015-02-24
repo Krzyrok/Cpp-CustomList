@@ -164,6 +164,13 @@ public:
 		assign(listWithValues.begin(), listWithValues.end());
 	}
 
+	template <class... Args>
+	void emplace_front(Args&&... args)
+	{
+		List<Type, Allocator>::emplace_front(args...);
+		createCyclicList();
+	}
+
 	void push_front(const Type& value)
 	{
 		List<Type, Allocator>::push_front(value);
@@ -173,6 +180,23 @@ public:
 	void push_front(Type&& value)
 	{
 		push_front(value);
+	}
+
+	void pop_front(void)
+	{
+		createNonCyclicList();
+		List<Type, Allocator>::pop_front();
+		if (empty())
+			return;
+
+		createCyclicList();
+	}
+
+	template <class... Args>
+	void emplace_back(Args&&... args)
+	{
+		List<Type, Allocator>::emplace_back(args...);
+		createCyclicList();
 	}
 
 	void push_back(const Type& value)
@@ -185,6 +209,58 @@ public:
 	{
 		push_back(value);
 	}
+
+	void pop_back(void)
+	{
+		createNonCyclicList();
+		List<Type, Allocator>::pop_back();
+		if (empty())
+			return;
+
+		createCyclicList();
+	}
+
+	template <class... Args>
+	iterator emplace(const_iterator positionIterator, Args&&... args)
+	{
+		iterator result = List<Type, Allocator>::emplace(positionIterator, args...);
+		createCyclicList();
+		return result;
+	}
+
+	iterator insert(const_iterator positionIterator, const Type& value)
+	{
+		iterator result = List<Type, Allocator>::insert(positionIterator, value);
+		createCyclicList();
+		return result;
+	}
+
+	iterator insert(const_iterator positionIterator, size_type numberOfValues, const Type& value)
+	{
+		iterator result = List<Type, Allocator>::insert(positionIterator, numberOfValues, value);
+		createCyclicList();
+		return result;
+	}
+
+	template <class InputIterator, class = typename enable_if<!is_fundamental<InputIterator>::value>::type>
+	iterator insert(const_iterator positionIterator, InputIterator firstIterator, InputIterator lastIterator)
+	{
+		iterator result = List<Type, Allocator>::insert(positionIterator, firstIterator, lastIterator);
+		createCyclicList();
+		return result;
+	}
+
+	iterator insert(const_iterator positionIterator, Type&& value)
+	{
+		return insert(positionIterator, value);
+	}
+
+	iterator insert(const_iterator positionIterator, initializer_list<Type> listWithValues)
+	{
+		return insert(positionIterator, listWithValues.begin(), listWithValues.end());
+	}
+
+
 
 	void clear(void)
 	{
