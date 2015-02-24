@@ -11,18 +11,18 @@ class CyclicListIterator
 	: public ListIterator<Type, Allocator>
 {
 public:
-	CyclicListIterator(bool isMadeByEndMethod = false)
-		: ListIterator(), _isFirstIteration(true), _isMadeByEndMethod(isMadeByEndMethod) {}
+	CyclicListIterator(bool isFirstIteration = false, bool isMadeByEndMethod = false)
+		: ListIterator(), _isFirstIteration(isFirstIteration), _isMadeByEndMethod(isMadeByEndMethod){}
 
 
-	CyclicListIterator(shared_ptr<ListElement<Type, Allocator>> ptr, bool isMadeByEndMethod = false)
-		: ListIterator(ptr), _isFirstIteration(true), _isMadeByEndMethod(isMadeByEndMethod) {}
+	CyclicListIterator(shared_ptr<ListElement<Type, Allocator>> ptr, bool isFirstIteration = false, bool isMadeByEndMethod = false)
+		: ListIterator(ptr), _isFirstIteration(isFirstIteration), _isMadeByEndMethod(isMadeByEndMethod) {}
 
-	CyclicListIterator(const CyclicListIterator& originalIterator, bool isMadeByEndMethod = false)
-		: CyclicListIterator(originalIterator._pointer, isMadeByEndMethod) {}
+	CyclicListIterator(const CyclicListIterator& originalIterator, bool isFirstIteration = false, bool isMadeByEndMethod = false)
+		: CyclicListIterator(originalIterator._pointer, isFirstIteration, isMadeByEndMethod) {}
 
-	CyclicListIterator(const ListIterator& originalIterator, bool isMadeByEndMethod = false)
-		: CyclicListIterator(originalIterator._pointer, isMadeByEndMethod) {}
+	CyclicListIterator(const ListIterator& originalIterator, bool isFirstIteration = false, bool isMadeByEndMethod = false)
+		: CyclicListIterator(originalIterator._pointer, isFirstIteration, isMadeByEndMethod) {}
 
 
 	CyclicListIterator& operator++()
@@ -42,9 +42,8 @@ public:
 
 	bool operator==(const CyclicListIterator& secondIterator)
 	{
-		bool result = (_pointer == nullptr) && (secondIterator._pointer == nullptr)
-			|| (_pointer == secondIterator._pointer) && (!_isFirstIteration || !secondIterator._isFirstIteration)
-			|| (_isMadeByEndMethod && secondIterator._isMadeByEndMethod);
+		bool result = (_pointer == secondIterator._pointer) && (!_isFirstIteration || !secondIterator._isFirstIteration)
+			|| (_pointer == secondIterator._pointer) && (_isMadeByEndMethod == secondIterator._isMadeByEndMethod);
 		return result;
 	}
 
@@ -65,24 +64,25 @@ class ConstCyclicListIterator
 	: public ConstListIterator<Type, Allocator>
 {
 public:
-	ConstCyclicListIterator(bool isMadeByEndMethod = false)
-		: ConstListIterator(), _isFirstIteration(true), _isMadeByEndMethod(isMadeByEndMethod) {}
+	ConstCyclicListIterator(bool isFirstIteration = false, bool isMadeByEndMethod = false)
+		: ConstListIterator(), _isFirstIteration(isFirstIteration), _isMadeByEndMethod(isMadeByEndMethod) {}
 
 
-	ConstCyclicListIterator(shared_ptr<ListElement<Type, Allocator>> ptr, bool isMadeByEndMethod = false)
-		: ConstListIterator(ptr), _isFirstIteration(true), _isMadeByEndMethod(isMadeByEndMethod) {}
+	ConstCyclicListIterator(shared_ptr<ListElement<Type, Allocator>> ptr, bool isFirstIteration = false, bool isMadeByEndMethod = false)
+		: ConstListIterator(ptr), _isFirstIteration(isFirstIteration), _isMadeByEndMethod(isMadeByEndMethod) {}
 
-	ConstCyclicListIterator(const ConstCyclicListIterator& originalIterator, bool isMadeByEndMethod = false)
-		: ConstCyclicListIterator(originalIterator._pointer, isMadeByEndMethod) {}
+	ConstCyclicListIterator(const ConstCyclicListIterator& originalIterator, bool isFirstIteration = false, bool isMadeByEndMethod = false)
+		: ConstCyclicListIterator(originalIterator._pointer, isFirstIteration, isMadeByEndMethod) {}
 
-	ConstCyclicListIterator(const CyclicListIterator<Type, Allocator>& originalIterator, bool isMadeByEndMethod = false)
-		: ConstCyclicListIterator(originalIterator._pointer, isMadeByEndMethod) {}
+	ConstCyclicListIterator(const CyclicListIterator<Type, Allocator>& originalIterator, 
+		bool isFirstIteration = false, bool isMadeByEndMethod = false)
+		: ConstCyclicListIterator(originalIterator._pointer, isFirstIteration, isMadeByEndMethod) {}
 
-	ConstCyclicListIterator(const ConstListIterator& originalIterator, bool isMadeByEndMethod = false)
-		: ConstCyclicListIterator(originalIterator._pointer, isMadeByEndMethod) {}
+	ConstCyclicListIterator(const ConstListIterator& originalIterator, bool isFirstIteration = false, bool isMadeByEndMethod = false)
+		: ConstCyclicListIterator(originalIterator._pointer, isFirstIteration, isMadeByEndMethod) {}
 
-	ConstCyclicListIterator(const ListIterator<Type, Allocator>& originalIterator, bool isMadeByEndMethod = false)
-		: ConstCyclicListIterator(originalIterator._pointer, isMadeByEndMethod) {}
+	ConstCyclicListIterator(const ListIterator<Type, Allocator>& originalIterator, bool isFirstIteration = false, bool isMadeByEndMethod = false)
+		: ConstCyclicListIterator(originalIterator._pointer, isFirstIteration, isMadeByEndMethod) {}
 
 
 	ConstCyclicListIterator& operator++()
@@ -102,9 +102,8 @@ public:
 
 	bool operator==(const ConstCyclicListIterator& secondIterator)
 	{
-		bool result = (_pointer == nullptr) && (secondIterator._pointer == nullptr)
-			|| (_pointer == secondIterator._pointer) && (!_isFirstIteration || !secondIterator._isFirstIteration)
-			|| (_isMadeByEndMethod && secondIterator._isMadeByEndMethod);
+		bool result = (_pointer == secondIterator._pointer) && (!_isFirstIteration || !secondIterator._isFirstIteration)
+			|| (_pointer == secondIterator._pointer) && (_isMadeByEndMethod == secondIterator._isMadeByEndMethod);
 		return result;
 	}
 

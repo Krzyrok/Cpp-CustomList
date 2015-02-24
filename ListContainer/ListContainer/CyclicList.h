@@ -74,7 +74,7 @@ public:
 	// Iterators
 	iterator begin(void)
 	{
-		return iterator(_firstElementPointer);
+		return iterator(_firstElementPointer, true);
 	}
 
 	const_iterator begin(void) const
@@ -96,7 +96,7 @@ public:
 
 	iterator end(void)
 	{
-		return iterator(_firstElementPointer, true);
+		return iterator(_firstElementPointer, true, true);
 	}
 
 	const_iterator end(void) const
@@ -118,12 +118,12 @@ public:
 
 	const_iterator cbegin(void) const
 	{
-		return const_iterator(_firstElementPointer);
+		return const_iterator(_firstElementPointer, true);
 	}
 
 	const_iterator cend(void) const
 	{
-		return const_iterator(_firstElementPointer, true);
+		return const_iterator(_firstElementPointer, true, true);
 	}
 
 
@@ -263,9 +263,11 @@ public:
 	iterator erase(const_iterator positionIterator)
 	{
 		createNonCyclicList();
-		iterator result = List<Type, Allocator>::erase(positionIterator);
+		bool isDeletingBeginning = checkIfBegin(positionIterator);
+
+		iterator result(List<Type, Allocator>::erase(positionIterator), isDeletingBeginning);
 		if (empty())
-			return iterator(nullptr);
+			return iterator();
 
 		createCyclicList();
 		return result;
@@ -274,9 +276,11 @@ public:
 	iterator erase(const_iterator firstPosition, const_iterator lastPosition)
 	{
 		createNonCyclicList();
-		iterator result = List<Type, Allocator>::erase(firstPosition, lastPosition);
+		bool isDeletingBeginning = checkIfBegin(firstPosition);
+
+		iterator result(List<Type, Allocator>::erase(firstPosition, lastPosition), isDeletingBeginning);
 		if (empty())
-			return iterator(nullptr);
+			return iterator();
 
 		createCyclicList();
 		return result;
@@ -300,6 +304,15 @@ private:
 	inline void createCyclicList(void)
 	{
 		_lastElementPointer->NextElementPointer = _firstElementPointer;
+	}
+
+	inline bool checkIfBegin(const_iterator& positionIterator)
+	{
+		bool result = false;
+		if (positionIterator == cbegin())
+			result = true;
+
+		return result;
 	}
 
 	void setFirstElementPointerAndMoveLast(const_iterator positionIterator)

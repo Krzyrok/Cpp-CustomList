@@ -6,7 +6,6 @@
 #include "BinaryFunctor.h"
 #include "CompareFunctor.h"
 
-
 template<class Type, class Allocator = allocator<Type>>
 class List
 {
