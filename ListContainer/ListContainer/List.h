@@ -353,7 +353,7 @@ public:
 		insert(positionIterator, listWithValues.begin(), listWithValues.end());
 	}
 
-	iterator erase(iterator positionIterator)
+	iterator erase(const_iterator positionIterator)
 	{
 		if (positionIterator == begin())
 		{
@@ -377,7 +377,7 @@ public:
 		return iterator(currentElementPointer);
 	}
 
-	iterator erase(iterator firstPosition, iterator lastPosition)
+	iterator erase(const_iterator firstPosition, const_iterator lastPosition)
 	{
 		if (firstPosition == lastPosition)
 			return nullptr;
@@ -456,12 +456,17 @@ public:
 
 
 	// Operations
-	void splice(iterator positionIteratorForNewElements, List& otherList)
+	void splice(const_iterator positionIteratorForNewElements, List& otherList)
 	{
 		splice(positionIteratorForNewElements, otherList, otherList.begin(), otherList.end());
 	}
 
-	void splice(iterator positionIteratorForNewElements, List& otherList, iterator positionIteratorInOtherList)
+	void splice(const_iterator positionIteratorForNewElements, List&& otherList)
+	{
+		splice(positionIteratorForNewElements, otherList);
+	}
+
+	void splice(const_iterator positionIteratorForNewElements, List& otherList, const_iterator positionIteratorInOtherList)
 	{
 		if (positionIteratorInOtherList == end())
 			return;
@@ -471,13 +476,25 @@ public:
 		splice(positionIteratorForNewElements, otherList, positionIteratorInOtherList, lastIteratorInOtherList);
 	}
 
-	void splice(iterator positionIteratorForNewElements, List& otherList, iterator firstIteratorInOtherList, iterator lastIteratorInOtherList)
+	void splice(const_iterator positionIteratorForNewElements, List&& otherList, const_iterator positionIteratorInOtherList)
+	{
+		splice(positionIteratorForNewElements, otherList, positionIteratorInOtherList);
+	}
+
+	void splice(const_iterator positionIteratorForNewElements, List& otherList, 
+		const_iterator firstIteratorInOtherList, const_iterator lastIteratorInOtherList)
 	{
 		if (firstIteratorInOtherList == lastIteratorInOtherList)
 			return;
 
 		insert(positionIteratorForNewElements, firstIteratorInOtherList, lastIteratorInOtherList);
 		otherList.erase(firstIteratorInOtherList, lastIteratorInOtherList);
+	}
+
+	void splice(const_iterator positionIteratorForNewElements, List&& otherList,
+		const_iterator firstIteratorInOtherList, const_iterator lastIteratorInOtherList)
+	{
+		splice(positionIteratorForNewElements, otherList, firstIteratorInOtherList, lastIteratorInOtherList);
 	}
 
 	void remove(const Type& value)
@@ -527,6 +544,11 @@ public:
 		merge(otherList, FirstSmallerThanSecond<Type>());
 	}
 
+	void merge(List&& otherList)
+	{
+		merge(otherList);
+	}
+
 	template <class Compare>
 	void merge(List& otherList, Compare compare)
 	{
@@ -564,6 +586,12 @@ public:
 		}
 
 		assign(resultList.begin(), resultList.end());
+	}
+
+	template <class Compare>
+	void merge(List&& otherList, Compare compare)
+	{
+		merge(otherList, compare);
 	}
 
 	void sort(void)
