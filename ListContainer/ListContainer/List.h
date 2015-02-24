@@ -441,10 +441,7 @@ public:
 		if (newSize > size())
 		{
 			size_type initialSize = size();
-			for (size_type i = 0; i < newSize - initialSize; i++)
-			{
-				push_back(newValue);
-			}
+			insert(end(), newSize - initialSize, newValue);
 		}
 		else if (newSize < size())
 		{

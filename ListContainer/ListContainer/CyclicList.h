@@ -308,6 +308,16 @@ public:
 		return result;
 	}
 
+	void resize(size_type newSize, const Type newValue = Type())
+	{
+		if (newSize == 0)
+		{
+			clear();
+		}
+		List<Type, Allocator>::resize(newSize, newValue);
+		createCyclicList();
+	}
+
 	void clear(void)
 	{
 		if (empty())

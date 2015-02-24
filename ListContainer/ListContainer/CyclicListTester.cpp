@@ -20,9 +20,9 @@ void CyclicListTester::Exeute(void)
 	TestPopBack();
 	TestInsert();
 	TestErase();
-	return;
 	TestSwap();
 	TestResize();
+	return
 	TestSplice();
 	TestRemoveAndRemoveIf();
 	TestUnique();
