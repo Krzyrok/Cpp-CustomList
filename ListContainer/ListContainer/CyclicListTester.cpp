@@ -23,7 +23,7 @@ void CyclicListTester::Exeute(void)
 	TestSwap();
 	TestResize();
 	TestSplice();
-	return;
+	//return;
 
 	TestRemoveAndRemoveIf();
 	TestUnique();

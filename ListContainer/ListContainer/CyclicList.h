@@ -266,10 +266,9 @@ public:
 
 	iterator erase(const_iterator positionIterator)
 	{
-		createNonCyclicList();
 		const_iterator positionAfter = positionIterator;
 		positionAfter++;
-		
+
 		// if delete last element, then new iterator should has _isMadeByBeginMethod = true 
 		// (bacause comparison of that new iterator with end() should return true -- look at operator== in Iterator)
 		bool isDeletingLastElement = checkIfEnd(positionAfter);
@@ -291,13 +290,13 @@ public:
 			return nullptr;
 		}
 
-		createNonCyclicList();
-				
 		// if delete last element, then new iterator should has _isMadeByBeginMethod = true 
 		// (bacause comparison of that new iterator with end() should return true -- look at operator== in Iterator)
 		bool isDeletingLastElement = checkIfEnd(lastPosition);
 		if (isDeletingLastElement)
 			lastPosition = const_iterator();
+
+		//createNonCyclicList();
 
 		iterator result = List<Type, Allocator>::erase(firstPosition, lastPosition);
 
@@ -364,6 +363,30 @@ public:
 		const_iterator firstIteratorInOtherList, const_iterator lastIteratorInOtherList)
 	{
 		splice(positionIteratorForNewElements, otherList, firstIteratorInOtherList, lastIteratorInOtherList);
+	}
+
+	void remove(const Type& value)
+	{
+		IsEqual<Type> predicate;
+		predicate.SetComparingValue(value);
+		remove_if(predicate);
+	}
+
+	template <class Predicate>
+	void remove_if(Predicate predicate)
+	{
+		if (empty())
+			return;
+
+		for (iterator listIterator = begin(); listIterator != end(); )
+		{
+			if (predicate(*listIterator))
+			{
+				listIterator = erase(listIterator);
+				continue;
+			}
+			listIterator++;
+		}
 	}
 
 
