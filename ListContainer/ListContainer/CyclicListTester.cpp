@@ -5,7 +5,6 @@ void CyclicListTester::Exeute(void)
 	srand((unsigned int)time(NULL));
 
 	TestConstructors();
-	return;
 	TestPushBack();
 	TestPushFront();
 	TestSize();
@@ -14,6 +13,7 @@ void CyclicListTester::Exeute(void)
 	TestBeginEndIterator();
 	TestEmpty();
 	TestMaxSize();
+	return;
 	TestFront();
 	TestBack();
 	TestAssign();
@@ -133,6 +133,7 @@ void CyclicListTester::TestConstructors(void)
 	PrintList(listToCopy);
 	cout << "List: 13, 1772; size (2): " << copiedList.size() << endl;
 	PrintList(copiedList);
+	cout << endl;
 
 	initializer_list<int> li = { 1, 2, 7 };
 	copiedList = li;
@@ -143,6 +144,7 @@ void CyclicListTester::TestConstructors(void)
 	CyclicList<int> copiedList2(li);
 	cout << "List: 1, 2, 7; size (3): " << copiedList.size() << endl;
 	PrintList(copiedList);
+	cout << endl;
 
 	CyclicList<int> testingList = PrepareTestList();
 	CyclicList<int>::iterator testingIterator = testingList.begin();
@@ -179,7 +181,6 @@ void CyclicListTester::TestConstructors(void)
 	cout << "Value pointed by const_iterator (2): " << *testingIterator2 << endl;
 	cout << "CyclicList: 2-6, 1; size (6): " << testingList.size() << endl;
 	PrintList(testingList);
-	cout << endl;
 
 	cout << "\n----------------\n\n";
 }
