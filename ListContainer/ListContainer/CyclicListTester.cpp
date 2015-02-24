@@ -22,8 +22,9 @@ void CyclicListTester::Exeute(void)
 	TestErase();
 	TestSwap();
 	TestResize();
-	return
 	TestSplice();
+	return;
+
 	TestRemoveAndRemoveIf();
 	TestUnique();
 	TestReverse();

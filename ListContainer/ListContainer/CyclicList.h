@@ -327,6 +327,46 @@ public:
 	}
 
 
+	// Operations
+	void splice(const_iterator positionIteratorForNewElements, CyclicList& otherList)
+	{
+		splice(positionIteratorForNewElements, otherList, otherList.begin(), otherList.end());
+	}
+
+	void splice(const_iterator positionIteratorForNewElements, CyclicList&& otherList)
+	{
+		splice(positionIteratorForNewElements, otherList, otherList.begin(), otherList.end());
+	}
+
+	void splice(const_iterator positionIteratorForNewElements, CyclicList& otherList, const_iterator positionIteratorInOtherList)
+	{
+		if (positionIteratorInOtherList == end())
+			return;
+
+		const_iterator lastIteratorInOtherList = positionIteratorInOtherList;
+		lastIteratorInOtherList++;
+		splice(positionIteratorForNewElements, otherList, positionIteratorInOtherList, lastIteratorInOtherList);
+	}
+
+	void splice(const_iterator positionIteratorForNewElements, CyclicList&& otherList, const_iterator positionIteratorInOtherList)
+	{
+		splice(positionIteratorForNewElements, otherList, positionIteratorInOtherList);
+	}
+
+	void splice(const_iterator positionIteratorForNewElements, CyclicList& otherList,
+		const_iterator firstIteratorInOtherList, const_iterator lastIteratorInOtherList)
+	{
+		insert(positionIteratorForNewElements, firstIteratorInOtherList, lastIteratorInOtherList);
+		otherList.erase(firstIteratorInOtherList, lastIteratorInOtherList);
+	}
+
+	void splice(const_iterator positionIteratorForNewElements, CyclicList&& otherList,
+		const_iterator firstIteratorInOtherList, const_iterator lastIteratorInOtherList)
+	{
+		splice(positionIteratorForNewElements, otherList, firstIteratorInOtherList, lastIteratorInOtherList);
+	}
+
+
 private:
 	inline void createNonCyclicList(void)
 	{

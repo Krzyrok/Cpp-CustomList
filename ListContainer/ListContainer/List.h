@@ -476,7 +476,7 @@ public:
 
 	void splice(const_iterator positionIteratorForNewElements, List&& otherList)
 	{
-		splice(positionIteratorForNewElements, otherList);
+		splice(positionIteratorForNewElements, otherList, otherList.begin(), otherList.end());
 	}
 
 	void splice(const_iterator positionIteratorForNewElements, List& otherList, const_iterator positionIteratorInOtherList)
