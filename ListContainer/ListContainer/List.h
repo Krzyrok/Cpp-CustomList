@@ -225,6 +225,11 @@ public:
 		setFirstElementPointer(newElementPointer);
 	}
 
+	void push_front(Type&& value)
+	{
+		push_front(value);
+	}
+
 	void pop_front(void)
 	{
 		if (checkIfEmptyOrOneElementAndDelete())
@@ -256,6 +261,11 @@ public:
 
 		shared_ptr<ListElement<Type, Allocator>> newElementPointer = createElementPtrAndChangeSize(value);
 		setLastElementPointer(newElementPointer);
+	}
+
+	void push_back(Type&& value)
+	{
+		push_back(value);
 	}
 
 	void pop_back(void)
@@ -375,7 +385,7 @@ public:
 
 	void swap(List& otherList)
 	{
-		shared_ptr <ListElement<Type, Allocator>> tmpPointer = _firstElementPointer;a
+		shared_ptr <ListElement<Type, Allocator>> tmpPointer = _firstElementPointer;
 		_firstElementPointer = otherList._firstElementPointer;
 		otherList._firstElementPointer = tmpPointer;
 

@@ -170,10 +170,20 @@ public:
 		createCyclicList();
 	}
 
+	void push_front(Type&& value)
+	{
+		push_front(value);
+	}
+
 	void push_back(const Type& value)
 	{
 		List<Type, Allocator>::push_back(value);
 		createCyclicList();
+	}
+
+	void push_back(Type&& value)
+	{
+		push_back(value);
 	}
 
 	void clear(void)
