@@ -49,6 +49,13 @@ public:
 	}
 
 
+	// Destrcutor
+	~CyclicList(void)
+	{
+		createNonCyclicList();
+	}
+
+
 	// -------------------------------------------------------------------
 
 	// Methods

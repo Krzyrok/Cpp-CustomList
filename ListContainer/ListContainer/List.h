@@ -62,6 +62,13 @@ public:
 	}
 
 
+	// Destrcutor
+	virtual ~List(void)
+	{
+		clear();
+	}
+
+
 	// -------------------------------------------------------------------
 
 	// Methods
@@ -463,7 +470,8 @@ public:
 		if (empty())
 			return;
 		_lastElementPointer.reset();
-		_firstElementPointer.reset();
+		for (size_type i = 0; i < _numberOfElements; i++)
+			_firstElementPointer = _firstElementPointer->NextElementPointer;
 		_numberOfElements = 0;
 	}
 

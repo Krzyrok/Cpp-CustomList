@@ -4,7 +4,7 @@
 template <class Type>
 struct IsEqual
 {
-	void SetComparingValue(int newValue)
+	void SetComparingValue(Type newValue)
 	{
 		_comparingValue = newValue;
 	}
@@ -15,7 +15,7 @@ struct IsEqual
 	};
 
 private:
-	int _comparingValue;
+	Type _comparingValue;
 };
 
 template <class Type>

@@ -13,8 +13,6 @@ public:
 	{
 		NextElementPointer = nullptr;
 		
-		//Type* insertingValuePointer = new Type(insertingValue);
-
 		Type* insertingValuePointer = passedAllocator.allocate(1);
 		passedAllocator.construct(insertingValuePointer, insertingValue);
 		
