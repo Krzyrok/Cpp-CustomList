@@ -16,6 +16,13 @@ public:
 
 private:
 	void TestClassicListForDictionary(vector<string> dictionary);
+	void TestInsertForClassicListForDictionary(vector<string> dictionary);
+	void TestPushFrontForClassicListForDictionary(vector<string> dictionary);
+	void TestPushBackForClassicListForDictionary(vector<string> dictionary);
+	void TestAssignForClassicListForDictionary(vector<string> dictionary);
+	void TestRemoveForClassicListForDictionary(vector<string> dictionary);
+	void TestReverseForClassicListForDictionary(vector<string> dictionary);
+
 	void TestOneWayListForDictionary(vector<string> dictionary);
 	void TestCyclicListForDictionary(vector<string> dictionary);
 };
