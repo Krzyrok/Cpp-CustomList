@@ -2,16 +2,16 @@
 
 void Comparer::Execute(void)
 {
-	vector<string> dictionary = FileReader::ReadWordsIntoVector("english.dic.txt");
-	random_shuffle(dictionary.begin(), dictionary.end());
+	//vector<string> dictionary = FileReader::ReadWordsIntoVector("english.dic.txt");
+	//random_shuffle(dictionary.begin(), dictionary.end());
 
 	//TestClassicListForDictionary(dictionary);
-	//TestOneWayListForDictionary(dictionary);
-	//TestCyclicListForDictionary(dictionary);
+	////TestOneWayListForDictionary(dictionary);
+	////TestCyclicListForDictionary(dictionary);
 
-	vector<int> randomNumbers = NumbersGenerator::GenerateNumbersVector(1000);
-	//TestClassicListForRanomNumbers(randomNumbers);
-	TestOneWayListForRanomNumbers(randomNumbers);
+	vector<int> randomNumbers = NumbersGenerator::GenerateNumbersVector(100000);
+	TestClassicListForRanomNumbers(randomNumbers);
+	//TestOneWayListForRanomNumbers(randomNumbers);
 	//TestCyclicListForRanomNumbers(randomNumbers);
 }
 
@@ -46,7 +46,9 @@ void Comparer::TestSortForClassicListForRanomNumbers(vector<int> numbersVector)
 void Comparer::TestMergeForClassicListForRanomNumbers(vector<int> numbersVector)
 {
 	list<int> testingList1(numbersVector.begin(), numbersVector.end());
-	list<int> testingList2(numbersVector.begin(), numbersVector.end());
+	testingList1.sort();
+	list<int> testingList2(testingList1);
+
 
 	clock_t executionTime = clock();
 	testingList1.merge(testingList2);
@@ -94,7 +96,8 @@ void Comparer::TestSortForOneWayListForRanomNumbers(vector<int> numbersVector)
 void Comparer::TestMergeForOneWayListForRanomNumbers(vector<int> numbersVector)
 {
 	List<int> testingList1(numbersVector.begin(), numbersVector.end());
-	List<int> testingList2(numbersVector.begin(), numbersVector.end());
+	testingList1.sort();
+	List<int> testingList2(testingList1);
 
 	clock_t executionTime = clock();
 	testingList1.merge(testingList2);
@@ -142,7 +145,8 @@ void Comparer::TestSortForCyclicListForRanomNumbers(vector<int> numbersVector)
 void Comparer::TestMergeForCyclicListForRanomNumbers(vector<int> numbersVector)
 {
 	CyclicList<int> testingList1(numbersVector.begin(), numbersVector.end());
-	CyclicList<int> testingList2(numbersVector.begin(), numbersVector.end());
+	testingList1.sort();
+	CyclicList<int> testingList2(testingList1);
 
 	clock_t executionTime = clock();
 	testingList1.merge(testingList2);

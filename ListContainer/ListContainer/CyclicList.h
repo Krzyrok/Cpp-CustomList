@@ -52,6 +52,8 @@ public:
 	// Destrcutor
 	~CyclicList(void)
 	{
+		if (empty())
+			return;
 		createNonCyclicList();
 	}
 
