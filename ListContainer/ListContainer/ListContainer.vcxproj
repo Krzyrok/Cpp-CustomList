@@ -79,6 +79,7 @@
     <ClInclude Include="BinaryFunctor.h" />
     <ClInclude Include="CommonHeaders.h" />
     <ClInclude Include="CompareFunctor.h" />
+    <ClInclude Include="Comparer.h" />
     <ClInclude Include="CyclicList.h" />
     <ClInclude Include="CyclicListIterator.h" />
     <ClInclude Include="CyclicListTester.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="TestObjectMoreComplex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Comparer.cpp" />
     <ClCompile Include="CyclicListTester.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ListTester.cpp" />
