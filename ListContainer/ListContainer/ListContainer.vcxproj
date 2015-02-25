@@ -84,6 +84,7 @@
     <ClInclude Include="CyclicListIterator.h" />
     <ClInclude Include="CyclicListTester.h" />
     <ClInclude Include="Deleter.h" />
+    <ClInclude Include="FileReader.h" />
     <ClInclude Include="Functor.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="ListElement.h" />
@@ -95,6 +96,7 @@
   <ItemGroup>
     <ClCompile Include="Comparer.cpp" />
     <ClCompile Include="CyclicListTester.cpp" />
+    <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ListTester.cpp" />
   </ItemGroup>

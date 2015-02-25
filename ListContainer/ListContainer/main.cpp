@@ -3,11 +3,11 @@
 
 int main()
 {
-	ListTester listTester;
-	listTester.Exeute();
+	//ListTester listTester;
+	//listTester.Exeute();
 
-	CyclicListTester cyclicListTester;
-	cyclicListTester.Exeute();
+	//CyclicListTester cyclicListTester;
+	//cyclicListTester.Exeute();
 
 	system("Pause");
 	return 0;

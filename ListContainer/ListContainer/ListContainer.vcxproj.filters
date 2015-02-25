@@ -25,6 +25,15 @@
     <Filter Include="Header Files\Iterators">
       <UniqueIdentifier>{77d1cea4-9fb3-4192-8c3f-88f7019e9e59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Helpers">
+      <UniqueIdentifier>{9010d0f1-435a-4327-a5ea-961705bf1177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tests">
+      <UniqueIdentifier>{c5571509-0155-4f2f-b918-f745c8491b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Helpers">
+      <UniqueIdentifier>{14f428b5-ff65-4e25-80ca-9372f571d509}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonHeaders.h">
@@ -40,9 +49,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CyclicList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Comparer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CyclicListTester.h">
@@ -72,19 +78,28 @@
     <ClInclude Include="CyclicListIterator.h">
       <Filter>Header Files\Iterators</Filter>
     </ClInclude>
+    <ClInclude Include="Comparer.h">
+      <Filter>Header Files\Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReader.h">
+      <Filter>Header Files\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Comparer.cpp">
+      <Filter>Source Files\Tests</Filter>
+    </ClCompile>
     <ClCompile Include="CyclicListTester.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tests</Filter>
     </ClCompile>
     <ClCompile Include="ListTester.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="Comparer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="FileReader.cpp">
+      <Filter>Source Files\Helpers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
