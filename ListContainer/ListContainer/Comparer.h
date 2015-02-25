@@ -4,6 +4,7 @@
 #include "CyclicList.h"
 #include "FileReader.h"
 #include "Printer.h"
+#include "NumbersGenerator.h"
 
 #include <algorithm>
 #include <list>
@@ -23,6 +24,11 @@ private:
 	void TestRemoveForClassicListForDictionary(vector<string> dictionary);
 	void TestReverseForClassicListForDictionary(vector<string> dictionary);
 
+	void TestClassicListForRanomNumbers(vector<int> numbersVector);
+	void TestSortForClassicListForRanomNumbers(vector<int> numbersVector);
+	void TestMergeForClassicListForRanomNumbers(vector<int> numbersVector);
+	void TestMovingIteratorsForClassicListForRanomNumbers(vector<int> numbersVector);
+
 	void TestOneWayListForDictionary(vector<string> dictionary);
 	void TestInsertForOneWayListForDictionary(vector<string> dictionary);
 	void TestPushFrontForOneWayListForDictionary(vector<string> dictionary);
@@ -31,6 +37,11 @@ private:
 	void TestRemoveForOneWayListForDictionary(vector<string> dictionary);
 	void TestReverseForOneWayListForDictionary(vector<string> dictionary);
 
+	void TestOneWayListForRanomNumbers(vector<int> numbersVector);
+	void TestSortForOneWayListForRanomNumbers(vector<int> numbersVector);
+	void TestMergeForOneWayListForRanomNumbers(vector<int> numbersVector);
+	void TestMovingIteratorsForOneWayListForRanomNumbers(vector<int> numbersVector);
+
 	void TestCyclicListForDictionary(vector<string> dictionary);
 	void TestInsertForCyclicListForDictionary(vector<string> dictionary);
 	void TestPushFrontForCyclicListForDictionary(vector<string> dictionary);
@@ -38,6 +49,11 @@ private:
 	void TestAssignForCyclicListForDictionary(vector<string> dictionary);
 	void TestRemoveForCyclicListForDictionary(vector<string> dictionary);
 	void TestReverseForCyclicListForDictionary(vector<string> dictionary);
+
+	void TestCyclicListForRanomNumbers(vector<int> numbersVector);
+	void TestSortForCyclicListForRanomNumbers(vector<int> numbersVector);
+	void TestMergeForCyclicListForRanomNumbers(vector<int> numbersVector);
+	void TestMovingIteratorsForCyclicListForRanomNumbers(vector<int> numbersVector);
 };
 
 #endif

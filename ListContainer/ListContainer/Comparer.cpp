@@ -6,9 +6,13 @@ void Comparer::Execute(void)
 	random_shuffle(dictionary.begin(), dictionary.end());
 
 	//TestClassicListForDictionary(dictionary);
-	TestOneWayListForDictionary(dictionary);
-	TestCyclicListForDictionary(dictionary);
+	//TestOneWayListForDictionary(dictionary);
+	//TestCyclicListForDictionary(dictionary);
 
+	vector<int> randomNumbers = NumbersGenerator::GenerateNumbersVector(1000);
+	//TestClassicListForRanomNumbers(randomNumbers);
+	TestOneWayListForRanomNumbers(randomNumbers);
+	//TestCyclicListForRanomNumbers(randomNumbers);
 }
 
 void Comparer::TestClassicListForDictionary(vector<string> dictionary)
@@ -18,6 +22,150 @@ void Comparer::TestClassicListForDictionary(vector<string> dictionary)
 	TestAssignForClassicListForDictionary(dictionary);
 	TestRemoveForClassicListForDictionary(dictionary);
 	TestReverseForClassicListForDictionary(dictionary);
+}
+
+void Comparer::TestClassicListForRanomNumbers(vector<int> numbersVector)
+{
+	TestSortForClassicListForRanomNumbers(numbersVector);
+	TestMergeForClassicListForRanomNumbers(numbersVector);
+	TestMovingIteratorsForClassicListForRanomNumbers(numbersVector);
+}
+
+void Comparer::TestSortForClassicListForRanomNumbers(vector<int> numbersVector)
+{
+	list<int> testingList(numbersVector.begin(), numbersVector.end());
+
+	clock_t executionTime = clock();
+	testingList.sort();
+	executionTime = clock() - executionTime;
+
+	string message = "sorting " + to_string(numbersVector.size()) + " elements for classic list";
+	Printer::PrintExecutionTime(message, executionTime);
+}
+
+void Comparer::TestMergeForClassicListForRanomNumbers(vector<int> numbersVector)
+{
+	list<int> testingList1(numbersVector.begin(), numbersVector.end());
+	list<int> testingList2(numbersVector.begin(), numbersVector.end());
+
+	clock_t executionTime = clock();
+	testingList1.merge(testingList2);
+	executionTime = clock() - executionTime;
+
+	string message = "merging two list (each " + to_string(numbersVector.size()) + " elements) for classic list";
+	Printer::PrintExecutionTime(message, executionTime);
+}
+
+void Comparer::TestMovingIteratorsForClassicListForRanomNumbers(vector<int> numbersVector)
+{
+	list<int> testingList(numbersVector.begin(), numbersVector.end());
+	list<int>::const_iterator it = testingList.begin();
+
+	clock_t executionTime = clock();
+	for (; it != testingList.end(); it++)
+	{
+
+	}
+	executionTime = clock() - executionTime;
+
+	string message = "moving by " + to_string(numbersVector.size()) + " elements (using iterator) for classic list";
+	Printer::PrintExecutionTime(message, executionTime);
+}
+
+void Comparer::TestOneWayListForRanomNumbers(vector<int> numbersVector)
+{
+	TestSortForOneWayListForRanomNumbers(numbersVector);
+	TestMergeForOneWayListForRanomNumbers(numbersVector);
+	TestMovingIteratorsForOneWayListForRanomNumbers(numbersVector);
+}
+
+void Comparer::TestSortForOneWayListForRanomNumbers(vector<int> numbersVector)
+{
+	List<int> testingList(numbersVector.begin(), numbersVector.end());
+
+	clock_t executionTime = clock();
+	testingList.sort();
+	executionTime = clock() - executionTime;
+
+	string message = "sorting " + to_string(numbersVector.size()) + " elements for one way list";
+	Printer::PrintExecutionTime(message, executionTime);
+}
+
+void Comparer::TestMergeForOneWayListForRanomNumbers(vector<int> numbersVector)
+{
+	List<int> testingList1(numbersVector.begin(), numbersVector.end());
+	List<int> testingList2(numbersVector.begin(), numbersVector.end());
+
+	clock_t executionTime = clock();
+	testingList1.merge(testingList2);
+	executionTime = clock() - executionTime;
+
+	string message = "merging two list (each " + to_string(numbersVector.size()) + " elements) for one way list";
+	Printer::PrintExecutionTime(message, executionTime);
+}
+
+void Comparer::TestMovingIteratorsForOneWayListForRanomNumbers(vector<int> numbersVector)
+{
+	List<int> testingList(numbersVector.begin(), numbersVector.end());
+	List<int>::const_iterator it = testingList.begin();
+
+	clock_t executionTime = clock();
+	for (; it != testingList.end(); it++)
+	{
+
+	}
+	executionTime = clock() - executionTime;
+
+	string message = "moving by " + to_string(numbersVector.size()) + " elements (using iterator) for one way list";
+	Printer::PrintExecutionTime(message, executionTime);
+}
+
+void Comparer::TestCyclicListForRanomNumbers(vector<int> numbersVector)
+{
+	TestSortForCyclicListForRanomNumbers(numbersVector);
+	TestMergeForCyclicListForRanomNumbers(numbersVector);
+	TestMovingIteratorsForCyclicListForRanomNumbers(numbersVector);
+}
+
+void Comparer::TestSortForCyclicListForRanomNumbers(vector<int> numbersVector)
+{
+	CyclicList<int> testingList(numbersVector.begin(), numbersVector.end());
+
+	clock_t executionTime = clock();
+	testingList.sort();
+	executionTime = clock() - executionTime;
+
+	string message = "sorting " + to_string(numbersVector.size()) + " elements for cyclic list";
+	Printer::PrintExecutionTime(message, executionTime);
+}
+
+void Comparer::TestMergeForCyclicListForRanomNumbers(vector<int> numbersVector)
+{
+	CyclicList<int> testingList1(numbersVector.begin(), numbersVector.end());
+	CyclicList<int> testingList2(numbersVector.begin(), numbersVector.end());
+
+	clock_t executionTime = clock();
+	testingList1.merge(testingList2);
+	executionTime = clock() - executionTime;
+
+	string message = "merging two list (each " + to_string(numbersVector.size()) + " elements) for cyclic list";
+	Printer::PrintExecutionTime(message, executionTime);
+}
+
+void Comparer::TestMovingIteratorsForCyclicListForRanomNumbers(vector<int> numbersVector)
+{
+	CyclicList<int> testingList(numbersVector.begin(), numbersVector.end());
+	CyclicList<int>::const_iterator it = testingList.begin();
+
+	clock_t executionTime = clock();
+	for (; it != testingList.end(); it++)
+	{
+
+	}
+	executionTime = clock() - executionTime;
+
+	string message = "moving by " + to_string(numbersVector.size()) + " elements (using iterator) for cyclic list";
+	Printer::PrintExecutionTime(message, executionTime);
 }
 
 void Comparer::TestInsertForClassicListForDictionary(vector<string> dictionary)
