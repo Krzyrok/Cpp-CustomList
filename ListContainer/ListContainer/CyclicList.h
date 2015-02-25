@@ -419,20 +419,21 @@ public:
 		}
 	}
 
-	void merge(List& otherList)
+	void merge(CyclicList& otherList)
 	{
 		merge(otherList, FirstSmallerThanSecond<Type>());
 	}
 
-	void merge(List&& otherList)
+	void merge(CyclicList&& otherList)
 	{
 		merge(otherList);
 	}
 
 	template <class Compare>
-	void merge(List& otherList, Compare compare)
+	void merge(CyclicList& otherList, Compare compare)
 	{
 		createNonCyclicList();
+		otherList.createNonCyclicList();
 		List<Type, Allocator>::merge(otherList, compare);
 		if (empty())
 			return;
@@ -440,7 +441,7 @@ public:
 	}
 
 	template <class Compare>
-	void merge(List&& otherList, Compare compare)
+	void merge(CyclicList&& otherList, Compare compare)
 	{
 		merge(otherList, compare);
 	}

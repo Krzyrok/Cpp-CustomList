@@ -28,7 +28,6 @@ void CyclicListTester::Exeute(void)
 	TestReverse();
 	TestSort();
 	TestMerge();
-	return;
 	TestEmplaceFront();
 	TestEmplaceBack();
 	TestEmplace();
