@@ -3,8 +3,6 @@
 void ListTester::Exeute(void)
 {
 	//TestClassicList();
-	srand((unsigned int)time(NULL));
-
 	TestConstructors();
 	TestPushBack();
 	TestPushFront();

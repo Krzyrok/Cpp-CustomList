@@ -2,8 +2,6 @@
 
 void CyclicListTester::Exeute(void)
 {
-	srand((unsigned int)time(NULL));
-
 	TestConstructors();
 	TestPushBack();
 	TestPushFront();
